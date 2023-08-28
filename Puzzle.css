@@ -77,7 +77,7 @@ input[type=checkbox]{
     font-size:10vmin;
     color:#FED;
     background-color:#B99361;
-    background-image:url("woodenBackground.png");
+    background-image:url("WoodenBG.jpg");
     background-size:cover;
     background-position:center;
     background-repeat:no-repeat;
@@ -170,10 +170,10 @@ input[type=button]:active, #labelsfx{
     //cursor:pointer;
 }
 #intro{
-    background-image:url("introBackground3.png");
+    background-image:url("Intro.jpg");
 }
 #creditspage{
-    background-image:url("credits4.png");
+    background-image:url("Credits.jpg");
     display:none;
 }
 #creditspage a{
@@ -188,6 +188,6 @@ input[type=button]:active, #labelsfx{
 }
 #helppage{
     display:none;
-    background-image:url("help2.png");
+    background-image:url("Help.jpg");
 }
 
