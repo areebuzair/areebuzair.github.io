@@ -53,7 +53,6 @@ input[type=checkbox]{
     font-weight:bolder;
     font-size:10vmin;
     color:gold;
-    //cursor:pointer;
     background-color:rgba(0,0,0,0.3);
 }
 
@@ -157,7 +156,7 @@ input[type=button]:active, #labelsfx{
     display:none;
 }
 
-#intro,#creditspage,#helppage{
+#intro, #creditspage, #helppage{
     width:100vw;
     height:100vh;
     position:fixed;
@@ -167,7 +166,6 @@ input[type=button]:active, #labelsfx{
     background-position:center;
     background-repeat:no-repeat;
     background-color:#321;
-    //cursor:pointer;
 }
 #intro{
     background-image:url("Intro.jpg");
@@ -184,7 +182,6 @@ input[type=button]:active, #labelsfx{
     width:76.6vmin;
     height:8vmin;
     cursor:pointer;
-//{x:0.12,y:0.644,w:0.766,h:0.08},
 }
 #helppage{
     display:none;
