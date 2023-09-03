@@ -165,7 +165,7 @@ input[type=button]:active, #labelsfx{
     background-size:100vmin 100vmin;
     background-position:center;
     background-repeat:no-repeat;
-    background-color:rgba(51, 34, 17, 0.585);
+    background-color:rgba(51, 34, 17, 0.7);
 }
 #intro{
     background-image:url("Intro.jpg");
