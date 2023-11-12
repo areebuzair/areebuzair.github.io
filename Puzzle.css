@@ -100,11 +100,7 @@ input[type=checkbox]{
     align-items:center;
     justify-content:space-between;
 }
-#buttons{
-    /*position:absolute;
-    top:10px;
-    left:10px;*/
-}
+
 #timedisp{
     /*position:absolute;
     top:10px;

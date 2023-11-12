@@ -69,7 +69,7 @@ window.onload = function(){
     function scramble(){
         started = false;
         let i = 0
-        while(i<s**3){
+        while(i< s**3 + 20){
           if(nor==0){
              nor -= [-1,-s][round(random())]; 
           }
