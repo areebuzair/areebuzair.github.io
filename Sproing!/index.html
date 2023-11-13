@@ -1,0 +1,219 @@
+<style>
+    body {
+
+        margin: 0;
+
+        background-color: #ccc;
+
+    }
+</style>
+
+<script>
+    "use strict";
+
+    var X, Y, W, H, bool = false;
+
+    var bubbles = [];
+
+    var bub;
+
+    window.onload = function () {
+
+        var cnv = document.getElementById("cnv");
+
+        var ctx = cnv.getContext("2d");
+
+        function init() {
+
+            W = window.innerWidth;
+
+            H = window.innerHeight;
+
+            cnv.width = W;
+
+            cnv.height = H;
+
+            // X = 0; Y = 0;
+
+            bool = false;
+
+        }
+
+        init();
+
+        window.onresize = init;
+
+
+
+        function Bubble(x, y) {
+
+            this.x = x;
+
+            this.y = y;
+
+            this.r = 30;
+
+            this.v = 0;
+
+            this.dy = Math.random() + 10;
+
+
+
+            this.draw = function () {
+
+                ctx.beginPath();
+
+                ctx.fillStyle = "white";
+
+                ctx.strokeStyle = "black";
+
+                ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+
+                //ctx.fill();
+
+                ctx.stroke();
+
+                this.x += 0.5 - Math.random();
+
+                this.y -= this.v;
+
+                this.v += 0.1;
+
+
+
+            }
+
+
+
+        }
+
+
+
+        cnv.addEventListener("touchstart", function (e) {
+
+            X = e.touches[0].clientX;
+
+            Y = e.touches[0].clientY;
+
+            bool = true;
+
+            //setInterval(function(){bool=false;},1000);
+
+
+
+        });
+
+        cnv.addEventListener("touchend", function () {
+
+            bool = false;
+
+        });
+
+        cnv.addEventListener("touchmove", function (e) {
+
+            X = e.touches[0].clientX;
+
+            Y = e.touches[0].clientY;
+
+        });
+
+        cnv.addEventListener("mousedown", function (e) {
+
+            X = e.clientX;
+
+            Y = e.clientY;
+
+            bool = true;
+
+            //setInterval(function(){bool=false;},1000);
+
+
+
+        });
+
+        window.addEventListener("mouseup", function () {
+
+            bool = false;
+
+        });
+
+        cnv.addEventListener("mousemove", function (e) {
+            if (bool) {
+                X = e.clientX;
+
+                Y = e.clientY;
+            }
+
+        });
+
+        function form() {
+
+            if (bool) {
+
+                bub = new Bubble(X, Y);
+
+                bubbles.push(bub);
+
+                //console.log(X);
+
+            }
+
+        }
+
+
+
+        function animate() {
+
+            form();
+
+            ctx.clearRect(0, 0, W, H);
+
+            for (let i = 0; i < bubbles.length; i++) {
+
+                bubbles[i].draw();
+
+            }
+
+            try {
+
+                if (bubbles[0].y < -30) {
+
+                    bubbles.shift();
+
+                }
+
+            }
+
+            catch (err) { }
+
+
+
+            window.requestAnimationFrame(animate);
+
+        }
+
+        animate();
+
+
+
+
+
+    }</script>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>Sproing!</title>
+
+</head>
+
+<body>
+
+    <canvas id="cnv"></canvas>
+
+</body>
+
+</html>
