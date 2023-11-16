@@ -7,14 +7,25 @@
     <meta author="J. M Areeb Uzair">
     <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair">
     <meta name="description" content="Home for J. M Areeb Uzair's various projects">
-    <link rel="icon" href="DoubleAFavicon.jpg" type="image/jpg">
+    <link rel="icon" href="./Assets/DoubleAFavicon.jpg" type="image/jpg">
+    <link rel="stylesheet" href="./style.css">
     <title>Areeb Uzair's Website</title>
 </head>
 
 <body>
-    <h1>Homepage under construction</h1>
-    <a href="./Puzzle">Play Puzzle Game</a><br><br>
-    <a href="./BlenderArtPortfolio/">Visit my Art Portfolio</a><br><br>
+    <div class="background"></div>
+    <div class="container">
+        <h1>J. M Areeb Uzair</h1>
+        <a href="./Puzzle">Play Puzzle Game</a>
+        <a href="./BlenderArtPortfolio/">Visit my Art Portfolio</a>
+    </div>
 </body>
+
+<script>
+    onload =()=>{
+        let bg = document.querySelector(".background");
+        bg.style.opacity = "1";
+    }
+</script>
 
 </html>
