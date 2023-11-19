@@ -3,6 +3,11 @@
 
 <head>
     <title>Areeb Uzair's Website</title>
+    <meta property="og:title" content="Areeb Uzair's Website">
+    <meta property="og:description" content="Home for J. M Areeb Uzair's various projects">
+    <meta property="og:image" content="https://areebuzair.github.io/Assets/ogpimage.jpg">
+    <meta property="og:url" content="https://areebuzair.github.io">
+    <meta property="og:type" content="website">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta author="J. M Areeb Uzair">
@@ -31,29 +36,29 @@
         let anim = document.querySelector(".animated-text");
         bg.style.opacity = ".4";
 
-        function deleteChar(){
-            if(anim.textContent != ""){
+        function deleteChar() {
+            if (anim.textContent != "") {
                 text = anim.textContent;
                 anim.textContent = text.slice(0, -1);
                 window.requestAnimationFrame(deleteChar);
             }
-            else{
+            else {
                 texts.push(texts.shift());
-                setTimeout(()=>{
+                setTimeout(() => {
                     addChar(texts[0]);
                 }, 100);
             }
         }
-        function addChar(text){
-            if(text != ""){
+        function addChar(text) {
+            if (text != "") {
                 ch = text[0];
                 text = text.slice(1);
                 anim.textContent += ch;
-                setTimeout(()=>{
+                setTimeout(() => {
                     addChar(text);
                 }, 100);
             }
-            else{
+            else {
                 setTimeout(deleteChar, 1000);
             }
         }
