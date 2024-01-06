@@ -1,4 +1,2 @@
+!MeshCompressionWebsite\*
 *.py
-!MeshCompressionWebsite\script.py
-!MeshCompressionWebsite\package\Vertices.py
-!MeshCompressionWebsite\package\__init__.py
