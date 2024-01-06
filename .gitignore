@@ -1,4 +1,4 @@
 *.py
 !MeshCompressionWebsite/script.py
-!MeshCompressionWebsite/package/Vertices.py
-!MeshCompressionWebsite/package/__init__.py
+!MeshCompressionWebsite/packages/Vertices.py
+!MeshCompressionWebsite/packages/__init__.py
