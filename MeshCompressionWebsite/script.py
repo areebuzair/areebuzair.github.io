@@ -1,7 +1,7 @@
 # Import libraries
 import numpy as np
 import matplotlib.pyplot as plt
-from package.Vertices import vertices
+from packages.Vertices import vertices
 from scipy.fft import dct, idct
 from pyscript import display
 from js import document
