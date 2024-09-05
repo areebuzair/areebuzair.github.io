@@ -1,0 +1,1057 @@
+<style>
+    body {
+
+        margin: 0;
+
+        width: 100vw;
+
+        height: 100vh;
+
+        background-color: black;
+
+        font-family: "Goldman";
+
+    }
+
+    #loader {
+
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100vw;
+
+        height: 100vh;
+
+        background-color: black;
+
+        z-index: 200;
+
+        color: red;
+
+    }
+
+    #loader img {
+
+        position: relative;
+
+        top: calc(50vh - 100px);
+
+        left: calc(50vw - 100px);
+
+        animation: spin 0.1s linear 1s infinite;
+
+        -webkit-animation: spin 0.1s linear 1s infinite;
+
+        -moz-animation: spin 0.1s linear 1s infinite;
+
+        -ms-animation: spin 0.1s linear 1s infinite;
+
+        -o-animation: spin 0.1s linear infinite;
+
+    }
+
+    #ripcord {
+
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100vw;
+
+        height: 100vh;
+
+        background-color: black;
+
+        z-index: 100;
+
+        color: white;
+
+        padding: 20px;
+
+    }
+
+
+
+    @keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+
+            -webkit-transform: rotate(360deg);
+
+            -moz-transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg);
+
+            -o-transform: rotate(360deg);
+        }
+
+    }
+
+
+
+    @-webkit-keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+
+            -webkit-transform: rotate(360deg);
+
+            -moz-transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg);
+
+            -o-transform: rotate(360deg);
+        }
+
+    }
+
+    @-moz-keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+
+            -webkit-transform: rotate(360deg);
+
+            -moz-transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg);
+
+            -o-transform: rotate(360deg);
+        }
+
+    }
+
+    @-ms-keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+
+            -webkit-transform: rotate(360deg);
+
+            -moz-transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg);
+
+            -o-transform: rotate(360deg);
+        }
+
+    }
+
+    @-o-keyframes spin {
+
+        to {
+            transform: rotate(360deg);
+
+            -webkit-transform: rotate(360deg);
+
+            -moz-transform: rotate(360deg);
+
+            -ms-transform: rotate(360deg);
+
+            -o-transform: rotate(360deg);
+        }
+
+    }
+
+
+
+    #att {
+
+        position: fixed;
+
+        bottom: 20px;
+
+        right: 20px;
+
+        width: 30vmin;
+
+        height: 30vmin;
+
+        border-radius: 50%;
+
+        outline: none;
+
+        border: 7px dashed white;
+
+        background-color: transparent;
+
+        color: white;
+
+        font-weight: bolder;
+
+        font-size: 7vmin;
+
+    }
+
+    #att:active {
+
+        border-color: grey;
+
+    }
+
+    #ripcord span {
+
+        position: fixed;
+
+        bottom: 20px;
+
+        text-align: center;
+
+        width: 100%;
+
+        left: 0;
+
+        color: gold;
+
+        font-size: 200%;
+
+    }
+
+    div#winscreen {
+
+        position: fixed;
+
+        top: 0;
+
+        left: 0;
+
+        width: 100vw;
+
+        height: 100vh;
+
+        background-color: black;
+
+        display: none;
+
+        z-index: 150;
+
+        justify-content: center;
+
+        text-align: center;
+
+        align-items: center;
+
+    }
+
+    /*#holder{
+
+    width:100vw;
+
+    //height:100vh;
+
+}*/
+
+    #TOP {
+
+        width: 200px;
+
+        height: 200px;
+
+        border-radius: 50%;
+
+        /*border:5vmin solid dimgrey;*/
+
+    }
+
+    #text {
+
+        color: gold;
+
+        font-size: 300%;
+
+    }
+
+    #continue {
+
+        color: white;
+
+        position: fixed;
+
+        bottom: 20px;
+
+        text-align: center;
+
+    }
+
+    #score {
+
+        color: white;
+
+        position: fixed;
+
+        bottom: 20px;
+
+        left: 30px;
+
+        text-align: center;
+
+        font-size: 20px;
+
+    }
+
+    #oscore {
+
+        color: red;
+
+    }
+
+    #pscore {
+
+        color: #5555FF;
+
+    }
+</style>
+
+<script>
+    "use strict";
+
+    var W, H, L, V;
+
+    var pscore = 0, oscore = 0;
+
+    var gameover = "Stamina Out!";
+
+    var X = 0, Y = 0, X1 = 0, Y1 = 0, joystick = false;
+
+    function vibrate(sec) {
+
+        try { navigator.vibrate(sec); }
+
+        catch (err) { }
+
+    }
+
+
+
+    window.onload = function () {
+
+        if (!("ontouchstart" in document)) {
+            document.getElementById("loader").innerHTML = "<h1>This is a mobile-only game :(</h1>";
+            return;
+        }
+
+        var cnv = document.getElementById("cnv");
+
+        var ctx = cnv.getContext("2d");
+
+        function init() {
+
+            W = window.innerWidth;
+
+            H = window.innerHeight;
+
+            cnv.width = W;
+
+            cnv.height = H;
+
+            L = W < H ? W / 2 : H / 2;
+
+            V = L / 69;
+
+        }
+
+        init();
+
+        //window.onresize = init;
+
+        ctx.translate(W / 2, H / 2);
+
+
+
+        const sin = Math.sin;
+
+        const cos = Math.cos;
+
+        const PI = Math.PI;
+
+        function id(n) {
+
+            return document.getElementById(n);
+
+        }
+
+
+
+        function atan(x1, y1, x2, y2) {
+
+            let dx = x2 - x1;
+
+            let dy = y2 - y1;
+
+            if (dx == 0) {
+
+                if (dy >= 0) {
+
+                    return PI / 2;
+
+                }
+
+                else {
+
+                    return (3 / 2) * PI;
+
+                }
+
+            }
+
+            else if (dx > 0) {
+
+                return Math.atan(dy / dx);
+
+            }
+
+            else { return PI + Math.atan(dy / dx); }
+
+
+
+        }
+
+
+
+        cnv.addEventListener("touchstart", function (e) {
+
+            if (!joystick) {
+
+                X = e.touches[0].clientX - W / 2;
+
+                Y = e.touches[0].clientY - H / 2;
+
+                X1 = e.touches[0].clientX - W / 2;
+
+                Y1 = e.touches[0].clientY - H / 2;
+
+                joystick = true;
+
+            }
+
+        });
+
+        cnv.addEventListener("touchmove", function (e) {
+
+            X1 = e.touches[0].clientX - W / 2;
+
+            Y1 = e.touches[0].clientY - H / 2;
+
+        });
+
+        cnv.addEventListener("mousedown", function (e) {
+
+            X = e.clientX - W / 2;
+
+            Y = e.clientY - H / 2;
+
+            X1 = e.clientX - W / 2;
+
+            Y1 = e.clientY - H / 2;
+
+            joystick = true;
+
+        });
+
+        cnv.addEventListener("mousemove", function (e) {
+
+            if (joystick) {
+
+                X1 = e.clientX - W / 2;
+
+                Y1 = e.clientY - H / 2;
+
+            }
+
+        });
+
+        function killJoy() {
+
+            X1 = X;
+
+            Y1 = Y;
+
+            joystick = false;
+
+        }
+
+        cnv.addEventListener("touchend", killJoy);
+
+        cnv.addEventListener("mouseup", killJoy);
+
+
+
+        var Plr, Opp;
+
+
+
+        function TOP(x, y, color) {
+
+            this.health = 4000;
+
+            this.x = x;
+
+            this.y = y;
+
+            this.r = L / 15;
+
+            this.color = color;
+
+            this.R = L * 0.8;
+
+            //this.opp = opp;
+
+            this.dx = 0; this.dy = 0;
+
+            this.dX = 0; this.dY = 0;
+
+            this.attacking = false;
+
+            this.frameCount = 0;
+
+            this.draw = function () {
+
+                ctx.beginPath();
+
+                let grd = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.r);
+
+                grd.addColorStop(0.5, this.color);
+
+                grd.addColorStop(1, "dimgrey");
+
+                if (this.health > 0) {
+
+                    ctx.fillStyle = grd;
+
+                    ctx.strokeStyle = "transparent";
+
+                }
+
+                else {
+
+                    ctx.fillStyle = this.color;
+
+                    ctx.strokeStyle = "dimgrey";
+
+                }
+
+                ctx.arc(this.x, this.y, this.r, 0, PI * 2);
+
+                ctx.fill();
+
+                ctx.stroke();
+
+            }
+
+            this.move = function () {
+
+                this.ang = atan(this.x, this.y, 0, 0) - 1.35;
+
+                this.dx = cos(this.ang) * V + this.dX;
+
+                this.dy = sin(this.ang) * V + this.dY;
+
+                if (this.attacking) {
+
+                    this.frameCount++;
+
+                    if (this.frameCount > 102) {
+
+                        this.attacking = false;
+
+                        this.frameCount = 0;
+
+                    }
+
+                    else if (this.frameCount == 17 || !this.attacking) {
+
+                        this.dX = 0;
+
+                        this.dY = 0;
+
+                    }
+
+                }
+
+            }
+
+            this.update = function () {
+
+                this.x += this.dx;
+
+                this.y += this.dy;
+
+                this.R = Math.sqrt(this.x ** 2 + this.y ** 2);
+
+                this.health--;
+
+                if (this.health < 0) {
+
+                    this.health = 0;
+
+                }
+
+                if (this.R > L) {
+
+                    this.health = 0;
+
+                    gameover = "Stadium Out!";
+
+                }
+
+            }
+
+            this.attack = function (that) {
+
+                if (this.frameCount === 0) {
+
+                    let ang = atan(this.x, this.y, that.x, that.y);
+
+                    this.dX = cos(ang) * V * 3;
+
+                    this.dY = sin(ang) * V * 3;
+
+                    this.attacking = true;
+
+                }
+
+
+
+
+
+            }
+
+        }
+
+
+
+        Plr = new TOP(-L * 0.8, 0, "blue");
+
+        Opp = new TOP(L * 0.8, 0, "red");
+
+
+
+        function animate() {
+
+            //vibrate(0);
+
+            ctx.clearRect(-W / 2, -H / 2, W, H);
+
+            //Stadium
+
+            ctx.beginPath();
+
+            ctx.arc(0, 0, L, 0, PI * 2);
+
+            let grds = ctx.createRadialGradient(0, 0, L * 2, 0, 0, L / 2);
+
+            grds.addColorStop(1, "grey");
+
+            grds.addColorStop(0, "lightgrey");
+
+            ctx.fillStyle = grds;
+
+            ctx.fill();
+
+
+
+            //The TOPs
+
+            Plr.move(); Opp.move();
+
+
+
+            //Player
+
+            let ang = atan(X, Y, X1, Y1);
+
+            let r = Math.sqrt((X - X1) ** 2 + (Y - Y1) ** 2);
+
+            if (r > 50) { r = 50; }
+
+            let vel = (r / 50) * V;
+
+
+
+            Plr.dx += vel * cos(ang);
+
+            Plr.dy += vel * sin(ang);
+
+
+
+            //Opponent
+
+            if (Plr.R >= L * 0.6 && Plr.R <= 0.8 * L) {
+
+                let d_ang = atan(Opp.x, Opp.y, Plr.x, Plr.y);
+
+
+
+                Opp.dx += V * cos(d_ang);
+
+                Opp.dy += V * sin(d_ang);
+
+            }
+
+            else if (Math.floor(Math.random() * 100) % 17 == 0) {
+
+                Opp.attack(Plr);
+
+            }
+
+
+
+            //Collision
+
+            if (Math.sqrt((Plr.x - Opp.x) ** 2 + (Plr.y - Opp.y) ** 2) <= Plr.r + Opp.r) {
+
+                let x = Plr.dx; let y = Plr.dy;
+
+                Plr.health -= (Math.sqrt(Opp.dx ** 2 + Opp.dy ** 2) / V) * 5;
+
+                Opp.health -= (Math.sqrt(Plr.dx ** 2 + Plr.dy ** 2) / V) * 5;
+
+                Plr.dx = 3 * Opp.dx;
+
+                Plr.dy = 3 * Opp.dy;
+
+                Opp.dx = 3 * x;
+
+                Opp.dy = 3 * y;
+
+                /*if(Plr.attacking){Plr.attacking=false;}
+    
+                if(Opp.attacking){Opp.attacking=false;}*/
+
+                vibrate(100);
+
+            }
+
+
+
+            Plr.update(); Opp.update();
+
+            Plr.draw();
+
+            if (Plr.frameCount == 0) {
+
+                id("att").style.borderWidth = "7px";
+
+            }
+
+            Opp.draw();
+
+
+
+            //Joystick
+
+            if (joystick) {
+
+                ctx.beginPath();
+
+                ctx.strokeStyle = "white";
+
+                ctx.arc(X, Y, 50, 0, PI * 2);
+
+                ctx.stroke();
+
+
+
+                ctx.beginPath();
+
+                ctx.fillStyle = "blue";
+
+                ctx.arc(X + cos(ang) * r, Y + sin(ang) * r, 15, 0, PI * 2);
+
+                ctx.fill();
+
+                ctx.stroke();
+
+            }
+
+
+
+            ctx.fillStyle = "skyblue";
+
+            ctx.font = "bold 30px Courier";
+
+            ctx.textAlign = "center";
+
+            ctx.textBaseline = "middle";
+
+            ctx.fillText(Math.round(Plr.health), -W / 2 + 50, -H / 2 + 30);
+
+            ctx.fillStyle = "red";
+
+            ctx.font = "bold 30px Courier";
+
+            ctx.textAlign = "center";
+
+            ctx.textBaseline = "middle";
+
+            ctx.fillText(Math.round(Opp.health), W / 2 - 50, -H / 2 + 30);
+
+
+
+            if (Plr.health && Opp.health) {
+
+                window.requestAnimationFrame(animate);
+
+            }
+
+            else {
+
+                killJoy();
+
+                ctx.clearRect(-W / 2, -H / 2, W, H);
+
+                ctx.beginPath();
+
+                ctx.arc(0, 0, L, 0, PI * 2);
+
+                ctx.fillStyle = grds;
+
+                ctx.fill();
+
+                Plr.draw(); Opp.draw();
+
+                ctx.fillStyle = "skyblue";
+
+                ctx.font = "bold 30px Courier";
+
+                ctx.textAlign = "center";
+
+                ctx.textBaseline = "middle";
+
+                ctx.fillText(Math.round(Plr.health), -W / 2 + 50, -H / 2 + 30);
+
+                ctx.fillStyle = "red";
+
+                ctx.font = "bold 30px Courier";
+
+                ctx.textAlign = "center";
+
+                ctx.textBaseline = "middle";
+
+                ctx.fillText(Math.round(Opp.health), W / 2 - 50, -H / 2 + 30);
+
+
+
+
+
+                ctx.fillStyle = "White";
+
+                ctx.font = "bold 50px Courier";
+
+                ctx.textAlign = "center";
+
+                ctx.textBaseline = "middle";
+
+                ctx.fillText(gameover, 0, 0);
+
+                setTimeout(function () {
+
+                    if (Plr.health <= 0 && Opp.health <= 0) {
+
+                        id("text").innerHTML = "DRAW!";
+
+                        id("TOP").style.backgroundColor = "black";
+
+                    }
+
+                    else if (Plr.health <= 0) {
+
+                        id("text").innerHTML = "RED WINS!";
+
+                        id("TOP").style.backgroundColor = "red";
+
+                        oscore++;
+
+                        id("oscore").innerHTML = oscore;
+
+                    } else if (Opp.health <= 0) {
+
+                        id("text").innerHTML = "BLUE WINS!";
+
+                        id("TOP").style.backgroundColor = "blue";
+
+                        pscore++;
+
+                        id("pscore").innerHTML = pscore;
+
+                    }
+
+                    id("winscreen").style.display = "flex";
+
+                    //console.log("call")
+
+
+
+                }, 1000);
+
+            }
+
+        }
+
+        document.getElementById("loader").style.display = "none";
+
+        function rectify(o) {
+
+            o.health = 4000;
+
+            o.y = 0;
+
+            o.attacking = false;
+
+            o.frameCount = 0;
+
+            o.dX = 0;
+
+            o.dY = 0;
+
+            o.dx = 0; o.dy = 0;
+
+        }
+
+        document.getElementById("ripcord").addEventListener("click", function () {
+
+            this.style.display = "none";
+
+            rectify(Plr);
+
+            Plr.x = -L * 0.8;
+
+            rectify(Opp);
+
+            Opp.x = L * 0.8;
+
+            gameover = "Stamina Out!"
+
+            animate();
+
+        });
+
+        //animate();
+
+
+
+        document.getElementById("att").addEventListener("touchstart", function () {
+
+            Plr.attack(Opp);
+
+            this.style.borderWidth = "1px";
+
+        });
+
+        cnv.addEventListener("contextmenu", function (e) {
+
+            e.preventDefault();
+
+            Plr.attack(Opp);
+
+            this.style.borderWidth = "1px";
+
+        });
+
+        id("winscreen").addEventListener("click", function () {
+
+            this.style.display = "none";
+
+            id("ripcord").style.display = "block";
+
+        });
+
+
+
+
+
+    }</script>
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Spinning Top Fight</title>
+
+    <link href='https://fonts.googleapis.com/css?family=Goldman' rel='stylesheet'>
+
+    <link rel="icon" type="image/svg+xml" href="./TopSVG.svg" />
+
+</head>
+
+<body>
+
+    <div id="loader">
+
+        <img src="./TopSVG.svg">
+
+    </div>
+
+    <div id="ripcord">
+
+        1) Tap/Click and hold to activate joystick.<br>
+
+        2) Tap the sword button to attack.<br>
+
+        For PC, right click.<br>
+
+        3) Oh, yeah, you control the blue TOP.<br>
+
+        4) This game is suitable only for touchscreen devices (PC Controls are unrefined).
+
+        <span id="cnt">Let it Rip!</span>
+
+    </div>
+
+    <canvas id="cnv"></canvas>
+
+    <input type="button" id="att" value="⚔">
+
+    <div id="score"><span id="pscore">0</span>:<span id="oscore">0</span></div>
+
+    <div id="winscreen">
+
+
+
+        <div id="TOP">
+
+            <svg width="200" height="200">
+
+                <circle cx="100" cy="100" r="95" fill="transparent" stroke="dimgrey" style="stroke-width:20;"></circle>
+
+                <polygon points="100 60, 134.64 80, 134.64 120, 100 140, 65.36 120, 65.36 80"
+                    fill="rgba(220,220,220,0.4)"></polygon>
+
+                <rect x="54.36" y="80" width="10" height="40" fill="black"></rect>
+
+                <rect x="134.64" y="80" width="10" height="40" fill="black"></rect>
+
+                <rect x="95" y="0" width="10" height="5" fill="black"></rect>
+
+                <rect x="0" y="95" width="5" height="10" fill="black"></rect>
+
+                <rect x="195" y="95" width="5" height="10" fill="black"></rect>
+
+                <rect x="95" y="195" width="10" height="5" fill="black"></rect>
+
+            </svg>
+
+        </div>
+
+        <div id="text"></div>
+
+        <div id="continue">Click to continue...</div>
+
+
+
+
+
+    </div>
+
+</body>
+
+</html>

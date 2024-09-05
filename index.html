@@ -13,7 +13,7 @@
     <meta author="J. M Areeb Uzair">
     <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair">
     <meta name="description" content="Home for J. M Areeb Uzair's various projects">
-    <link rel="icon" href="./Assets/DoubleAFavicon.jpg" type="image/jpg">
+    <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
     <link rel="stylesheet" href="./style.css">
 </head>
 
@@ -32,38 +32,38 @@
 <script>
     onload = () => {
         let bg = document.querySelector(".background");
-        let texts = ["Front-End Developer", "Programmer", "Artist"];
-        let anim = document.querySelector(".animated-text");
         bg.style.opacity = ".4";
-
-        function deleteChar() {
-            if (anim.textContent != "") {
-                text = anim.textContent;
-                anim.textContent = text.slice(0, -1);
-                window.requestAnimationFrame(deleteChar);
-            }
-            else {
-                texts.push(texts.shift());
-                setTimeout(() => {
-                    addChar(texts[0]);
-                }, 100);
-            }
-        }
-        function addChar(text) {
-            if (text != "") {
-                ch = text[0];
-                text = text.slice(1);
-                anim.textContent += ch;
-                setTimeout(() => {
-                    addChar(text);
-                }, 100);
-            }
-            else {
-                setTimeout(deleteChar, 1000);
-            }
-        }
-        deleteChar()
     }
+    let texts = ["Front-End Developer", "Programmer", "Artist"];
+    let anim = document.querySelector(".animated-text");
+
+    function deleteChar() {
+        if (anim.textContent != "") {
+            text = anim.textContent;
+            anim.textContent = text.slice(0, -1);
+            window.requestAnimationFrame(deleteChar);
+        }
+        else {
+            texts.push(texts.shift());
+            setTimeout(() => {
+                addChar(texts[0]);
+            }, 100);
+        }
+    }
+    function addChar(text) {
+        if (text != "") {
+            ch = text[0];
+            text = text.slice(1);
+            anim.textContent += ch;
+            setTimeout(() => {
+                addChar(text);
+            }, 100);
+        }
+        else {
+            setTimeout(deleteChar, 1000);
+        }
+    }
+    deleteChar();
 </script>
 
 </html>

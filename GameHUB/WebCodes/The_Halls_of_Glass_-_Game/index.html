@@ -1,0 +1,610 @@
+<style>
+    * {
+        -webkit-tap-highlight-color: transparent;
+        user-select: none;
+        -webkit-user-select: none;
+    }
+
+    html,
+    body {
+        overflow: hidden;
+        max-width: 100%;
+    }
+
+    body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: black;
+        font-family: "Goldman", "sansserif";
+    }
+
+    #intro {
+        cursor: pointer;
+    }
+
+    canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        cursor: grab;
+    }
+
+    #kc {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        color: yellow;
+        font-weight: bolder;
+    }
+
+    .screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        box-sizing: border-box;
+        padding: 10px;
+        background-color: black;
+        color: yellow;
+        text-align: justify;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        background-position: center;
+        background-image: url("MazePattern.jpg")
+    }
+
+    .screen p {
+        text-align: justify;
+        max-width: 800px;
+        overflow-y: auto;
+    }
+
+    #finished div {
+        display: block;
+    }
+
+    #finished {
+        display: none;
+        text-align: center;
+        color: skyblue;
+    }
+
+    input[type=button] {
+        outline: none;
+        color: red;
+        background-color: black;
+        border-color: yellow;
+    }
+
+    input,
+    label {
+        cursor: pointer;
+    }
+</style>
+<script>
+    // alert("Brought to you by Nor'wester!");
+    // alert("The PassKeys and Switches are the 💾 and 🔘 emojis as seen in Samsung phones.");
+    "use strict";
+    var W, H, L, D, joy, A, B;
+    var victory = false;
+    var inv = {
+        light1: false,
+        light2: false,
+        light3: false,
+        light4: false,
+        key1: false,
+        key2: false,
+        key3: false,
+        key4: false,
+    }
+    const { sin, cos, PI, sqrt, random, floor, ceil, round, abs } = Math;
+    function id(n) {
+        return document.getElementById(n);
+    }
+    var avatarPoints = [0, 34, 6, 30, 6, 10, 0, 6, 0, 0, 6, 0, 10, 6, 30, 6, 34, 0, 40, 0, 40, 6, 34, 10, 34, 30, 40, 34, 40, 40, 34, 40, 30, 34, 10, 34, 6, 40, 0, 40,];
+    var wallPoints = [0, 40, 40, 40, 0, 0, 40, 0, 18, 6, 6, 18, 34, 22, 22, 34, 34, 6, 6, 34];
+    var keycardPoints = [
+        4, 36, 4, 34, 16, 34, 16, 32, 4, 32, 4, 30, 16, 30, 16, 28, 4, 28, 4, 26, 16, 26, 16, 24, 4, 24, 4, 22, 16, 22, 16, 20, 4, 20, 4, 18, 16, 18, 16, 16, 4, 16, 4, 14, 16, 14, 16, 12, 4, 12, 4, 10, 16, 10, 16, 8, 4, 8, 4, 4, 20, 4, 36, 15, 36, 36
+    ]
+    var map = [
+        [1, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0],
+        [0, 0, 1, 0, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1],
+        [0, 0, 1, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1],
+        [0, 1, 1, 0, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 1, 0],
+        [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+        [0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 1, 0],
+        [0, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1],
+        [0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+        [1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0],
+        [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+        [0, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 0, 0],
+        [0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 1, 0, 0, 0],
+        [1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1, 1],
+        [0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0, 1],
+        [1, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 0, 1],
+        [0, 0, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1],
+        [1, 0, 0, 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 0],
+    ];
+
+    var barriers = [], keys = [], buttons = [];
+    function atan(x1, y1, x2, y2) {
+        let dx = x2 - x1;
+        let dy = y2 - y1;
+        if (dx == 0) {
+            if (dy >= 0) {
+                return PI / 2;
+            }
+            else {
+                return (3 / 2) * PI;
+            }
+        }
+        else if (dx > 0) {
+            return Math.atan(dy / dx);
+        }
+        else { return PI + Math.atan(dy / dx); }
+    }
+    window.onload = function () {
+        var cnv = document.getElementById("cnv");
+        var ctx = cnv.getContext("2d");
+        function init() {
+            barriers = [];
+            W = window.innerWidth;
+            H = window.innerHeight;
+            cnv.width = W;
+            cnv.height = H;
+            L = (W < H ? W : H) * 4;
+            D = L / map.length;
+            ctx.lineWidth = D / 80;
+            for (let row = 0; row < map.length; row++) {
+                for (let col = 0; col < map[row].length; col++) {
+                    if (map[row][col]) {
+                        //console.log(row)
+                        let b = {
+                            x: D * col,
+                            y: D * row,
+                            w: D,
+                            h: D,
+                        };
+                        barriers.push(b);
+                    }
+                }
+            }
+            barriers.push({ x: 0, y: 0, w: L, h: 0, });
+            barriers.push({ x: 0, y: 0, w: 0, h: L, });
+            barriers.push({ x: L, y: 0, w: 0, h: L, });
+            barriers.push({ x: 0, y: L, w: L, h: 0, });
+            //draw();
+            ctx.shadowBlur = D / 3;
+        }
+        init();
+        joy = {
+            x: 0,
+            y: 0,
+            x1: 0,
+            y1: 0,
+            ang: 0,
+            dist: 0,
+            maxR: 50,
+            stick: false,
+            draw: function () {
+                ctx.fillStyle = "rgba(0,0,0,0.1)";
+                ctx.strokeStyle = "white";
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.maxR + 25, 0, PI * 2);
+                ctx.fill();
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(this.x + this.dist * cos(this.ang), this.y + this.dist * sin(this.ang), 25, 0, PI * 2);
+                ctx.stroke();
+            },
+            fix: function (e) {
+                joy.stick = true;
+                //alert(joy.stick)
+                if (e.clientX) {
+                    joy.x = e.clientX;
+                    joy.y = e.clientY;
+                }
+                else {
+                    joy.x = e.touches[0].clientX;
+                    joy.y = e.touches[0].clientY;
+                }
+                joy.x1 = joy.x;
+                joy.y1 = joy.y;
+                joy.ang = 0;
+                joy.dist = 0;
+            },
+            move: function (e) {
+                if (joy.stick) {
+                    if (e.clientX) {
+                        joy.x1 = e.clientX;
+                        joy.y1 = e.clientY;
+                    }
+                    else {
+                        joy.x1 = e.touches[0].clientX;
+                        joy.y1 = e.touches[0].clientY;
+                    }
+                    joy.ang = atan(joy.x, joy.y, joy.x1, joy.y1);
+                    joy.dist = Math.sqrt((joy.x - joy.x1) ** 2 + (joy.y - joy.y1) ** 2);
+                    if (joy.dist > joy.maxR) {
+                        joy.dist = joy.maxR;
+                    }
+                }
+            },
+            kill: function () {
+                joy.stick = false;
+                joy.dist = 0;
+                //alert(this.ang)
+            },
+        };
+        //window.onresize = init;
+        cnv.addEventListener("touchstart", joy.fix);
+        cnv.addEventListener("touchmove", joy.move);
+        cnv.addEventListener("touchend", joy.kill);
+        cnv.addEventListener("mousedown", joy.fix);
+        cnv.addEventListener("mousemove", joy.move);
+        window.addEventListener("mouseup", joy.kill);
+        function Key(row, col) {
+            this.row = row;
+            this.col = col;
+            this.draw = function () {
+                if (Math.abs(Player.x - D * this.col) > W || Math.abs(Player.y - D * this.row) > H) return;
+                ctx.fillStyle = "#F00";
+                ctx.fillRect(
+                    D * this.col + D * 2.5 / 20 + D / 4,
+                    H - L + D * this.row + D * 4 / 20 + D / 4,
+                    D * 4 / 40,
+                    D * 10 / 40
+                )
+                ctx.beginPath();
+                ctx.moveTo(
+                    D * this.col + keycardPoints[0] * D / 80 + D / 4,
+                    H - L + D * this.row + keycardPoints[1] * D / 80 + D / 4
+                );
+                for (let i = 2; i < keycardPoints.length; i += 2) {
+                    ctx.lineTo(
+                        D * this.col + keycardPoints[i] * D / 80 + D / 4,
+                        H - L + D * this.row + keycardPoints[i + 1] * D / 80 + D / 4
+                    );
+                }
+                ctx.closePath();
+                // ctx.arc(D * this.col, H - L + D * this.row, D/2, 0, PI*2);
+                ctx.fillStyle = "#000";
+                ctx.fill();
+                ctx.strokeStyle = "#CCE";
+                ctx.stroke();
+                ctx.fillStyle = "#08F";
+                ctx.fillRect(
+                    D * this.col + D * 5 / 20 + D / 4,
+                    H - L + D * this.row + D * 4.5 / 20 + D / 4,
+                    D * 3 / 20,
+                    D * 3 / 20
+                )
+            }
+        }
+        keys.push(new Key(11, 3));
+        keys.push(new Key(0, 8));
+        keys.push(new Key(7, 19));
+        keys.push(new Key(17, 16));
+        function Button(row, col) {
+            this.row = row;
+            this.col = col;
+            this.draw = function () {
+                if (Math.abs(Player.x - D * this.col) > W || Math.abs(Player.y - D * this.row) > H) return;
+                let btnGrad = ctx.createLinearGradient(D * this.col, H - L + D * this.row, D * this.col + D, H - L + D * this.row + D);
+                btnGrad.addColorStop(0, "#333");
+                btnGrad.addColorStop(1, "#AAA");
+                ctx.fillStyle = btnGrad;
+
+                ctx.beginPath();
+                ctx.arc(D * this.col + D / 2, H - L + D * this.row + D / 2, D / 4, 0, PI * 2);
+                ctx.fill();
+                ctx.strokeStyle = "#000";
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(D * this.col + D / 2, H - L + D * this.row + D / 2, D / 8, 0, PI * 2);
+                ctx.fillStyle = "#EEE";
+                ctx.fill();
+                ctx.strokeStyle = "#000";
+                ctx.stroke();
+            }
+        }
+        buttons.push(new Button(19, 7));
+        buttons.push(new Button(1, 0));
+        buttons.push(new Button(0, 16));
+        buttons.push(new Button(10, 19));
+        var Player = {
+            //p.y = 0.982
+            //p.x = 0.032
+            x: D + D / 4,
+            w: D / 2,
+            h: D / 2,
+            y: L - D + D / 4,
+            dx: 0,
+            dy: 0,
+            bladeAng: 0,
+            drawBlade: function(cx, cy){
+                ctx.beginPath();
+                let spinGrd = ctx.createConicGradient(this.bladeAng, cx,  cy);
+                spinGrd.addColorStop(0, "transparent");
+                spinGrd.addColorStop(0.5, "#FFF");
+                spinGrd.addColorStop(1, "transparent");
+                ctx.arc(cx,  cy, D/8, 0, PI*2);
+                ctx.fillStyle = spinGrd;
+                ctx.fill();
+                // ctx.strokeStyle = "#212223";
+                // ctx.stroke();
+            },
+            draw: function () {
+                this.bladeAng += 1;
+                if(this.bladeAng >= 2*PI) this.bladeAng -= 2*PI;
+                this.drawBlade(
+                    this.x + D/8,
+                    this.y + H - L + D/8
+                )
+                this.drawBlade(
+                    this.x + 3*D/8,
+                    this.y + H - L + D/8
+                )
+                this.drawBlade(
+                    this.x + D/8,
+                    this.y + H - L + 3*D/8
+                )
+                this.drawBlade(
+                    this.x + 3*D/8,
+                    this.y + H - L + 3*D/8
+                )
+
+                ctx.beginPath();
+                ctx.arc(this.x + D/4,  this.y + H - L + D/4, D/4, 0, PI*2);
+                ctx.strokeStyle = "rgb(0, 0, 0)";
+                ctx.stroke();
+
+                ctx.beginPath();
+                ctx.fillStyle = "#212223";
+                ctx.moveTo(this.x + avatarPoints[0] * D / 80, this.y + H - L + avatarPoints[1] * D / 80);
+                for (let i = 2; i < avatarPoints.length; i += 2) {
+                    ctx.lineTo(this.x + avatarPoints[i] * D / 80, this.y + H - L + avatarPoints[i + 1] * D / 80)
+                }
+                ctx.closePath();
+                ctx.fill();
+
+                ctx.beginPath();
+                let glowGrd = ctx.createRadialGradient(this.x + D/4,  this.y + H - L + D/4, 0, this.x + D/4,  this.y + H - L + D/4, D/10);
+                glowGrd.addColorStop(0, "white");
+                glowGrd.addColorStop(0.35, "#FCC");
+                glowGrd.addColorStop(1, "red");
+                ctx.arc(this.x + D/4,  this.y + H - L + D/4, D/10, 0, PI*2);
+                ctx.fillStyle = glowGrd;
+                ctx.fill();
+
+            },
+            move: function () {
+                this.dx = (this.w / 10) * (joy.dist / joy.maxR) * cos(joy.ang);
+                this.dy = (this.h / 10) * (joy.dist / joy.maxR) * sin(joy.ang);
+                if (this.dx > 0) {
+                    for (let b of barriers) {
+                        if (this.x + this.w + this.dx >= b.x && this.x + this.dx < b.x && this.y < b.y + b.h && this.y + this.h > b.y) {
+                            this.dx = b.x - this.x - this.w;
+                        }
+                    }
+                }
+                else if (this.dx < 0) {
+                    for (let b of barriers) {
+                        if (this.x + this.dx <= b.x + b.w && this.x + this.w + this.dx > b.x + b.w && this.y < b.y + b.h && this.y + this.h > b.y) {
+                            this.dx = b.x + b.w - this.x
+                        }
+                    }
+                }
+                /*if(this.dy===0){
+    
+                    this.dy = this.h/50;
+    
+                }*/
+                if (this.dy > 0) {
+                    for (let b of barriers) {
+                        if (this.y + this.dy + this.h >= b.y && this.y + this.dy < b.y && this.x < b.x + b.w && this.x + this.w > b.x) {
+                            this.dy = b.y - this.y - this.h;
+                        }
+                    }
+                }
+                else if (this.dy < 0) {
+                    for (let b of barriers) {
+                        if (this.y + this.dy <= b.y + b.h && this.y + this.h + this.dy > b.y + b.h && this.x < b.x + b.w && this.x + this.w > b.x) {
+                            this.dy = b.y + b.h - this.y;
+                        }
+                    }
+                }
+                this.x += this.dx;
+                this.y += this.dy;
+                tx = (W - this.w) / 2 - this.x;
+                if (tx > 0) tx = 0;
+                if (tx < W - L) tx = W - L;
+                ty = L - this.y - this.h / 2 - H / 2;
+                if (ty < 0) ty = 0;
+                else if (ty > L - H) ty = L - H;
+                // console.log(this.x)
+            },
+            check: function () {
+                let c = floor((this.x + this.w / 2) / D);
+                let r = floor((this.y + this.h / 2) / D);
+                if (c == keys[0].col && r == keys[0].row) {
+                    inv.key1 = true
+                    kc.textContent = "Keys: " + ((inv.key1 ? 1 : 0) + (inv.key2 ? 1 : 0) + (inv.key3 ? 1 : 0) + (inv.key4 ? 1 : 0)) + "/4";
+                }
+                else if (c == keys[1].col && r == keys[1].row) {
+                    inv.key2 = true
+                    kc.textContent = "Keys: " + ((inv.key1 ? 1 : 0) + (inv.key2 ? 1 : 0) + (inv.key3 ? 1 : 0) + (inv.key4 ? 1 : 0)) + "/4";
+                }
+                else if (c == keys[2].col && r == keys[2].row) {
+                    inv.key3 = true
+                    kc.textContent = "Keys: " + ((inv.key1 ? 1 : 0) + (inv.key2 ? 1 : 0) + (inv.key3 ? 1 : 0) + (inv.key4 ? 1 : 0)) + "/4";
+                }
+                else if (c == keys[3].col && r == keys[3].row) {
+                    inv.key4 = true
+                    kc.textContent = "Keys: " + ((inv.key1 ? 1 : 0) + (inv.key2 ? 1 : 0) + (inv.key3 ? 1 : 0) + (inv.key4 ? 1 : 0)) + "/4";
+                }
+                if (c == buttons[0].col && r == buttons[0].row) inv.light1 = true;
+                else if (c == buttons[1].col && r == buttons[1].row) inv.light2 = true;
+                else if (c == buttons[2].col && r == buttons[2].row) inv.light3 = true;
+                else if (c == buttons[3].col && r == buttons[3].row) inv.light4 = true;
+                if (inv.key1 && inv.key2 && inv.key3 && inv.key4 && barriers.length == 186) {
+                    barriers.splice(95, 1);
+                }
+                if (r == 10 && c == 9) {
+                    victory = true;
+                    B = new Date().getTime();
+                    joy.kill();
+                }
+            },
+        };
+        var tx = 0, ty = 0;
+        // ctx.save();
+        function animate() {
+            ctx.save();
+            ctx.clearRect(0, 0, W, H);
+            ctx.translate(tx, ty);
+            let grd = ctx.createRadialGradient(Player.x + Player.w / 2, H - L + Player.y + Player.h / 2, 0, Player.x + Player.w / 2, H - L + Player.y + Player.h / 2, D * 3);
+            grd.addColorStop(0, "rgba(129, 133, 137, 1.0)")
+            grd.addColorStop(0.1, "rgba(129, 133, 137, 0.81)")
+            grd.addColorStop(0.2, "rgba(129, 133, 137, 0.64)")
+            grd.addColorStop(0.3, "rgba(129, 133, 137, 0.49)")
+            grd.addColorStop(0.4, "rgba(129, 133, 137, 0.36)")
+            grd.addColorStop(0.5, "rgba(129, 133, 137, 0.25)")
+            grd.addColorStop(0.6, "rgba(129, 133, 137, 0.16)")
+            grd.addColorStop(0.7, "rgba(129, 133, 137, 0.09)")
+            grd.addColorStop(0.8, "rgba(129, 133, 137, 0.04)")
+            grd.addColorStop(0.9, "rgba(129, 133, 137, 0.01)")
+            grd.addColorStop(1, "rgba(129, 133, 137, 0.0)")
+            ctx.fillStyle = grd;
+            ctx.beginPath();
+            ctx.arc(Player.x + Player.w / 2, H - L + Player.y + Player.h / 2, D * 2, 0, PI * 2);
+            ctx.fill();
+            ctx.fillStyle = "rgb(129, 133, 137)";
+            if (inv.light1) {
+                ctx.fillRect(0, H - L / 2, L / 2, L / 2);
+            }
+            if (inv.light2) {
+                ctx.fillRect(0, H - L, L / 2, L / 2);
+            }
+            if (inv.light3) {
+                ctx.fillRect(L / 2, H - L, L / 2, L / 2);
+            }
+            if (inv.light4) {
+                ctx.fillRect(L / 2, H - L / 2, L / 2, L / 2);
+            }
+            if (!hint.checked)
+                ctx.globalCompositeOperation = 'source-atop';
+            if (!inv.light1) { buttons[0].draw(); }
+            if (!inv.light2) { buttons[1].draw(); }
+            if (!inv.light3) { buttons[2].draw(); }
+            if (!inv.light4) { buttons[3].draw(); }
+            if (!inv.key1) keys[0].draw();
+            if (!inv.key2) keys[1].draw();
+            if (!inv.key3) keys[2].draw();
+            if (!inv.key4) keys[3].draw();
+            if (!hint.checked)
+                ctx.globalCompositeOperation = 'source-over';
+            Player.move();
+            Player.draw();
+            Player.check();
+
+            for (let b = 0; b < barriers.length - 4; b++) {
+                if (!(Math.abs(Player.x - barriers[b].x) > W || Math.abs(Player.y - barriers[b].y) > H)) {
+                    ctx.fillStyle = `rgba(0, 0, 0, 0.4)`;
+                    ctx.fillRect(barriers[b].x, H - L + barriers[b].y, barriers[b].w, barriers[b].h);
+                    ctx.strokeStyle = `black`;
+                    ctx.strokeRect(barriers[b].x, H - L + barriers[b].y, barriers[b].w, barriers[b].h);
+
+                    ctx.beginPath();
+                    for (let j = 0; j < wallPoints.length; j += 4) {
+                        ctx.moveTo(
+                            barriers[b].x + wallPoints[j] * D / 40,
+                            H - L + barriers[b].y + wallPoints[j + 1] * D / 40
+                        )
+                        ctx.lineTo(
+                            barriers[b].x + wallPoints[j + 2] * D / 40,
+                            H - L + barriers[b].y + wallPoints[j + 3] * D / 40
+                        )
+                    }
+                    ctx.stroke();
+                }
+            }
+            ctx.shadowColor = "blue";
+            ctx.fillStyle = "skyblue";
+            ctx.fillRect(D * map.length / 2 - D, H - L + D * map.length / 2 - D, D * 2, D * 2);
+            ctx.shadowColor = "transparent";
+            ctx.restore();
+            //ctx.translate(-tx,-ty);
+            if (joy.stick) {
+                joy.draw();
+                //console.log("y")
+            }
+            if (!victory) window.requestAnimationFrame(animate);
+            else setTimeout(function () {
+                let dt = (B - A) / 1000;
+                time.textContent = `${floor(dt / 60)}M:${round(dt % 60)}S`;
+                finished.style.display = "flex";
+            }, 200);
+        }
+        window.onresize = function () {
+            joy.kill();
+            let pL = L;
+            for (let b of barriers) {
+                b.x /= L;
+                b.y /= L;
+                b.w /= L;
+                b.h /= L;
+            }
+            init();
+            Player.x *= L / pL;
+            Player.y *= L / pL;
+            Player.w *= L / pL;
+            Player.h *= L / pL;
+        }
+        animate();
+        //console.log(barriers.length);
+    }</script>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>The Halls of Glass</title>
+    <link href='https://fonts.googleapis.com/css?family=Goldman' rel='stylesheet'>
+    <link rel="icon" href="./MazePattern.jpg" type="image/jpg">
+</head>
+
+<body>
+    <canvas id="cnv"></canvas>
+    <span id="kc"></span>
+    <div id="finished" class="screen">
+        <div>
+            <h1>CORE<br>BREACHED</h1><br>
+            Time: <span id="time"></span>
+        </div>
+    </div>
+    <div id="hintscreen" class="screen">
+        <div>
+            <b>Show hints?</b><br>
+            <input type="radio" name="h" id="hint" checked><label for="hint">Yeah, sure!</label><br>
+            <input type="radio" name="h" id="no_hint"><label for="no_hint">Nah, I got this.</label><br><br>
+            <input type="button" onclick="hintscreen.style.display='none';A=new Date().getTime();" value="Continue">
+        </div>
+    </div>
+    <div id="intro" class="screen" onclick="this.style.display='none';">
+        <p>
+            My name is Indyana Drones, and I am on a quest. I need to enter the Core of the Maze (that big, bright blue
+            box), but I need to find four PassKeys™ scattered within this labyrinth. Too bad it's pitch dark... Maybe
+            there
+            are lights somewhere?<br><br>Click to continue...<br>&#9432;Click and hold for joystick.
+        </p>
+    </div>
+</body>
+
+</html>

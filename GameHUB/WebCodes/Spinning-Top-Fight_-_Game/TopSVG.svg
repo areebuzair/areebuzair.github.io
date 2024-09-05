@@ -1,0 +1,19 @@
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+
+            <circle cx="100" cy="100" r="95" fill="blue" stroke="dimgrey" style="stroke-width:20;"></circle>
+
+            <polygon points="100 60, 134.64 80, 134.64 120, 100 140, 65.36 120, 65.36 80" fill="#5050FF"></polygon>
+
+            <rect x="54.36" y="80" width="10" height="40" fill="black"></rect>
+
+            <rect x="134.64" y="80" width="10" height="40" fill="black"></rect>
+
+            <rect x="95" y="0" width="10" height="5" fill="black"></rect>
+
+            <rect x="0" y="95" width="5" height="10" fill="black"></rect>
+
+            <rect x="195" y="95" width="5" height="10" fill="black"></rect>
+
+            <rect x="95" y="195" width="10" height="5" fill="black"></rect>
+
+</svg>

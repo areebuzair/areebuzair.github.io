@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta property="og:title" content="Nor'wester's Game Hub">
+    <meta property="og:description" content="Home for J. M Areeb Uzair's various projects">
+    <meta property="og:image" content="https://areebuzair.github.io/GameHUB/Assets/ogpimage.jpg">
+    <meta property="og:url" content="https://areebuzair.github.io/GameHUB">
+    <meta property="og:type" content="website">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta author="J. M Areeb Uzair">
+    <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair, Nor'wester GameHUB, Norwester GameHUB, Game, Games">
+    <meta name="description" content="Home for J. M Areeb Uzair's various projects">
+    <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/png">
+    <link href="style.css" rel="stylesheet">
+    <link href="icons.css" rel="stylesheet">
+    <title>Nor'wester's GameHub</title>
+</head>
+
+<body>
+    <canvas id="cnv"></canvas>
+    <header>
+        <label class="gameControllerIcon"></label>
+        <img src="./Assets/Norwester GameHUB logo.svg" onload="document.getElementById('PageTitle').style.display ='none'; this.className = 'animated-header-logo';">
+        <h1 id="PageTitle">Nor'wester's GameHUB</h1>
+        <div>
+            <a class="link-button" onClick="document.getElementById('Games-Container').scrollIntoView();">PLAY GAMES
+                NOW</a>
+            <a href="../" id="HUBlink" class="link-button">Project HUB</a>
+        </div>
+    </header>
+    <h2 id="loader-text" class="loader-animated">Loading</h2>
+    <div id="Games-Container">
+    </div>
+
+    <script src="AnimatedBG.js"></script>
+
+    <script>
+        const handleGrid = () => {
+            let N = Math.floor(
+                parseInt(window.getComputedStyle(
+                    document.getElementById("Games-Container")
+                , null).getPropertyValue("width")) / 500
+            );
+            let column_templates = "auto";
+            for (let i = 1; i < N; i++) {
+                column_templates += " auto";
+            }
+            document.getElementById("Games-Container").style.gridTemplateColumns = column_templates;
+        }
+        handleGrid();
+        window.addEventListener("resize", handleGrid);
+
+        // let observer = new window.IntersectionObserver(function (entries, self) {
+        //     //console.log("entries", entries);
+        //     //console.log("self", self);
+        //     // iterate over each entry
+        //     entries.forEach((entry) => {
+        //         // process just the images that are intersecting.
+        //         // isIntersecting is a property exposed by the interface
+        //         if (entry.isIntersecting) {
+        //             // custom function that copies the path to the img
+        //             // from data-src to src
+        //             loadImages(entry.target);
+        //             // the image is now in place, stop watching
+        //             self.unobserve(entry.target);
+        //         }
+        //     });
+        // }, {
+        //     rootMargin: "50px",
+        // });
+        // let header = document.querySelector('header');
+        // observer.observe(header);
+    </script>
+
+    <script>
+        const jsonFilePath = './list.json';
+
+        fetch(jsonFilePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    document.getElementById("loader-text").innerHTML = "ERROR!";
+                    document.getElementById("loader-text").className = "";
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById("loader-text").style.display = "none";
+                // Handle the JSON data
+                // console.log(data);
+                for (let name of data) {
+                    // console.log(name.folder_name)
+                    // let a = document.createElement("a");
+                    let card = document.createElement("a");
+                    card.className = "card";
+                    let title = document.createElement("h3");
+                    let img = document.createElement("img");
+                    card.href = `./WebCodes/${name.folder_name}`;
+                    // card.target = "_blank";
+                    img.src = `./WebCodes/${name.folder_name}/cover.jpg`;
+                    img.alt = name.folder_name.replaceAll("_", " ");
+                    title.textContent = name.folder_name.replaceAll("_", " ");
+                    card.appendChild(img);
+                    card.appendChild(title);
+                    // a.appendChild(card);
+                    let cardContainer = document.createElement("div");
+                    cardContainer.className = "card-container";
+                    cardContainer.appendChild(card);
+                    document.getElementById("Games-Container").appendChild(cardContainer);
+                    // document.getElementById("Container").innerHTML += "<br>"
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching the JSON file:', error);
+                document.getElementById("loader-text").innerHTML = "ERROR!";
+                document.getElementById("loader-text").className = "";
+            });
+    </script>
+</body>
+
+</html>

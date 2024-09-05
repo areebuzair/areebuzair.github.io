@@ -1,0 +1,248 @@
+* {
+    user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    -moz-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    background-color: rgb(219, 152, 61);
+    width: 100vw;
+    height: 100vh;
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url("WoodenBG.jpg");
+}
+
+input[type=checkbox] {
+    visibility: hidden;
+    /*Told you, there's nothing to see...*/
+    display: none;
+}
+
+#grid {
+    width: 80vmin;
+    height: 80vmin;
+    background-color: rgba(255, 238, 221, 0.8);
+    position: relative;
+    /*top:calc(50vh - 50vmin);*/
+    left: calc(50vw - 40vmin);
+    /*border-radius:10px;*/
+    display: grid;
+}
+
+#grid div {
+    box-sizing: border-box;
+    border: 0.5vmin solid black;
+    color: red;
+    font-weight: bolder;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+#grid div:hover {
+    background-color: #EDC;
+}
+
+#solved {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 10vmin;
+    color: gold;
+    background-color: rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+#solved i {
+    font-weight: lighter;
+    font-size: 5vmin;
+    color: #FED;
+}
+
+#levelselect,
+#confirmpage {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    /*font-weight:bolder;*/
+    font-size: 10vmin;
+    color: #FED;
+    background-color: #B99361;
+    background-image: url("WoodenBG.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#confirmpage {
+    font-size: 7vmin;
+}
+
+#levelselect i {
+    font-weight: bold;
+    font-size: 5vmin;
+}
+
+#gamemenu {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 2vmin;
+    padding-right: 5vmin;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#timedisp {
+    /*position:absolute;
+    top:10px;
+    right:10px;*/
+    color: white;
+    font-weight: bolder;
+    font-size: 5vmin;
+    text-shadow: 1px 1px 0px black,
+        -1px 1px 0px black,
+        1px -1px 0px black,
+        -1px -1px 0px black;
+    -webkit-text-shadow: 1px 1px 0px black,
+        -1px 1px 0px black,
+        1px -1px 0px black,
+        -1px -1px 0px black;
+    -ms-text-shadow: 1px 1px 0px black,
+        -1px 1px 0px black,
+        1px -1px 0px black,
+        -1px -1px 0px black;
+    -moz-text-shadow: 1px 1px 0px black,
+        -1px 1px 0px black,
+        1px -1px 0px black,
+        -1px -1px 0px black;
+    -o-text-shadow: 1px 1px 0px black,
+        -1px 1px 0px black,
+        1px -1px 0px black,
+        -1px -1px 0px black;
+}
+
+#preview {
+    color: #321;
+    font-size: 80%;
+}
+
+input[type=button],
+#labelsfx {
+    border: #321;
+    background-color: #321;
+    color: #DDD;
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
+    padding: 5px;
+    font-size: 20px;
+    outline: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 5vmin;
+}
+
+input[type=button]:active,
+#labelsfx {
+    background-color: #210;
+}
+
+#confirmpage {
+    display: none;
+}
+
+#intro,
+#creditspage,
+#helppage {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    background-size: 100vmin 100vmin;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(51, 34, 17, 0.7);
+}
+
+#intro {
+    background-image: url("WoodenBG.jpg");
+    background-color: #321;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#intro img{
+    width: 60vmin;
+}
+
+#intro h1{
+    color: gold;
+    text-shadow: .3vmin .3vmin 1vmin black;
+    font-size: 7vmin;
+}
+
+#creditspage a {
+    color: #321;
+    cursor: pointer;
+}
+
+#creditspage a:hover {
+    color: #00F;
+}
+
+#helppage,
+#creditspage {
+    display: none;
+    background-image: url("WoodenBG.jpg");
+    text-align: center;
+    color: white;
+    padding-left: calc(50vw - 50vmin);
+    padding-right: calc(50vw - 45vmin);
+    padding-top: calc(50vh - 45vmin);
+    padding-bottom: calc(50vh - 45vmin);
+    box-sizing: border-box;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    font-size: 4vmin;
+}
+
+#helppage ol {
+    text-align: justify;
+}
+
+#creditspage {
+    font-size: 6vmin;
+}
+
+input[type="button"].continue-btn {
+    background-color: transparent;
+    border: 1px solid #210;
+    color: #210;
+    font-size: 5vmin;
+    padding: 2vmin;
+}

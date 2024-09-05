@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+
+        <title>The Gates of Gold</title>
+
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <meta author="Nor'wester">
+
+        <meta keywords="golden gates, gates of gold, adventure game">
+
+        <meta name="description" content="Can you reach the Gates of Gold?">
+
+        <link rel="icon" href="./wings.png" type="image/png">
+
+        <link rel="stylesheet" href="goldGates.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Varela+Round|Nosifer" rel="stylesheet">
+
+        <script src="goldGates.js"></script>
+
+    </head>
+
+    <body>
+
+        <canvas id="cnv"></canvas>
+
+        <input type="button" id="left" value="←" class="controls">
+
+        <input type="button" id="right" value="→" class="controls">
+
+        <input value="0" id="joystick" style="display:none;">
+
+        <input type="button" id="jump" value="↑" class="controls">
+
+        <input id="map" type="checkbox">
+
+        <!--<img src="https://www.dropbox.com/s/kgkmrylu1o70t5g/MapModel-retro.png?raw=1" onload="this.parentNode.removeChild(this);">-->
+
+       <div id=loader><div class=box>
+
+    <h1 id="gameTitle">The Gates of Gold</h1>
+
+    <p>Instructions: (for touch devices/ keyboard controls)<br>
+
+    ☆Use the <button>←</button> and <button>→</button> buttons/ <kbd>a</kbd> and <kbd>d</kbd> keys to move and to grab onto walls.<br>    
+
+    ☆Press the <button>↑</button> button/  <kbd>spacebar</kbd> to jump and climb.<br>
+
+    ☆Use the <button>🗺️</button> and the <button>❌</button>button/ <kbd>m</kbd> key to open and close the map.<br>
+
+    ☆Your objective is to find the Gates of Gold. Enter it to win.<br>
+
+    ☆Hidden in the dungeons are the legendary Wings of Nebula. Rumour has it that this artifact allows the wielder to walk on clouds as though they were solid.<br>
+
+    ☆Avoid the venom vines scattered throughout the landscape.<br>
+
+    ☆Collect gems for points. They also function as checkpoints.<br>  
+
+    <br><span id=continue>Click to Start</span></p></div>
+
+        <div id="circularbar"></div>
+
+    </div>
+
+    
+
+    <div id=gameOver>
+
+        <i id="deathcause"></i><br>
+
+        <span>Goto Last<br>Checkpoint</span>
+
+    </div>
+
+    <div id="resume">
+
+        <span>Resume?</span>
+
+    </div>
+
+           
+
+    <div id=end>
+
+        <div class=box><p>
+
+        <span id="scroll">Ascension, will yet, be mine.</span><center>
+
+          <table border="1" cellpadding="5px">
+
+            <tr>
+
+              <td>Gate cleared</td>
+
+              <td>10000</td>
+
+            </tr> 
+
+            <tr>
+
+              <td>Gems</td>
+
+              <td>1000×<span id="gemnumber"></span></td>
+
+            </tr>
+
+            <tr>
+
+              <td>Wings</td>
+
+              <td>2000</td>
+
+            </tr>
+
+            <tr>
+
+              <td>Deaths</td>
+
+              <td>-50×<span id="deathcount"></span></td>
+
+            </tr>
+
+            <tr>
+
+              <th>Total Score</th>
+
+              <th><span id=score></span></th>
+
+            </tr>
+
+            <tr>
+
+              <th colspan="2"><i style="color:#888;font-size:70%;">High Score: 17000</i></th>
+
+            </tr>
+
+          </table></center>
+
+        <br><input type="button" value="New Game" id="replay"><br><hr>The Gates of Gold, a game designed, coded and debugged by <a href="https://www.sololearn.com/Profile/16557744/?ref=app" target="_blank">Nor'wester</a>.<br> &copy; 2022<br>All illustrations &copy; Nor'wester<br>All illustrations made using Paint 3D and HTML Canvas<br>Character design and voice by Nor'wester<br>Character animation using <a href="https://www.mixamo.com/" target="_blank">Mixamo.com</a> and Blender<br>The following audio from <a href="https://www.fesliyanstudios.com/" target="_blank">FesliyanStudios.com</a>:<br>● Body Thud 1<br>● Breaking Bones B7<br>● Dramatic Heartbeat<br>● Fireball Strong Attack Whoosh<br>Be sure to leave a comment!</p>
+
+        </div>
+
+    </div>
+
+    </body>
+
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Puzzles Infinite</title>
+  <meta property="og:title" content="Puzzles Infinite">
+  <meta property="og:description" content="Enjoy a relaxing yet mind-crunching puzzle!">
+  <meta property="og:image" content="https://areebuzair.github.io/Puzzle/ogpimage.jpg">
+  <meta property="og:url" content="https://areebuzair.github.io/Puzzle">
+  <meta property="og:type" content="website">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta author="J. M Areeb Uzair">
+  <meta keywords="puzzles infinite, puzzle, puzzles, game, games, puzzle game">
+  <meta name="description" content="Enjoy a relaxing yet mind-crunching puzzle!">
+  <link rel="icon" href="puzzleFavicon.png" type="image/png">
+  <link href='https://fonts.googleapis.com/css?family=Varela+Round' rel='stylesheet'>
+  <link href="Puzzle.css" rel="stylesheet">
+  <script src="Puzzle.js"></script>
+</head>
+
+<body>
+  <div id="gamemenu">
+    <span id="buttons">
+      <!--<input type="button" id="quit" value="Quit">-->
+      <input type="button" id="save" value="Save & Go to Menu">
+    </span>
+    <span id="timedisp">00:00</span>
+  </div>
+  <div id="grid"></div>
+
+  <div id="solved">
+    <div>Solved!<br><i>click to continue</i></div>
+  </div>
+
+  <div id="levelselect">
+    <div>
+      Select Level:<br>
+      <label id="preview" for="level">4×4</label><br>
+      <input type="range" id="level" min="3" max="10" step="1" value="4"
+        oninput="preview.innerHTML=`${this.value}×${this.value}`;"><br>
+      <input type="button" value="Start New Game" id="start">
+      <br><i>OR</i><br>
+      <input type="button" id="lastgame" value="Resume Previous Game"><br>
+      <label for="audiobox" id="labelsfx">🔇</label>
+      <input type="checkbox" id="audiobox">
+      <input type="button" value=" ? " onclick="document.getElementById('helppage').style.display='block';">
+      <input type="button" value=" ℹ️ " onclick="document.getElementById('creditspage').style.display='block';">
+      <!-- <br><input type="button" value="Project HUB" onclick="window.location.href='../../';"> -->
+    </div>
+  </div>
+
+  <div id="confirmpage">
+    <div>
+      Are you sure you want to start a new game? Your previously saved game will be deleted. <br>
+      <input type="button" value="Continue" id="confrm">
+      <input type="button" value="Go Back" onclick="confirmpage.style.display='none';">
+
+    </div>
+  </div>
+
+  <div id="creditspage" onclick="this.style.display='none';">
+    <h2>Credits</h2>
+    Code: <i>J. M Areeb Uzair</i><br />
+    Design: <i>J. M Areeb Uzair</i><br />
+    Sound Effect from <a href="https://www.fesliyanstudios.com" target="_blank">www.fesliyanstudios.com</a><br />
+    <input type="button" class="continue-btn" value="Click to continue">
+  </div>
+
+  <div id="helppage" onclick="this.style.display='none';">
+    <h2>Help</h2>
+    <ol>
+      <li>Click on a tile to move it to its adjacent empty cell.</li>
+      <li>Rearrange all the tiles in ascending order to win.</li>
+      <li>You can save the game to finish later by clicking the <i>Save & Go to Menu</i> option. Only starting a new
+        game will delete the save file.</li>
+    </ol>
+    <input type="button" class="continue-btn" value="Click to continue">
+  </div>
+
+  <div id="intro" onclick="this.style.display='none';">
+    <img src="./puzzle icon.png">
+    <h1>PUZZLES<br>infinite</h1>
+    <input type="button" class="continue-btn" value="Click to continue">
+  </div>
+
+</body>
+
+</html>

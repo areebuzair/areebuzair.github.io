@@ -1,0 +1,138 @@
+:root{
+    --color: #0008ff;
+    --buttoncolor: white;
+}
+
+.gameControllerIcon {
+
+    --btw: 4px;
+    --bsw: 20px;
+    --bbw: 4px;
+    --btr: 6px;
+    --bbr: 10px;
+    --width: 50px;
+    --height: 28px;
+
+    display: inline-block;
+    text-align: center;
+    border-style: solid;
+    background-color: #151515;
+    background-image: linear-gradient(-45deg, #202020, #333, #000000);
+    border-top-color: #202020;
+    border-left-color: var(--color);
+    border-right-color: var(--color);
+    border-bottom-color: #202020;
+    border-top-width: var(--btw);
+    border-left-width: var(--bsw);
+    border-right-width: var(--bsw);
+    border-bottom-width: var(--bbw);
+
+    border-top-left-radius: var(--btr);
+    border-top-right-radius: var(--btr);
+
+    border-bottom-left-radius: var(--bbr);
+    border-bottom-right-radius: var(--bbr);
+
+    width: var(--width);
+    height: var(--height);
+
+    background-clip: content-box;
+
+    transform: scale(150%);
+    overflow: visible;
+
+    box-shadow: 0 0 2px rgb(0, 0, 0);
+
+    box-sizing: content-box;
+    margin-top: 20px;
+}
+
+.gameControllerIcon:before,
+.gameControllerIcon:after {
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    display: inline-block;
+    content: "+";
+    color: transparent;
+    overflow: visible;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--buttoncolor);
+    box-shadow: 0 0 1px black,
+                0 0 2px black;
+    box-sizing: border-box;
+    border: 2px solid #555;
+}
+.gameControllerIcon:before{
+    transform: translate(-28px, 12px);
+    text-shadow: -1px -15px 0 var(--buttoncolor);
+}
+.gameControllerIcon:after{
+    transform: translate(28px, 12px);
+    text-shadow: 1px -15px 0 var(--buttoncolor);
+}
+@media only screen and (max-width:300px) {
+    .gameControllerIcon{
+        transform: scale(100%);
+    }
+}
+
+/* .gameControllerIcon2 {
+    --btw: 4px;
+    --bsw: 20px;
+    --bbw: 32px;
+    --btr: 6px;
+    --bbr: 10px;
+    --width: 40px;
+    --height: 20px;
+    border-style: solid;
+    border-top-color: #202020;
+    border-left-color: #ff0000;
+    border-right-color: #0008ff;
+    background-color: #151515;
+    border-bottom-color: transparent;
+    border-top-width: var(--btw);
+    border-left-width: var(--bsw);
+    border-right-width: var(--bsw);
+    border-bottom-width: var(--bbw);
+
+    border-top-left-radius: var(--btr);
+    border-top-right-radius: var(--btr);
+
+    border-bottom-right-radius: var(--bbr);
+    border-bottom-left-radius: var(--bbr);
+
+    width: var(--width);
+    height: var(--height);
+
+    background-clip: content-box;
+
+    transform: scale(150%);
+    overflow: visible;
+    text-align: center;
+}
+
+.gameControllerIcon2:before,
+.gameControllerIcon2:after {
+    content: "+";
+    font-size: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-weight: bold;
+    color: #a1c1e5;
+    display: inline-block;
+    width: 11.5px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000000;
+}
+.gameControllerIcon2:before{
+    transform: translate(-24px);
+}
+.gameControllerIcon2:after{
+    transform: translate(24px);
+}
+
+ */
