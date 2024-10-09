@@ -1,1300 +1,694 @@
 <style>
-*{
+    * {
 
-    user-select:none;
+        user-select: none;
 
-     -webkit-user-select:none;
+        -webkit-user-select: none;
 
-    -ms-user-select:none;
+        -ms-user-select: none;
 
-    -o-user-select:none;
+        -o-user-select: none;
 
-    -moz-user-select:none;
+        -moz-user-select: none;
 
-    //cursor:pointer;
+        -webkit-tap-highlight-color: transparent;
 
-    -webkit-tap-highlight-color: transparent ;
+        font-family: Helvetica, Arial, sans-serif;
 
-    font-family: Helvetica, Arial, sans-serif;
+        background-position: center;
+        /* Center the image */
 
-    background-position: center; /* Center the image */
+        background-repeat: no-repeat;
+        /* Do not repeat the image */
 
-    background-repeat: no-repeat; /* Do not repeat the image */
+        background-size: cover;
+        /* Resize the background image to cover the entire container */
 
-    background-size: cover; /* Resize the background image to cover the entire container */
+    }
 
-}
+    body {
 
-body {
+        margin: 0;
 
-    margin:0;
+        background-color: black;
 
-    background-color:black;
+        width: 100vw;
 
-    width:100vw;
+        height: 100vh;
 
-    height:100vh;
+        box-sizing: border-box;
 
-    box-sizing:border-box;
+    }
 
-}
+    div.room {
 
-div.room{
+        width: 100vmin;
 
-    width:100vmin;
+        height: 100vmin;
 
-    height:100vmin;
+        display: grid;
 
-    display:grid;
+        grid-template-columns: auto auto auto auto auto auto auto auto;
 
-    grid-template-columns: auto auto auto auto auto auto auto auto;
+        grid-template-rows: auto auto auto auto auto auto auto auto;
 
-    grid-template-rows: auto auto auto auto auto auto auto auto;
+        position: fixed;
 
-    position:fixed;
+        top: 0vmin;
 
-    top:0vmin;
+        left: calc(50vw - 50vmin);
 
-    left:calc(50vw - 50vmin);
+        display: none;
 
-    display:none;
+    }
 
-}
+    div.room div {
 
-div.room div{
+        width: 12.5vmin;
 
-    width:12.5vmin;
+        height: 12.5vmin;
 
-    height:12.5vmin;
+        background-color: #606060;
 
-    background-color:#606060;
+        font-size: 7vmin;
 
-    font-size:7vmin;
+        overflow: hidden;
 
-    overflow:hidden;
+    }
 
-}
 
 
+    div#controls {
 
-div#controls{
+        position: fixed;
 
-    position:fixed;
+        z-index: 100;
 
-    z-index:100;
+        left: 15px;
 
-    left:15px;
+        bottom: 15px;
 
-    bottom:15px;
+        width: 2.5cm;
 
-    width:2.5cm;
+        height: 2.5cm;
 
-    height:2.5cm;
+        background-color: rgba(0, 0, 0, 0.4);
 
-    background-color:rgba(0,0,0,0.4);
+        border-radius: 45%;
 
-    border-radius:45%;
+        display: none;
 
-    display:none;
+    }
 
-}
+    div#cont {
 
-div#cont{
+        position: relative;
 
-    position:relative;
+    }
 
-}
+    div#cont span {
 
-div#cont span{
+        display: grid;
 
-    display:grid;
+        min-width: 1cm;
 
-    min-width:1cm;
+        min-height: 1cm;
 
-    min-height:1cm;
+        -webkit-place-items: center;
 
-    -webkit-place-items:center;
+        place-items: center;
 
-    place-items:center;
+        border-radius: 50%;
 
-    border-radius:50%;
+        background-color: rgba(255, 255, 255, 0.5);
 
-    background-color: rgba(255,255,255,0.5);
+        position: absolute;
 
-    position:absolute;
+        font-size: 30px;
 
-    font-size:30px;
+        cursor: pointer;
 
-    cursor: pointer;
+    }
 
-}
+    #top {
 
-#top{
+        top: 0;
 
-    top:0;
+        left: calc(1.25cm - 0.5cm);
 
-    left:calc(1.25cm - 0.5cm);
+    }
 
-}
+    #left {
 
-#left{
+        left: 0;
 
-    left:0;
+        top: calc(1.25cm - 0.5cm);
 
-    top:calc(1.25cm - 0.5cm);
+    }
 
-}
+    #right {
 
-#right{
+        right: 0;
 
-    right:0;
+        top: calc(1.25cm - 0.5cm);
 
-    top:calc(1.25cm - 0.5cm);
+    }
 
-}
+    #bottom {
 
-#bottom{
+        top: calc(2.5cm - 1cm);
 
-    top:calc(2.5cm - 1cm);
+        left: calc(1.25cm - 0.5cm);
 
-    left:calc(1.25cm - 0.5cm);
+    }
 
-}
+    div#cont span:active {
 
-div#cont span:active{
+        background-color: white;
 
-    background-color:white;
+    }
 
-}
+    div#gameover {
 
-div#gameover{
+        width: 100vw;
 
-    width:100vw;
+        min-height: 100vh;
 
-    min-height:100vh;
+        position: fixed;
 
-    position:fixed;
+        top: 0;
 
-    top:0;
+        left: 0;
 
-    left:0;
+        display: none;
 
-    display:none;
+        -webkit-place-items: center;
 
-    -webkit-place-items:center;
+        place-items: center;
 
-    place-items:center;
+        z-index: 100000;
 
-    z-index:100000;
+        color: white;
 
-    color:white;
+        text-shadow: 0 0 3vmin black,
 
-    text-shadow:0 0 3vmin black,
+            0 0 5vmin black;
 
-                0 0 5vmin black;
+        font-size: 13vmin;
 
-    font-size:13vmin;
+        cursor: pointer;
 
-    cursor: pointer;
+    }
 
-}
+    div#victory {
 
-div#victory{
+        width: 100vw;
 
-    width:100vw;
+        min-height: 100vh;
 
-    min-height:100vh;
+        position: fixed;
 
-    position:fixed;
+        top: 0;
 
-    top:0;
+        left: 0;
 
-    left:0;
+        display: none;
 
-    display:none;
+        place-items: center;
 
-    place-items:center;
+        z-index: 100;
 
-    z-index:100;
+        color: white;
 
-    color:white;
+        background-color: #7878FF;
 
-    background-color:#7878FF;
+        text-align: center;
 
-    text-align:center;
+        padding: 10px;
 
-    padding:10px;
+        font-size: 4vmin;
 
-    font-size:4vmin;
+    }
 
-}
+    div#victory div {
 
-div#victory div{
+        width: 100vw;
 
-    width:100vw;
+        max-height: 100vh;
 
-    max-height:100vh;
+    }
 
-}
+    p {
 
-p{
+        font-size: 5vmin;
 
-    font-size:5vmin;
+    }
 
-}
+    #retry {
 
-#retry{
+        border: 1vmin solid white;
 
-    border:1vmin solid white;
+        padding: 5px;
 
-    padding:5px;
+        width: auto;
 
-    width:auto;
+        font-size: 5vmin;
 
-    font-size:5vmin;
+        border-radius: 15px;
 
-    border-radius:15px;
+        background-color: transparent;
 
-    background-color:transparent;
+        transition: color .1s, background .1s;
 
-    transition:color .1s, background .1s;
+        cursor: pointer;
 
-    cursor: pointer;
+    }
 
-}
+    #retry:hover {
 
-#retry:hover{
+        background-color: white;
 
-    background-color:white;
+        color: black;
 
-    color:black;
+        cursor: pointer;
 
-    cursor: pointer;
+    }
 
-}
+    img {
 
-img{
+        width: 12.5vmin;
 
-    width:12.5vmin;
+        height: 12.5vmin;
 
-    height:12.5vmin;
+    }
 
-}
+    #textbox {
 
-#textbox{
+        position: fixed;
 
-    position:fixed;
+        font-size: 4vmin;
 
-    font-size: 4vmin;
+        bottom: 5vmin;
 
-    bottom:5vmin;
+        width: 80vmin;
 
-    width:80vmin;
+        left: calc(50vw - 40vmin);
 
-    left: calc(50vw - 40vmin);
+        max-height: 50vmin;
 
-    max-height:50vmin;
+        overflow-y: scroll;
 
-    overflow-y:scroll;
+        color: white;
 
-    color:white;
+        background-color: rgba(0, 0, 0, 0.6);
 
-    background-color:rgba(0, 0, 0, 0.6);
+        border: 1px solid white;
 
-    border:1px solid white;
+        padding: 5vmin;
 
-    padding:5vmin;
+        border-radius: 4vmin;
 
-    border-radius:4vmin;
+        box-sizing: border-box;
 
-    box-sizing:border-box;
+        display: none;
 
-    display:none;
+        text-align: justify;
 
-    text-align:justify;
+        cursor: pointer;
 
-    cursor:pointer;
+        z-index: 200;
 
-    z-index:200;
+    }
 
-}
+    /* Hide scrollbar for Chrome, Safari and Opera */
 
-/* Hide scrollbar for Chrome, Safari and Opera */
+    #textbox::-webkit-scrollbar {
 
-#textbox::-webkit-scrollbar {
+        display: none;
 
-  display: none;
+    }
 
-}
 
 
+    /* Hide scrollbar for IE, Edge and Firefox */
 
-/* Hide scrollbar for IE, Edge and Firefox */
+    #textbox {
 
-#textbox {
+        -ms-overflow-style: none;
+        /* IE and Edge */
 
-  -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
 
-  scrollbar-width: none;  /* Firefox */
+    }
 
-}
 
 
+    #loading {
 
-#loading{
+        width: 20vmin;
 
-    width:20vmin;
+        height: 20vmin;
 
-    height:20vmin;
+        border-radius: 50%;
 
-    border-radius: 50%;
+        border: 10vmin solid rgb(171, 171, 171);
 
-    border: 10vmin solid rgb(171, 171, 171);
+        border-top-color: rgb(90, 90, 253);
 
-    border-top-color: rgb(90, 90, 253);
+        animation: spin 2s linear infinite;
 
-    animation: spin 2s linear infinite;
+        display: block;
 
-    display: block;
+        position: fixed;
 
-    position:fixed;
+        top: calc(50vh - 20vmin);
 
-    top:calc(50vh - 20vmin);
+        left: calc(50vw - 20vmin);
 
-    left:calc(50vw - 20vmin);
+        //transform:rotate(0deg) translate(-50%,-50%);
 
-    //transform:rotate(0deg) translate(-50%,-50%);
+    }
 
-}
+    @keyframes spin {
 
-@keyframes spin{
+        to {
+            transform: rotate(360deg);
+        }
 
-    to{transform:rotate(360deg);}
-
-}
-
+    }
 </style>
 
 <script>
-//alert("The original doesn't work anymore, so here's a new one. Slightly better. Actually has assets I'm allowed to use.");
+    //alert("The original doesn't work anymore, so here's a new one. Slightly better. Actually has assets I'm allowed to use.");
 
 
 
-function id(n) {
+    function id(n) {
 
-    return document.getElementById(n);
-
-}
-
-var sprites = {
-
-    player: "./Character%20Front%20%281%29.png",
-
-    diamond: "./diamond%20violet.png",
-
-    hole: "./Hole.png",
-
-    key: "./key.png",
-
-    monster: "./Monster.png",
-
-    chest: "./chest2.png",
-
-    gate: "./New%20Piskel%20%281%29%20%282%29.png",
-
-    fire: "./fire.gif",
-
-    portal: "./ezgif.com-gif-maker.gif",
-
-    lava: "./lava.jpg",
-
-}
-
-for (let sprite in sprites) {
-
-    let s = new Image();
-
-    //console.log(sprite)
-
-    s.src = sprites[sprite];
-
-}
-
-var charc = "<img src='" + sprites.player + "'>"
-
-var inv = {
-
-    key: false,
-
-    dagger: false,
-
-    diamond: false,
-
-    hintSheet: false,
-
-    letter: false,
-
-    chestKey: false,
-
-    guard: false,
-
-};
-
-var spawn = [
-
-    0, 0, 0, 0, 0, 0, 0, 0,
-
-    0, 2, 2, 2, 2, 2, 2, 0,
-
-    0, 1, 0, 0, 0, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 1,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    "p", 1, 0, 0, 0, 1, 1, 0,
-
-    0, 2, 2, 2, 2, 2, 2, 0,
-
-    0, 0, 0, 0, 0, 0, 0, 0,
-
-];
-
-var hub = [
-
-    0, 0, 0, 0, 9, 0, 0, 0,
-
-    0, 0, 1, 1, 1, 0, "ck", 0,
-
-    0, 0, 0, 2, 1, 1, 1, 0,
-
-    1, 1, 1, 2, 1, 2, 1, 1,
-
-    0, 2, 1, 2, 1, 2, 2, 0,
-
-    0, 1, 1, 1, 1, 1, 0, 0,
-
-    0, 0, 1, 0, 2, 1, 1, 1,
-
-    0, 0, 0, 0, 0, 0, 0, 0,
-
-];
-
-
-
-var puzzle = [
-
-    0, 0, 0, 0, 0, 0, 1, 0,
-
-    1, 1, 4, 2, 2, 4, 1, 0,
-
-    0, 4, 2, 2, 2, 1, 5, 0,
-
-    0, 2, 2, 2, 2, 4, 2, 0,
-
-    0, 4, 1, 4, 2, 2, 2, 0,
-
-    0, 4, 2, 2, 1, 4, 2, 0,
-
-    0, 1, 4, 2, 4, 2, 2, 0,
-
-    0, "d", 0, 0, 0, 0, 0, 0,
-
-];
-
-
-
-var guard = [
-
-    0, 0, 0, 0, 0, 0, 0, 0,
-
-    0, 1, 1, 1, 3, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 0, 0, 0, 0, 1, 0, 0,
-
-    1, 1, 1, 1, 1, 6, 1, 0,
-
-    0, 0, 0, 0, 0, 0, 1, 0,
-
-];
-
-
-
-var exit = [
-
-    0, 0, 0, 0, 0, 0, 0, 0,
-
-    0, 7, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 8, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 1, 1, 1, 1, 1, 1, 0,
-
-    0, 0, 0, 0, 1, 0, 0, 0,
-
-];
-
-
-
-window.onload = function () {
-
-    function speak(n) {
-
-        id("textbox").innerHTML = n;
-
-        id("textbox").innerHTML += "<br><br><span style='color:red;font-weight:bold;'>Click to close</span>";
-
-        id("textbox").style.display = "block";
+        return document.getElementById(n);
 
     }
 
-    speak("Where am I?<br>What is this place?<br>...<br>Wait, <i>who</i> am I?!<br>Also, is that <i>LAVA</i>?");
+    var sprites = {
 
-    function createLevel(a, b) {
+        player: "./Character%20Front%20%281%29.png",
 
-        for (i = 0; i < 64; i++) {
+        diamond: "./diamond%20violet.png",
 
-            var p = document.createElement("div");
+        hole: "./Hole.png",
 
-            if (b[i] == 0) {
+        key: "./key.png",
 
-                var txt = document.createTextNode("■");
+        monster: "./Monster.png",
 
-                p.style.color = "transparent";
+        chest: "./chest2.png",
 
-                p.style.backgroundColor = "rgb(46,46,46)";
+        gate: "./New%20Piskel%20%281%29%20%282%29.png",
 
-                p.style.fontSize = "12.5vmin";
+        fire: "./fire.gif",
 
-            }
+        portal: "./ezgif.com-gif-maker.gif",
 
-            else if (b[i] == 2) {
-
-                txt = document.createTextNode("□")
-
-                p.style.color = "transparent";
-
-                p.style.backgroundImage = "url("+sprites.lava+")";
-
-            }
-
-            else if (b[i] == 1) {
-
-                txt = document.createTextNode("");
-
-            }
-
-            else if (b[i] == 4) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.portal + "'>";
-
-                p.id = "portal";
-
-            }
-
-            else if (b[i] == 5) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.key + "'>";
-
-                p.id = "key";
-
-            }
-
-            else if (b[i] == 3) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.diamond + "'>";
-
-                p.id = "diamond";
-
-            }
-
-            else if (b[i] == 6) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.monster + "'>";
-
-                p.id = "monster";
-
-            }
-
-            else if (b[i] == 7) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.hole + "'>";
-
-                p.id = "hole";
-
-            }
-
-            else if (b[i] == 8) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.chest + "'>";
-
-                p.id = "chest";
-
-            }
-
-            else if (b[i] == 9) {
-
-                txt = document.createTextNode("");
-
-                p.innerHTML = "<img src='" + sprites.gate + "'>";
-
-                p.style.backgroundColor = "rgb(50,50,50)";
-
-                p.id = "door";
-
-            }
-
-            else {
-
-                txt = document.createTextNode(b[i]);
-
-                p.style.color = "transparent";
-
-                p.style.background = "linear-gradient(to top, rgb(38,38,38), rgb(48,48,48), rgb(38,38,38))";
-
-            }
-
-            p.appendChild(txt);
-
-            id(a).appendChild(p);
-
-        }
+        lava: "./lava.jpg",
 
     }
 
-    createLevel("hub", hub);
+    for (let sprite in sprites) {
 
-    hub = id("hub").childNodes;
+        let s = new Image();
 
-    createLevel("spawn", spawn);
+        //console.log(sprite)
 
-    spawn = id("spawn").childNodes;
-
-    createLevel("puzzle", puzzle);
-
-    puzzle = id("puzzle").childNodes;
-
-    createLevel("guard", guard);
-
-    guard = id("guard").childNodes;
-
-    createLevel("exit", exit);
-
-    exit = id("exit").childNodes;
-
-    var CP = 25;
-
-    var IP = 25;
-
-    var room = spawn;
-
-    id("spawn").style.display = "grid";
-
-    room[CP].innerHTML = charc;
-
-    id("top").addEventListener("click", function () { move(-8) });
-
-    id("left").addEventListener("click", function () { move(-1) });
-
-    id("right").addEventListener("click", function () { move(1) });
-
-    id("bottom").addEventListener("click", function () { move(8) });
-
-    function move(n) {
-
-        textbox.style.display = "none";
-
-        IP += n;
-
-        if (room[IP].innerHTML == "") {
-
-            room[CP].innerHTML = "";
-
-            CP = IP;
-
-            room[CP].innerHTML = charc;
-
-            roomChanger();
-
-        }
-
-        else { events(); }
+        s.src = sprites[sprite];
 
     }
 
-    function events() {
+    var charc = "<img src='" + sprites.player + "'>"
 
-        if (room[IP].innerHTML == "□") {
+    var inv = {
 
-            room[CP].innerHTML = "<img src='" + sprites.fire + "'>";
+        key: false,
 
-            speak("Aaagghhhhh!!!");
+        dagger: false,
 
-            gameOver();
+        diamond: false,
+
+        hintSheet: false,
+
+        letter: false,
+
+        chestKey: false,
+
+        guard: false,
+
+    };
+
+    var spawn = [
+
+        0, 0, 0, 0, 0, 0, 0, 0,
+
+        0, 2, 2, 2, 2, 2, 2, 0,
+
+        0, 1, 0, 0, 0, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 1,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        "p", 1, 0, 0, 0, 1, 1, 0,
+
+        0, 2, 2, 2, 2, 2, 2, 0,
+
+        0, 0, 0, 0, 0, 0, 0, 0,
+
+    ];
+
+    var hub = [
+
+        0, 0, 0, 0, 9, 0, 0, 0,
+
+        0, 0, 1, 1, 1, 0, "ck", 0,
+
+        0, 0, 0, 2, 1, 1, 1, 0,
+
+        1, 1, 1, 2, 1, 2, 1, 1,
+
+        0, 2, 1, 2, 1, 2, 2, 0,
+
+        0, 1, 1, 1, 1, 1, 0, 0,
+
+        0, 0, 1, 0, 2, 1, 1, 1,
+
+        0, 0, 0, 0, 0, 0, 0, 0,
+
+    ];
+
+
+
+    var puzzle = [
+
+        0, 0, 0, 0, 0, 0, 1, 0,
+
+        1, 1, 4, 2, 2, 4, 1, 0,
+
+        0, 4, 2, 2, 2, 1, 5, 0,
+
+        0, 2, 2, 2, 2, 4, 2, 0,
+
+        0, 4, 1, 4, 2, 2, 2, 0,
+
+        0, 4, 2, 2, 1, 4, 2, 0,
+
+        0, 1, 4, 2, 4, 2, 2, 0,
+
+        0, "d", 0, 0, 0, 0, 0, 0,
+
+    ];
+
+
+
+    var guard = [
+
+        0, 0, 0, 0, 0, 0, 0, 0,
+
+        0, 1, 1, 1, 3, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 0, 0, 0, 0, 1, 0, 0,
+
+        1, 1, 1, 1, 1, 6, 1, 0,
+
+        0, 0, 0, 0, 0, 0, 1, 0,
+
+    ];
+
+
+
+    var exit = [
+
+        0, 0, 0, 0, 0, 0, 0, 0,
+
+        0, 7, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 8, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 1, 1, 1, 1, 1, 1, 0,
+
+        0, 0, 0, 0, 1, 0, 0, 0,
+
+    ];
+
+
+
+    window.onload = function () {
+
+        function speak(n) {
+
+            id("textbox").innerHTML = n;
+
+            id("textbox").innerHTML += "<br><br><span style='color:red;font-weight:bold;'>Click to close</span>";
+
+            id("textbox").style.display = "block";
 
         }
 
-        else if (room[IP].id == "key") {
+        speak("Where am I?<br>What is this place?<br>...<br>Wait, <i>who</i> am I?!<br>Also, is that <i>LAVA</i>?");
 
-            room[IP].innerHTML = "";
+        function createLevel(a, b) {
 
-            speak("Hey, a key!");
+            for (i = 0; i < 64; i++) {
 
-            inv.key = true;
+                var p = document.createElement("div");
 
-        }
+                if (b[i] == 0) {
 
-        else if (room[IP].id == "portal") {
+                    var txt = document.createTextNode("■");
 
-            room[CP].innerHTML = "";
+                    p.style.color = "transparent";
 
-            teleport(IP);
+                    p.style.backgroundColor = "rgb(46,46,46)";
 
-        }
+                    p.style.fontSize = "12.5vmin";
 
-        else if (room[IP].innerHTML == "ck") {
+                }
 
-            inv.chestKey = true;
+                else if (b[i] == 2) {
 
-            room[IP].innerHTML = "■";
+                    txt = document.createTextNode("□")
 
-            speak("🔑<br>A key! In the wall? What does it open?");
+                    p.style.color = "transparent";
 
-        }
+                    p.style.backgroundImage = "url(" + sprites.lava + ")";
 
-        else if (room[IP].innerHTML == "p") {
+                }
 
-            inv.hintSheet = true;
+                else if (b[i] == 1) {
 
-            speak("📜<br>A paper! It seems there are stuff hidden in the walls. It says... down down down up...?")
+                    txt = document.createTextNode("");
 
-            room[IP].innerHTML = "■";
+                }
 
-        }
+                else if (b[i] == 4) {
 
-        else if (room[IP].id == "monster") {
+                    txt = document.createTextNode("");
 
-            room[IP].innerHTML = "";
+                    p.innerHTML = "<img src='" + sprites.portal + "'>";
 
-            if (inv.dagger) {
+                    p.id = "portal";
 
-                speak("Well... the knife came in handy.");
+                }
 
-                inv.guard = true;
+                else if (b[i] == 5) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.key + "'>";
+
+                    p.id = "key";
+
+                }
+
+                else if (b[i] == 3) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.diamond + "'>";
+
+                    p.id = "diamond";
+
+                }
+
+                else if (b[i] == 6) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.monster + "'>";
+
+                    p.id = "monster";
+
+                }
+
+                else if (b[i] == 7) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.hole + "'>";
+
+                    p.id = "hole";
+
+                }
+
+                else if (b[i] == 8) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.chest + "'>";
+
+                    p.id = "chest";
+
+                }
+
+                else if (b[i] == 9) {
+
+                    txt = document.createTextNode("");
+
+                    p.innerHTML = "<img src='" + sprites.gate + "'>";
+
+                    p.style.backgroundColor = "rgb(50,50,50)";
+
+                    p.id = "door";
+
+                }
+
+                else {
+
+                    txt = document.createTextNode(b[i]);
+
+                    p.style.color = "transparent";
+
+                    p.style.background = "linear-gradient(to top, rgb(38,38,38), rgb(48,48,48), rgb(38,38,38))";
+
+                }
+
+                p.appendChild(txt);
+
+                id(a).appendChild(p);
 
             }
 
-            else {
-
-                room[CP].innerHTML = "<img src='" + sprites.monster + "'>";
-
-                speak("Aaagghhh! Get off of me!!");
-
-                gameOver();
-
-            }
-
         }
-
-        else if (room[IP].id == "diamond") {
-
-            inv.diamond = true;
-
-            speak("Holy...!")
-
-            room[IP].innerHTML = "";
-
-        }
-
-        else if (room[IP].id == "hole") {
-
-            speak("There's a ladder going down. I wonder where it leads...");
-
-            room[CP].innerHTML = "";
-
-            win();
-
-        }
-
-        else if (room[IP].id == "chest") {
-
-            if (inv.chestKey) {
-
-                room[IP].innerHTML = "";
-
-                speak("Hey, a letter! It says:<hr>Wanderer,<br>I know not Thy name, nor doth Thee, mayhaps, yet Congratulations are merited, for Thee has lived through what be mayhaps the most perilous Straits known. What Need brought Thee herein, to these Crypts, or what Virtue of Heart allows Thee Life, I wonder, yet know that henceforth Thee travels with my Blessings. Be true to Thyself, and Thee shalt remember Thyself.<br>J.M.A.");
-
-                inv.letter = true;
-
-            }
-
-            else {
-
-                speak("It's locked.")
-
-            }
-
-        }
-
-        else if (room[IP].id == "door") {
-
-            if (inv.key) {
-
-                room[IP].innerHTML = "";
-
-                speak("So that's what the key's for ");
-
-            }
-
-            else {
-
-                speak("It's locked.")
-
-            }
-
-        }
-
-        else if (room[IP].innerHTML == "d") {
-
-            inv.dagger = true;
-
-            speak("🗡<br>A dagger! Might come in handy.")
-
-            room[IP].innerHTML = "■";
-
-        }
-
-        IP = CP;
-
-    }
-
-
-
-    function roomChanger() {
-
-        if (room == spawn && CP == 31) {
-
-            room[CP].innerHTML = "";
-
-            id("spawn").style.display = "none";
-
-            id("hub").style.display = "grid";
-
-            CP = 25;
-
-            IP = CP;
-
-            room = hub;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == hub && CP == 24) {
-
-            room[CP].innerHTML = "";
-
-            id("hub").style.display = "none";
-
-            id("spawn").style.display = "grid";
-
-            CP = 30;
-
-            IP = CP;
-
-            room = spawn;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == hub && CP == 31) {
-
-            room[CP].innerHTML = "";
-
-            id("hub").style.display = "none";
-
-            id("guard").style.display = "grid";
-
-            CP = 49;
-
-            IP = CP;
-
-            room = guard;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == guard && CP == 48) {
-
-            room[CP].innerHTML = "";
-
-            id("guard").style.display = "none";
-
-            id("hub").style.display = "grid";
-
-            CP = 30;
-
-            IP = CP;
-
-            room = hub;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == hub && CP == 55) {
-
-            room[CP].innerHTML = "";
-
-            id("hub").style.display = "none";
-
-            id("puzzle").style.display = "grid";
-
-            CP = 9;
-
-            IP = CP;
-
-            room = puzzle;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == puzzle && CP == 8) {
-
-            room[CP].innerHTML = "";
-
-            id("puzzle").style.display = "none";
-
-            id("hub").style.display = "grid";
-
-            CP = 54;
-
-            IP = CP;
-
-            room = hub;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == hub && CP == 4) {
-
-            room[CP].innerHTML = "";
-
-            id("hub").style.display = "none";
-
-            id("exit").style.display = "grid";
-
-            CP = 52;
-
-            IP = CP;
-
-            room = exit;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == exit && CP == 60) {
-
-            room[CP].innerHTML = "";
-
-            id("exit").style.display = "none";
-
-            id("hub").style.display = "grid";
-
-            CP = 12;
-
-            IP = CP;
-
-            room = hub;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == guard && CP == 62) {
-
-            room[CP].innerHTML = "";
-
-            id("guard").style.display = "none";
-
-            id("puzzle").style.display = "grid";
-
-            CP = 14;
-
-            IP = CP;
-
-            room = puzzle;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (room == puzzle && CP == 6) {
-
-            room[CP].innerHTML = "";
-
-            id("puzzle").style.display = "none";
-
-            id("guard").style.display = "grid";
-
-            CP = 54;
-
-            IP = CP;
-
-            room = guard;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-
-
-        /*else if(room==spawn && CP==31){
-
-        room[CP].innerHTML = "";
-
-        id("spawn").style.display = "none";
-
-        id("hub").style.display = "grid";
-
-        CP = 25;
-
-        IP = CP;
-
-        room = hub;
-
-        room[CP].innerHTML = "";   
-
-        }*/
-
-    }
-
-    function teleport(n) {
-
-        if (n == 29 || n == 45 || n == 50) {
-
-            IP = 9;
-
-            CP = 9;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (n == 41) {
-
-            IP = 21;
-
-            CP = 21;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (n == 10 || n == 13) {
-
-            IP = 34;
-
-            CP = 34;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (n == 35 || n == 52) {
-
-            IP = 49;
-
-            CP = 49;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-        else if (n == 33 || n == 17) {
-
-            IP = 44;
-
-            CP = 44;
-
-            room[CP].innerHTML = charc;
-
-        }
-
-    }
-
-    function gameOver() {
-
-        id("gameover").style.display = "grid";
-
-    }
-
-
-
-
-
-    id("gameover").addEventListener("click", retry);
-
-    function retry() {
-
-        id("textbox").style.display = "none";
-
-        for (i = 0; i < 5; i++) {
-
-            document.getElementsByClassName("room")[i].style.display = "none";
-
-            document.getElementsByClassName("room")[i].innerHTML = "";
-
-        }
-
-        inv.key = false;
-
-        inv.dagger = false;
-
-        inv.diamond = false;
-
-        inv.hintSheet = false;
-
-        inv.letter = false;
-
-        inv.chestKey = false;
-
-        inv.guard = false;
-
-        spawn = [
-
-            0, 0, 0, 0, 0, 0, 0, 0,
-
-            0, 2, 2, 2, 2, 2, 2, 0,
-
-            0, 1, 0, 0, 0, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 1,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            "p", 1, 0, 0, 0, 1, 1, 0,
-
-            0, 2, 2, 2, 2, 2, 2, 0,
-
-            0, 0, 0, 0, 0, 0, 0, 0,
-
-        ];
-
-        hub = [
-
-            0, 0, 0, 0, 9, 0, 0, 0,
-
-            0, 0, 1, 1, 1, 0, "ck", 0,
-
-            0, 0, 0, 2, 1, 1, 1, 0,
-
-            1, 1, 1, 2, 1, 2, 1, 1,
-
-            0, 2, 1, 2, 1, 2, 2, 0,
-
-            0, 1, 1, 1, 1, 1, 0, 0,
-
-            0, 0, 1, 0, 2, 1, 1, 1,
-
-            0, 0, 0, 0, 0, 0, 0, 0,
-
-        ];
-
-
-
-        puzzle = [
-
-            0, 0, 0, 0, 0, 0, 1, 0,
-
-            1, 1, 4, 2, 2, 4, 1, 0,
-
-            0, 4, 2, 2, 2, 1, 5, 0,
-
-            0, 2, 2, 2, 2, 4, 2, 0,
-
-            0, 4, 1, 4, 2, 2, 2, 0,
-
-            0, 4, 2, 2, 1, 4, 2, 0,
-
-            0, 1, 4, 2, 4, 2, 2, 0,
-
-            0, "d", 0, 0, 0, 0, 0, 0,
-
-        ];
-
-
-
-        guard = [
-
-            0, 0, 0, 0, 0, 0, 0, 0,
-
-            0, 1, 1, 1, 3, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 0, 0, 0, 0, 1, 0, 0,
-
-            1, 1, 1, 1, 1, 6, 1, 0,
-
-            0, 0, 0, 0, 0, 0, 1, 0,
-
-        ];
-
-
-
-        exit = [
-
-            0, 0, 0, 0, 0, 0, 0, 0,
-
-            0, 7, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 8, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 1, 1, 1, 1, 1, 1, 0,
-
-            0, 0, 0, 0, 1, 0, 0, 0,
-
-        ];
 
         createLevel("hub", hub);
 
@@ -1316,91 +710,743 @@ window.onload = function () {
 
         exit = id("exit").childNodes;
 
-        CP = 25;
+        var CP = 25;
 
-        IP = 25;
+        var IP = 25;
 
-        room = spawn;
+        var room = spawn;
 
         id("spawn").style.display = "grid";
 
         room[CP].innerHTML = charc;
 
-        id("victory").style.display = "none";
+        id("top").addEventListener("click", function () { move(-8) });
 
-        id("gameover").style.display = "none";
+        id("left").addEventListener("click", function () { move(-1) });
+
+        id("right").addEventListener("click", function () { move(1) });
+
+        id("bottom").addEventListener("click", function () { move(8) });
+
+        id('victory').style.display = 'none';
+        id('gameover').style.display = 'none';
+        document.addEventListener('keyup', function (event) {
+            if (textbox.style.display != "none") {
+                textbox.style.display = "none";
+                return;
+            }
+            if (id('victory').style.display != 'none' || id('gameover').style.display != 'none') {
+                console.log('Nothing happens')
+                return;
+            }
+
+            switch (event.key) {
+                case 'w':
+                case 'W':
+                case 'ArrowUp':
+                    id('top').click();
+                    break;
+                case 'a':
+                case 'A':
+                case 'ArrowLeft':
+                    id('left').click();
+                    break;
+                case 's':
+                case 'S':
+                case 'ArrowDown':
+                    id('bottom').click();
+                    break;
+                case 'd':
+                case 'D':
+                case 'ArrowRight':
+                    id('right').click();
+                    break;
+
+                default:
+                    console.log('Other key pressed');
+                    break;
+            }
+        });
+
+        function move(n) {
+            if (textbox.style.display != "none") {
+                textbox.style.display = "none";
+                return;
+            }
+
+            IP += n;
+
+            if (room[IP].innerHTML == "") {
+
+                room[CP].innerHTML = "";
+
+                CP = IP;
+
+                room[CP].innerHTML = charc;
+
+                roomChanger();
+
+            }
+
+            else { events(); }
+
+        }
+
+        function events() {
+
+            if (room[IP].innerHTML == "□") {
+
+                room[CP].innerHTML = "<img src='" + sprites.fire + "'>";
+
+                speak("Aaagghhhhh!!!");
+
+                gameOver();
+
+            }
+
+            else if (room[IP].id == "key") {
+
+                room[IP].innerHTML = "";
+
+                speak("Hey, a key!");
+
+                inv.key = true;
+
+            }
+
+            else if (room[IP].id == "portal") {
+
+                room[CP].innerHTML = "";
+
+                teleport(IP);
+
+            }
+
+            else if (room[IP].innerHTML == "ck") {
+
+                inv.chestKey = true;
+
+                room[IP].innerHTML = "■";
+
+                speak("🔑<br>A key! In the wall? What does it open?");
+
+            }
+
+            else if (room[IP].innerHTML == "p") {
+
+                inv.hintSheet = true;
+
+                speak("📜<br>A paper! It seems there are stuff hidden in the walls. It says... down down down up...?")
+
+                room[IP].innerHTML = "■";
+
+            }
+
+            else if (room[IP].id == "monster") {
+
+                room[IP].innerHTML = "";
+
+                if (inv.dagger) {
+
+                    speak("Well... the knife came in handy.");
+
+                    inv.guard = true;
+
+                }
+
+                else {
+
+                    room[CP].innerHTML = "<img src='" + sprites.monster + "'>";
+
+                    speak("Aaagghhh! Get off of me!!");
+
+                    gameOver();
+
+                }
+
+            }
+
+            else if (room[IP].id == "diamond") {
+
+                inv.diamond = true;
+
+                speak("Holy...!")
+
+                room[IP].innerHTML = "";
+
+            }
+
+            else if (room[IP].id == "hole") {
+
+                speak("There's a ladder going down. I wonder where it leads...");
+
+                room[CP].innerHTML = "";
+
+                win();
+
+            }
+
+            else if (room[IP].id == "chest") {
+
+                if (inv.chestKey) {
+
+                    room[IP].innerHTML = "";
+
+                    speak("Hey, a letter! It says:<hr>Wanderer,<br>I know not Thy name, nor doth Thee, mayhaps, yet Congratulations are merited, for Thee has lived through what be mayhaps the most perilous Straits known. What Need brought Thee herein, to these Crypts, or what Virtue of Heart allows Thee Life, I wonder, yet know that henceforth Thee travels with my Blessings. Be true to Thyself, and Thee shalt remember Thyself.<br>J.M.A.");
+
+                    inv.letter = true;
+
+                }
+
+                else {
+
+                    speak("It's locked.")
+
+                }
+
+            }
+
+            else if (room[IP].id == "door") {
+
+                if (inv.key) {
+
+                    room[IP].innerHTML = "";
+
+                    speak("So that's what the key's for ");
+
+                }
+
+                else {
+
+                    speak("It's locked.")
+
+                }
+
+            }
+
+            else if (room[IP].innerHTML == "d") {
+
+                inv.dagger = true;
+
+                speak("🗡<br>A dagger! Might come in handy.")
+
+                room[IP].innerHTML = "■";
+
+            }
+
+            IP = CP;
+
+        }
+
+
+
+        function roomChanger() {
+
+            if (room == spawn && CP == 31) {
+
+                room[CP].innerHTML = "";
+
+                id("spawn").style.display = "none";
+
+                id("hub").style.display = "grid";
+
+                CP = 25;
+
+                IP = CP;
+
+                room = hub;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == hub && CP == 24) {
+
+                room[CP].innerHTML = "";
+
+                id("hub").style.display = "none";
+
+                id("spawn").style.display = "grid";
+
+                CP = 30;
+
+                IP = CP;
+
+                room = spawn;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == hub && CP == 31) {
+
+                room[CP].innerHTML = "";
+
+                id("hub").style.display = "none";
+
+                id("guard").style.display = "grid";
+
+                CP = 49;
+
+                IP = CP;
+
+                room = guard;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == guard && CP == 48) {
+
+                room[CP].innerHTML = "";
+
+                id("guard").style.display = "none";
+
+                id("hub").style.display = "grid";
+
+                CP = 30;
+
+                IP = CP;
+
+                room = hub;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == hub && CP == 55) {
+
+                room[CP].innerHTML = "";
+
+                id("hub").style.display = "none";
+
+                id("puzzle").style.display = "grid";
+
+                CP = 9;
+
+                IP = CP;
+
+                room = puzzle;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == puzzle && CP == 8) {
+
+                room[CP].innerHTML = "";
+
+                id("puzzle").style.display = "none";
+
+                id("hub").style.display = "grid";
+
+                CP = 54;
+
+                IP = CP;
+
+                room = hub;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == hub && CP == 4) {
+
+                room[CP].innerHTML = "";
+
+                id("hub").style.display = "none";
+
+                id("exit").style.display = "grid";
+
+                CP = 52;
+
+                IP = CP;
+
+                room = exit;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == exit && CP == 60) {
+
+                room[CP].innerHTML = "";
+
+                id("exit").style.display = "none";
+
+                id("hub").style.display = "grid";
+
+                CP = 12;
+
+                IP = CP;
+
+                room = hub;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == guard && CP == 62) {
+
+                room[CP].innerHTML = "";
+
+                id("guard").style.display = "none";
+
+                id("puzzle").style.display = "grid";
+
+                CP = 14;
+
+                IP = CP;
+
+                room = puzzle;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (room == puzzle && CP == 6) {
+
+                room[CP].innerHTML = "";
+
+                id("puzzle").style.display = "none";
+
+                id("guard").style.display = "grid";
+
+                CP = 54;
+
+                IP = CP;
+
+                room = guard;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+
+
+            /*else if(room==spawn && CP==31){
+    
+            room[CP].innerHTML = "";
+    
+            id("spawn").style.display = "none";
+    
+            id("hub").style.display = "grid";
+    
+            CP = 25;
+    
+            IP = CP;
+    
+            room = hub;
+    
+            room[CP].innerHTML = "";   
+    
+            }*/
+
+        }
+
+        function teleport(n) {
+
+            if (n == 29 || n == 45 || n == 50) {
+
+                IP = 9;
+
+                CP = 9;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (n == 41) {
+
+                IP = 21;
+
+                CP = 21;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (n == 10 || n == 13) {
+
+                IP = 34;
+
+                CP = 34;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (n == 35 || n == 52) {
+
+                IP = 49;
+
+                CP = 49;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+            else if (n == 33 || n == 17) {
+
+                IP = 44;
+
+                CP = 44;
+
+                room[CP].innerHTML = charc;
+
+            }
+
+        }
+
+        function gameOver() {
+
+            id("gameover").style.display = "grid";
+
+        }
+
+
+
+
+
+        id("gameover").addEventListener("click", retry);
+
+        function retry() {
+
+            id("textbox").style.display = "none";
+
+            for (i = 0; i < 5; i++) {
+
+                document.getElementsByClassName("room")[i].style.display = "none";
+
+                document.getElementsByClassName("room")[i].innerHTML = "";
+
+            }
+
+            inv.key = false;
+
+            inv.dagger = false;
+
+            inv.diamond = false;
+
+            inv.hintSheet = false;
+
+            inv.letter = false;
+
+            inv.chestKey = false;
+
+            inv.guard = false;
+
+            spawn = [
+
+                0, 0, 0, 0, 0, 0, 0, 0,
+
+                0, 2, 2, 2, 2, 2, 2, 0,
+
+                0, 1, 0, 0, 0, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 1,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                "p", 1, 0, 0, 0, 1, 1, 0,
+
+                0, 2, 2, 2, 2, 2, 2, 0,
+
+                0, 0, 0, 0, 0, 0, 0, 0,
+
+            ];
+
+            hub = [
+
+                0, 0, 0, 0, 9, 0, 0, 0,
+
+                0, 0, 1, 1, 1, 0, "ck", 0,
+
+                0, 0, 0, 2, 1, 1, 1, 0,
+
+                1, 1, 1, 2, 1, 2, 1, 1,
+
+                0, 2, 1, 2, 1, 2, 2, 0,
+
+                0, 1, 1, 1, 1, 1, 0, 0,
+
+                0, 0, 1, 0, 2, 1, 1, 1,
+
+                0, 0, 0, 0, 0, 0, 0, 0,
+
+            ];
+
+
+
+            puzzle = [
+
+                0, 0, 0, 0, 0, 0, 1, 0,
+
+                1, 1, 4, 2, 2, 4, 1, 0,
+
+                0, 4, 2, 2, 2, 1, 5, 0,
+
+                0, 2, 2, 2, 2, 4, 2, 0,
+
+                0, 4, 1, 4, 2, 2, 2, 0,
+
+                0, 4, 2, 2, 1, 4, 2, 0,
+
+                0, 1, 4, 2, 4, 2, 2, 0,
+
+                0, "d", 0, 0, 0, 0, 0, 0,
+
+            ];
+
+
+
+            guard = [
+
+                0, 0, 0, 0, 0, 0, 0, 0,
+
+                0, 1, 1, 1, 3, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 0, 0, 0, 0, 1, 0, 0,
+
+                1, 1, 1, 1, 1, 6, 1, 0,
+
+                0, 0, 0, 0, 0, 0, 1, 0,
+
+            ];
+
+
+
+            exit = [
+
+                0, 0, 0, 0, 0, 0, 0, 0,
+
+                0, 7, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 8, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 1, 1, 1, 1, 1, 1, 0,
+
+                0, 0, 0, 0, 1, 0, 0, 0,
+
+            ];
+
+            createLevel("hub", hub);
+
+            hub = id("hub").childNodes;
+
+            createLevel("spawn", spawn);
+
+            spawn = id("spawn").childNodes;
+
+            createLevel("puzzle", puzzle);
+
+            puzzle = id("puzzle").childNodes;
+
+            createLevel("guard", guard);
+
+            guard = id("guard").childNodes;
+
+            createLevel("exit", exit);
+
+            exit = id("exit").childNodes;
+
+            CP = 25;
+
+            IP = 25;
+
+            room = spawn;
+
+            id("spawn").style.display = "grid";
+
+            room[CP].innerHTML = charc;
+
+            id("victory").style.display = "none";
+
+            id("gameover").style.display = "none";
+
+        }
+
+        function win() {
+
+            id("victory").style.display = "grid";
+
+            score = 30000;
+
+            if (inv.letter) {
+
+                id("let").innerHTML = "15000";
+
+                score += 15000;
+
+            } else {
+
+                id("let").innerHTML = "×××××";
+
+            }
+
+            if (inv.diamond) {
+
+                id("dia").innerHTML = "10000";
+
+                score += 10000;
+
+            } else {
+
+                id("dia").innerHTML = "×××××";
+
+            }
+
+            if (inv.guard) {
+
+                id("ktg").innerHTML = "20000";
+
+                score += 20000;
+
+            } else {
+
+                id("ktg").innerHTML = "×××××";
+
+            }
+
+            if (inv.hintSheet) {
+
+                id("man").innerHTML = "5000";
+
+                score += 5000;
+
+            } else {
+
+                id("man").innerHTML = "×××××";
+
+            }
+
+
+
+            id("score").innerHTML = score;
+
+        }
+
+        id("retry").addEventListener("click", retry);
+
+        id("loading").style.display = "none";
+
+        id("controls").style.display = "block";
+
+
 
     }
-
-    function win() {
-
-        id("victory").style.display = "grid";
-
-        score = 30000;
-
-        if (inv.letter) {
-
-            id("let").innerHTML = "15000";
-
-            score += 15000;
-
-        } else {
-
-            id("let").innerHTML = "×××××";
-
-        }
-
-        if (inv.diamond) {
-
-            id("dia").innerHTML = "10000";
-
-            score += 10000;
-
-        } else {
-
-            id("dia").innerHTML = "×××××";
-
-        }
-
-        if (inv.guard) {
-
-            id("ktg").innerHTML = "20000";
-
-            score += 20000;
-
-        } else {
-
-            id("ktg").innerHTML = "×××××";
-
-        }
-
-        if (inv.hintSheet) {
-
-            id("man").innerHTML = "5000";
-
-            score += 5000;
-
-        } else {
-
-            id("man").innerHTML = "×××××";
-
-        }
-
-
-
-        id("score").innerHTML = score;
-
-    }
-
-    id("retry").addEventListener("click", retry);
-
-    id("loading").style.display = "none";
-
-    id("controls").style.display = "block";
-
-     
-
-}
 
 
 
@@ -1436,72 +1482,80 @@ Available for Smartphones and PC.
 
 <html>
 
-    <head>
+<head>
 
-        <title>The Crypt</title>
+    <title>The Crypt</title>
 
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-        <link rel="icon" href="./New Piskel (1) (2).png" type="image/png">
-        
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./New Piskel (1) (2).png" type="image/png">
 
-    </head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <body>
+</head>
 
-        <div id="loading"></div>
+<body>
 
-        <div id=spawn class=room></div>
+    <div id="loading"></div>
 
-        <div id=hub class=room></div>
+    <div id=spawn class=room></div>
 
-        <div id=puzzle class=room></div>
+    <div id=hub class=room></div>
 
-        <div id=guard class=room></div>
+    <div id=puzzle class=room></div>
 
-        <div id=exit class=room></div>
+    <div id=guard class=room></div>
 
-        
+    <div id=exit class=room></div>
 
-    <div id=controls><div id=cont>
 
-        <span id=top>&#8593;</span>
 
-        <span id=left>&#8592;</span>
+    <div id=controls>
+        <div id=cont>
 
-        <span id=right>&#8594;</span>
+            <span id=top>&#8593;</span>
 
-        <span id=bottom>&#8595;</span>
+            <span id=left>&#8592;</span>
 
-    </div>
+            <span id=right>&#8594;</span>
+
+            <span id=bottom>&#8595;</span>
+
+        </div>
 
         <div id=gameover>Restart?</div>
 
-        <div id=victory><div><b>You have found your way out!</b><br>And thus the journey begins!<br>
+        <div id=victory>
+            <div><b>You have found your way out!</b><br>And thus the journey begins!<br>
 
-        <div>Level passed: <span>30000</span></div>    
+                <div>Level passed: <span>30000</span></div>
 
-        <div>J.M.A's letter: <span id=let></span></div>   
+                <div>J.M.A's letter: <span id=let></span></div>
 
-        <div>The Diamond: <span id=dia></span></div>
+                <div>The Diamond: <span id=dia></span></div>
 
-        <div>Killed The Guard: <span id=ktg></span></div>
+                <div>Killed The Guard: <span id=ktg></span></div>
 
-        <div>The Paper: <span id=man></span></div><hr>
+                <div>The Paper: <span id=man></span></div>
+                <hr>
 
-        <div>Total score: <span id=score></span></div> <br> 
+                <div>Total score: <span id=score></span></div> <br>
 
-        <span id=retry>Try Again?</span>
+                <span id=retry>Try Again?</span>
 
-    <br>    <p>The Crypt, a game designed, coded and debugged by <a href="https://www.sololearn.com/Profile/16557744/?ref=app" target="_blank">Nor'wester</a>.<br> &copy; 2023<br>Assets from <a href="https://www.blenderkit.com/" target="_blank">Blenderkit</a> and <a href="https://opengameart.org/" target="_blank">Opengameart.org</a><br>Be sure to leave a comment!</p>
+                <br>
+                <p>The Crypt, a game designed, coded and debugged by <a
+                        href="https://www.sololearn.com/Profile/16557744/?ref=app" target="_blank">Nor'wester</a>.<br>
+                    &copy; 2023<br>Assets from <a href="https://www.blenderkit.com/" target="_blank">Blenderkit</a> and
+                    <a href="https://opengameart.org/" target="_blank">Opengameart.org</a><br>Be sure to leave a
+                    comment!</p>
 
-        </div>  
+            </div>
 
         </div>
 
         <div id="textbox" onclick="this.style.display='none';"></div>
 
-    </body>
+</body>
 
 </html>
