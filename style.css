@@ -1,6 +1,7 @@
-*{
+* {
     -webkit-tap-highlight-color: transparent;
 }
+
 body {
     margin: 0;
     padding: 10px;
@@ -8,13 +9,13 @@ body {
     height: 100vh;
     box-sizing: border-box;
     background-color: rgb(17, 17, 17);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
 }
 
-h1 {
-    font-family: Arial, Helvetica, sans-serif;
-}
+/* h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+} */
 
 .background {
     user-select: none;
@@ -41,11 +42,11 @@ h1 {
     box-sizing: border-box;
     text-shadow: 1px 1px 0px black,
 
-    -1px 1px 0px black,
+        -1px 1px 0px black,
 
-    1px -1px 0px black,
+        1px -1px 0px black,
 
-    -1px -1px 0px black;
+        -1px -1px 0px black;
 }
 
 .container {
@@ -87,14 +88,17 @@ a:hover:after {
         0 0 5px darkblue;
 }
 
-.animated-text{
+.animated-text {
     margin: 2px;
     display: block;
     color: rgb(196, 196, 196);
-    font-weight: lighter;
+    font-family: "JetBrains Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 100;
     font-style: italic;
 }
-.animated-text:after{
+
+.animated-text:after {
     content: "|";
     color: rgb(142, 142, 142);
 }

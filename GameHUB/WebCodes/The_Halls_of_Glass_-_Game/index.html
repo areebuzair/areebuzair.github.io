@@ -330,13 +330,13 @@
             dx: 0,
             dy: 0,
             bladeAng: 0,
-            drawBlade: function(cx, cy){
+            drawBlade: function (cx, cy) {
                 ctx.beginPath();
-                let spinGrd = ctx.createConicGradient(this.bladeAng, cx,  cy);
+                let spinGrd = ctx.createConicGradient(this.bladeAng, cx, cy);
                 spinGrd.addColorStop(0, "transparent");
                 spinGrd.addColorStop(0.5, "#FFF");
                 spinGrd.addColorStop(1, "transparent");
-                ctx.arc(cx,  cy, D/8, 0, PI*2);
+                ctx.arc(cx, cy, D / 8, 0, PI * 2);
                 ctx.fillStyle = spinGrd;
                 ctx.fill();
                 // ctx.strokeStyle = "#212223";
@@ -344,26 +344,26 @@
             },
             draw: function () {
                 this.bladeAng += 1;
-                if(this.bladeAng >= 2*PI) this.bladeAng -= 2*PI;
+                if (this.bladeAng >= 2 * PI) this.bladeAng -= 2 * PI;
                 this.drawBlade(
-                    this.x + D/8,
-                    this.y + H - L + D/8
+                    this.x + D / 8,
+                    this.y + H - L + D / 8
                 )
                 this.drawBlade(
-                    this.x + 3*D/8,
-                    this.y + H - L + D/8
+                    this.x + 3 * D / 8,
+                    this.y + H - L + D / 8
                 )
                 this.drawBlade(
-                    this.x + D/8,
-                    this.y + H - L + 3*D/8
+                    this.x + D / 8,
+                    this.y + H - L + 3 * D / 8
                 )
                 this.drawBlade(
-                    this.x + 3*D/8,
-                    this.y + H - L + 3*D/8
+                    this.x + 3 * D / 8,
+                    this.y + H - L + 3 * D / 8
                 )
 
                 ctx.beginPath();
-                ctx.arc(this.x + D/4,  this.y + H - L + D/4, D/4, 0, PI*2);
+                ctx.arc(this.x + D / 4, this.y + H - L + D / 4, D / 4, 0, PI * 2);
                 ctx.strokeStyle = "rgb(0, 0, 0)";
                 ctx.stroke();
 
@@ -377,11 +377,11 @@
                 ctx.fill();
 
                 ctx.beginPath();
-                let glowGrd = ctx.createRadialGradient(this.x + D/4,  this.y + H - L + D/4, 0, this.x + D/4,  this.y + H - L + D/4, D/10);
+                let glowGrd = ctx.createRadialGradient(this.x + D / 4, this.y + H - L + D / 4, 0, this.x + D / 4, this.y + H - L + D / 4, D / 10);
                 glowGrd.addColorStop(0, "white");
                 glowGrd.addColorStop(0.35, "#FCC");
                 glowGrd.addColorStop(1, "red");
-                ctx.arc(this.x + D/4,  this.y + H - L + D/4, D/10, 0, PI*2);
+                ctx.arc(this.x + D / 4, this.y + H - L + D / 4, D / 10, 0, PI * 2);
                 ctx.fillStyle = glowGrd;
                 ctx.fill();
 
@@ -580,6 +580,7 @@
     <title>The Halls of Glass</title>
     <link href='https://fonts.googleapis.com/css?family=Goldman' rel='stylesheet'>
     <link rel="icon" href="./MazePattern.jpg" type="image/jpg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
 <body>
