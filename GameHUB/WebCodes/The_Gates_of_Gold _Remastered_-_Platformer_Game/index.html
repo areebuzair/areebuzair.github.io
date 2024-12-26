@@ -2,95 +2,106 @@
 
 <html>
 
-    <head>
+<head>
 
-        <title>The Gates of Gold</title>
+  <title>The Gates of Gold</title>
 
-        <meta charset="utf-8">
+  <meta charset="utf-8">
 
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <meta author="Nor'wester">
+  <meta author="Nor'wester">
 
-        <meta keywords="golden gates, gates of gold, adventure game">
+  <meta keywords="golden gates, gates of gold, adventure game">
 
-        <meta name="description" content="Can you reach the Gates of Gold?">
+  <meta name="description" content="Can you reach the Gates of Gold?">
 
-        <link rel="icon" href="./wings.png" type="image/png">
+  <link rel="icon" href="./wings.png" type="image/png">
 
-        <link rel="stylesheet" href="goldGates.css">
+  <link rel="stylesheet" href="goldGates.css">
 
-        <link href="https://fonts.googleapis.com/css?family=Varela+Round|Nosifer" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Varela+Round|Nosifer" rel="stylesheet">
 
-        <script src="goldGates.js"></script>
+  <script src="goldGates.js"></script>
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <canvas id="cnv"></canvas>
+  <canvas id="cnv"></canvas>
 
-        <input type="button" id="left" value="←" class="controls">
+  <input type="button" id="left" value="←" class="controls">
 
-        <input type="button" id="right" value="→" class="controls">
+  <input type="button" id="right" value="→" class="controls">
 
-        <input value="0" id="joystick" style="display:none;">
+  <input value="0" id="joystick" style="display:none;">
 
-        <input type="button" id="jump" value="↑" class="controls">
+  <input type="button" id="jump" value="↑" class="controls">
 
-        <input id="map" type="checkbox">
+  <input id="map" type="checkbox">
 
-        <!--<img src="https://www.dropbox.com/s/kgkmrylu1o70t5g/MapModel-retro.png?raw=1" onload="this.parentNode.removeChild(this);">-->
+  <!--<img src="https://www.dropbox.com/s/kgkmrylu1o70t5g/MapModel-retro.png?raw=1" onload="this.parentNode.removeChild(this);">-->
 
-       <div id=loader><div class=box>
+  <div id=loader>
+    <div class=box>
 
-    <h1 id="gameTitle">The Gates of Gold</h1>
+      <h1 id="gameTitle">The Gates of Gold</h1>
 
-    <p>Instructions: (for touch devices/ keyboard controls)<br>
+      <p>Instructions: (for touch devices/ keyboard controls)<br>
 
-    ☆Use the <button>←</button> and <button>→</button> buttons/ <kbd>a</kbd> and <kbd>d</kbd> keys to move and to grab onto walls.<br>    
+        ☆Use the <button>←</button> and <button>→</button> buttons/ <kbd>a</kbd> and <kbd>d</kbd> keys to move and to
+        grab onto walls.<br>
 
-    ☆Press the <button>↑</button> button/  <kbd>spacebar</kbd> to jump and climb.<br>
+        ☆Press the <button>↑</button> button/ <kbd>spacebar</kbd> to jump and climb.<br>
 
-    ☆Use the <button>🗺️</button> and the <button>❌</button>button/ <kbd>m</kbd> key to open and close the map.<br>
+        ☆Use the <button>🗺️</button> and the <button>❌</button>button/ <kbd>m</kbd> key to open and close the map.<br>
 
-    ☆Your objective is to find the Gates of Gold. Enter it to win.<br>
+        ☆Your objective is to find the Gates of Gold. Enter it to win.<br>
 
-    ☆Hidden in the dungeons are the legendary Wings of Nebula. Rumour has it that this artifact allows the wielder to walk on clouds as though they were solid.<br>
+        ☆Hidden in the dungeons are the legendary Wings of Nebula. Rumour has it that this artifact allows the wielder
+        to walk on clouds as though they were solid.<br>
 
-    ☆Avoid the venom vines scattered throughout the landscape.<br>
+        ☆Avoid the venom vines scattered throughout the landscape.<br>
 
-    ☆Collect gems for points. They also function as checkpoints.<br>  
+        ☆Collect gems for points. They also function as checkpoints.<br>
 
-    <br><span id=continue>Click to Start</span></p></div>
-
-        <div id="circularbar"></div>
-
+        <br><span id=continue>Click to Start</span>
+      </p>
+      <p class="warning">
+        The game has been known to crash on occasion. I cannot figure out a way to fix it, except maybe to rebuild it from
+        scratch at some point. But that won't be for a while. Nevertheless, have fun.
+      </p>
     </div>
 
-    
+    <div id="circularbar"></div>
 
-    <div id=gameOver>
+  </div>
 
-        <i id="deathcause"></i><br>
 
-        <span>Goto Last<br>Checkpoint</span>
 
-    </div>
+  <div id=gameOver>
 
-    <div id="resume">
+    <i id="deathcause"></i><br>
 
-        <span>Resume?</span>
+    <span>Goto Last<br>Checkpoint</span>
 
-    </div>
+  </div>
 
-           
+  <div id="resume">
 
-    <div id=end>
+    <span>Resume?</span>
 
-        <div class=box><p>
+  </div>
 
-        <span id="scroll">Ascension, will yet, be mine.</span><center>
+
+
+  <div id=end>
+
+    <div class=box>
+      <p>
+
+        <span id="scroll">Ascension, will yet, be mine.</span>
+        <center>
 
           <table border="1" cellpadding="5px">
 
@@ -100,7 +111,7 @@
 
               <td>10000</td>
 
-            </tr> 
+            </tr>
 
             <tr>
 
@@ -140,14 +151,23 @@
 
             </tr>
 
-          </table></center>
+          </table>
+        </center>
 
-        <br><input type="button" value="New Game" id="replay"><br><hr>The Gates of Gold, a game designed, coded and debugged by <a href="https://www.sololearn.com/Profile/16557744/?ref=app" target="_blank">Nor'wester</a>.<br> &copy; 2022<br>All illustrations &copy; Nor'wester<br>All illustrations made using Paint 3D and HTML Canvas<br>Character design and voice by Nor'wester<br>Character animation using <a href="https://www.mixamo.com/" target="_blank">Mixamo.com</a> and Blender<br>The following audio from <a href="https://www.fesliyanstudios.com/" target="_blank">FesliyanStudios.com</a>:<br>● Body Thud 1<br>● Breaking Bones B7<br>● Dramatic Heartbeat<br>● Fireball Strong Attack Whoosh<br>Be sure to leave a comment!</p>
-
-        </div>
+        <br><input type="button" value="New Game" id="replay"><br>
+        <hr>The Gates of Gold, a game designed, coded and debugged by <a
+          href="https://www.sololearn.com/Profile/16557744/?ref=app" target="_blank">Nor'wester</a>.<br> &copy;
+        2022<br>All illustrations &copy; Nor'wester<br>All illustrations made using Paint 3D and HTML
+        Canvas<br>Character design and voice by Nor'wester<br>Character animation using <a
+          href="https://www.mixamo.com/" target="_blank">Mixamo.com</a> and Blender<br>The following audio from <a
+          href="https://www.fesliyanstudios.com/" target="_blank">FesliyanStudios.com</a>:<br>● Body Thud 1<br>●
+        Breaking Bones B7<br>● Dramatic Heartbeat<br>● Fireball Strong Attack Whoosh<br>Be sure to leave a comment!
+      </p>
 
     </div>
 
-    </body>
+  </div>
+
+</body>
 
 </html>

@@ -1,84 +1,84 @@
-*{
+* {
 
     -webkit-tap-highlight-color: transparent;
 
-    user-select:none;
+    user-select: none;
 
-    -webkit-user-select:none;
+    -webkit-user-select: none;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 
 }
 
 body {
 
-    margin:0;
+    margin: 0;
 
-    width:100vw;
+    width: 100vw;
 
-    height:100vh;
+    height: 100vh;
 
-    background-color:black;
+    background-color: black;
 
-    font-family:"Varela Round", Helvetica, Arial, sans-serif;
-
-}
-
-kbd{
-
-    font-size:80%;
-
-    border:1vmin solid;
-
-    border-top-color:#333;
-
-    border-left-color:#222;
-
-    border-bottom-color:#000;
-
-    border-right-color:#111;
-
-    background-color:#444;
-
-    padding:0.5vmin;
-
-    padding-top:0.1vmin;
-
-    padding-bottom:0.1vmin;
-
-    border-radius:1vmin;
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
 
 }
 
-button{
+kbd {
 
-    min-width:8vmin;
+    font-size: 80%;
 
-    min-height:8vmin;
+    border: 1vmin solid;
 
-    border-radius:50%;
+    border-top-color: #333;
 
-    background-color:rgba(255,255,255,0.5);
+    border-left-color: #222;
 
-    font-size:4vmin;
+    border-bottom-color: #000;
 
-    outline:none;
+    border-right-color: #111;
 
-    border:none;
+    background-color: #444;
+
+    padding: 0.5vmin;
+
+    padding-top: 0.1vmin;
+
+    padding-bottom: 0.1vmin;
+
+    border-radius: 1vmin;
 
 }
 
-canvas{
+button {
 
-    position:fixed;
+    min-width: 8vmin;
 
-    top:calc(50vh - 50vmin);
+    min-height: 8vmin;
 
-    left:calc(50vw - 50vmin);
+    border-radius: 50%;
 
-    width:100vmin;
+    background-color: rgba(255, 255, 255, 0.5);
 
-    height:100vmin;
+    font-size: 4vmin;
+
+    outline: none;
+
+    border: none;
+
+}
+
+canvas {
+
+    position: fixed;
+
+    top: calc(50vh - 50vmin);
+
+    left: calc(50vw - 50vmin);
+
+    width: 100vmin;
+
+    height: 100vmin;
 
 }
 
@@ -126,303 +126,317 @@ canvas{
 
 }*/
 
-.controls{
+.controls {
 
-    width:90px;
+    width: 90px;
 
-    height:90px;
+    height: 90px;
 
-    border-radius:5%;
+    border-radius: 5%;
 
-    background-color:rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
 
-    position:fixed;
+    position: fixed;
 
-    font-size:20px;
+    font-size: 20px;
 
-    outline:none;
+    outline: none;
 
-    border:none;
+    border: none;
+
+
+
+}
+
+.controls:active {
+
+    background-color: white;
+
+}
+
+#jump {
+
+    right: 20px;
+
+    bottom: 45px;
+
+}
+
+#left {
+
+    left: 15px;
+
+    bottom: 45px;
+
+}
+
+#right {
+
+    left: 115px;
+
+    bottom: 45px;
+
+}
+
+#loader {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 10000;
+
+    background-color: #111;
+
+    color: #eee;
+
+    font-size: 5vmin;
+
+}
+
+#circularbar {
+
+    width: 30vmin;
+
+    height: 30vmin;
+
+    position: fixed;
+
+    right: 10px;
+
+    bottom: 10px;
+
+    border-radius: 50%;
+
+    border-top: 2px solid #EDEDED;
+
+    border-bottom: 2px solid #EDEDED;
+
+    animation: spin 2s infinite;
+
+    font-family: "Nosifer";
+
+}
+
+@keyframes spin {
+
+    to {
+        transform: rotate(360deg);
+    }
+
+}
+
+#gameTitle {
+
+    color: gold;
+
+    font-variant: small-caps;
+
+    text-align: center;
+
+}
+
+#gameOver,
+#resume {
+
+    display: none;
+
+    justify-content: center;
+
+    text-align: center;
+
+    align-items: center;
+
+    flex-direction: column;
+
+    font-size: 4vmin;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 1000;
+
+    color: red;
+
+    font-family: "Nosifer";
+
+    background-color: rgb(0, 0, 0);
+
+    cursor: pointer;
+
+}
+
+#scroll {
+
+    font-size: 8vmin;
+
+    color: red;
+
+    font-family: "Nosifer";
+
+}
+
+#end {
+
+    width: 100vw;
+
+    height: 100vh;
+
+    position: fixed;
+
+    top: 0;
+
+    left: 0;
+
+    z-index: 1000;
+
+    background-color: #111;
+
+    color: #eee;
+
+    justify-content: center;
+
+    text-align: center;
+
+    align-items: center;
+
+    font-size: 5vmin;
+
+    display: none;
 
 
 
 }
 
-.controls:active{
+a {
 
-    background-color:white;
+    text-decoration: none;
 
-}
+    color: skyblue;
 
-#jump{
-
-    right:20px;
-
-    bottom:45px;
+    cursor: pointer;
 
 }
 
-#left{
+#end p {
 
-    left:15px;
-
-    bottom:45px;
+    text-align: center;
 
 }
 
-#right{
+.box {
 
-    left:115px;
+    overflow-y: scroll;
 
-    bottom:45px;
+    width: 100vw;
 
-}
+    height: 100vh;
 
-#loader{
-
-    width:100vw;
-
-    height:100vh;
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    z-index:10000;
-
-    background-color:#111;
-
-    color:#eee;
-
-    font-size:5vmin;
+    padding: 10px;
 
 }
 
-#circularbar{
+#continue,
+#replay,
+#gameOver span,
+#resume span {
 
-    width:30vmin;
+    color: yellow;
 
-    height:30vmin;
+    background-color: black;
 
-    position:fixed;
+    border: 1vmin solid yellow;
 
-    right:10px;
+    display: inline-block;
 
-    bottom:10px;
+    padding: 2vmin;
 
-    border-radius:50%;
+    border-radius: 2vmin;
 
-    border-top:2px solid #EDEDED;
-
-    border-bottom:2px solid #EDEDED;
-
-    animation:spin 2s infinite;
-
-    font-family:"Nosifer";
-
-}
-
-@keyframes spin{
-
-    to{transform:       rotate(360deg);}
-
-}
-
-#gameTitle{
-
-    color:gold;
-
-    font-variant:small-caps;
-
-    text-align:center;
-
-}
-
-#gameOver,#resume{
-
-    display:none;
-
-    justify-content:center;
-
-    text-align:center;
-
-    align-items:center;
-
-    flex-direction:column;
-
-    font-size:4vmin;
-
-    width:100vw;
-
-    height:100vh;
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    z-index:1000;
-
-    color:red;
-
-    font-family:"Nosifer";
-
-    background-color: rgb(0,0,0);
-
-    cursor:pointer;
-
-}
-
-#scroll{
-
-    font-size:8vmin;
-
-    color:red;
-
-    font-family:"Nosifer";
-
-}
-
-#end{
-
-    width:100vw;
-
-    height:100vh;
-
-    position:fixed;
-
-    top:0;
-
-    left:0;
-
-    z-index:1000;
-
-    background-color:#111;
-
-    color:#eee;
-
-    justify-content:center;
-
-    text-align:center;
-
-    align-items:center;
-
-    font-size:5vmin;
-
-    display:none;
-
-    
-
-}
-
-a{
-
-    text-decoration:none;
-
-    color:skyblue;
-
-    cursor:pointer;
-
-}
-
-#end p{
-
-    text-align:center;
-
-}
-
-.box{
-
-    overflow-y:scroll;
-
-    width:100vw;
-
-    height:100vh;
-
-    padding:10px;
-
-}
-
-#continue,#replay,#gameOver span,#resume span{
-
-    color:yellow;
-
-    background-color:black;
-
-    border:1vmin solid yellow;
-
-    display:inline-block;
-
-    padding:2vmin;
-
-    border-radius:2vmin;
-
-    font-size:5vmin;
+    font-size: 5vmin;
 
     transition: 0.5s;
 
-    font-family:"Varela Round", Helvetica, Arial, sans-serif;
+    font-family: "Varela Round", Helvetica, Arial, sans-serif;
 
 }
 
-#continue:hover,#replay:hover,#gameOver span:hover,#resume span:hover{
+#continue:hover,
+#replay:hover,
+#gameOver span:hover,
+#resume span:hover {
 
-    background-color:yellow;
+    background-color: yellow;
 
-    color:black;
-
-}
-
-#continue{
-
-    display:none;
-
-    text-align:center;
+    color: black;
 
 }
 
-#map{
+#continue {
 
-    position:fixed;
+    display: none;
 
-    top:10px;
-
-    left:10px;
-
-    cursor:pointer;
-
-    width:0;
-
-    height:0;
+    text-align: center;
 
 }
 
-#map:after{
+#map {
 
-    content:"🗺️";
+    position: fixed;
 
-    font-size:7vmin;
+    top: 10px;
 
-    text-shadow:0 0 1px black,
+    left: 10px;
 
-                0 0 2px black;
+    cursor: pointer;
 
-}
+    width: 0;
 
-#map:checked:after{
-
-    content:"❌";
-
-    font-size:7vmin;
-
-    text-shadow:0 0 1px black,
-
-                0 0 2px black;
+    height: 0;
 
 }
 
+#map:after {
 
+    content: "🗺️";
 
+    font-size: 7vmin;
+
+    text-shadow: 0 0 1px black,
+
+        0 0 2px black;
+
+}
+
+#map:checked:after {
+
+    content: "❌";
+
+    font-size: 7vmin;
+
+    text-shadow: 0 0 1px black,
+
+        0 0 2px black;
+
+}
+
+.warning {
+    color: orange;
+    border: 1px solid orange;
+    padding: 10px;
+    text-align: justify;
+    font-weight: bold;
+}
