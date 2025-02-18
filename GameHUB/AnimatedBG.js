@@ -5,6 +5,7 @@ let N1 = 600, N2 = 100, N3 = 50;
 let cnv = document.getElementById("cnv");
 let ctx = cnv.getContext("2d");
 const { min, random, ceil, floor, round, PI, abs, sin, cos } = Math;
+const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
 
 function init() {
     W = 1000;//window.innerWidth;
@@ -268,6 +269,6 @@ function draw(t) {
     // console.log(t);
 
     T1 = t;
-    requestAnimationFrame(draw);
+    if(!isReduced) window.requestAnimationFrame(draw);
 }
 requestAnimationFrame(draw);
