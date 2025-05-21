@@ -1,0 +1,142 @@
+body {
+    background: linear-gradient(45deg, #DDD, #CCC);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: clamp(8px, 4vw, 28px);
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 80vmin;
+    height: 80vmin;
+    aspect-ratio: 1;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-items: center;
+    position: relative;
+    display: none;
+}
+
+.container div {
+    width: 18vmin;
+    height: 18vmin;
+    margin: 1vmin;
+    border: 1vmin solid green;
+    border-radius: 2vmin;
+    box-sizing: border-box;
+    display: grid;
+    place-items: center;
+}
+
+.empty-tile:hover {
+    background-color: #FFF;
+    cursor: pointer;
+}
+
+.player-tile:before {
+    content: "";
+    width: 10vmin;
+    height: 10vmin;
+    border: 2vmin solid blue;
+    border-radius: 50%;
+}
+
+.enemy-tile:before,
+.enemy-tile:after {
+    content: "";
+    width: 2vmin;
+    height: 10vmin;
+    background-color: red;
+    position: absolute;
+}
+
+.enemy-tile:before {
+    transform: rotate(45deg);
+}
+
+.enemy-tile:after {
+    transform: rotate(-45deg);
+}
+
+#gameover,
+#victory {
+    font-weight: bolder;
+    text-align: center;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 10;
+    backdrop-filter: blur(2px);
+    place-items: center;
+    text-shadow: 1px 0 0 black,
+        -1px 0 0 black,
+        0 1px 0 black,
+        0 -1px 0 black;
+}
+
+#gameover {
+    color: red;
+    background-color: rgba(0, 0, 0, 0.273);
+}
+
+#victory {
+    background-color: rgba(255, 255, 255, 0.108);
+    color: gold;
+}
+
+#main-menu {
+    margin: 0 auto;
+    max-width: 900px;
+    padding: 10px;
+    text-align: justify;
+    text-align-last: center;
+}
+
+#title {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+    border: .5vmin solid black;
+    background-color: transparent;
+    padding: 2vmin;
+    border-radius: 2vmin;
+    margin: 2vmin;
+    font-size: 1em;
+}
+
+#game-area {
+    min-height: 150vh;
+}
+
+#level-display {
+    text-align: center;
+}
+
+#retry {
+    position: fixed;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 15;
+    color: white;
+    border-color: white;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.408);
+}
+
+button:hover, #retry:hover {
+    background-color: black;
+    color: white;
+}
+
+.dead{
+    background-color: black;
+}
