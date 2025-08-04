@@ -1,0 +1,619 @@
+<style>
+*{
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+body{
+
+    width: 100vw;
+
+    height: 100vh;
+
+    margin: 0;
+
+    overflow: hidden;
+
+}
+
+canvas{
+
+    cursor:grab;
+
+}
+
+canvas:active{
+
+    cursor:grabbing;
+
+}
+
+#loading{
+
+    position:fixed;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    top:0;
+
+    left:0;
+
+    background-color:#222;
+
+    color:white;
+
+    display:flex;
+
+    text-align:center;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    flex-direction:column;
+
+}
+
+#spin{
+
+    width:30vmin;
+
+    height:30vmin;
+
+    border:5vmin solid #AAD;
+
+    border-radius:50%;
+
+    border-top-color:#FFF;
+
+    animation:spin 1s linear infinite;
+
+    margin:5px;
+
+}
+
+@keyframes spin{
+
+    to{transform:rotate(360deg);}
+
+}
+
+#instructions{
+
+    position:fixed;
+
+    padding:5px;
+
+    bottom:10px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    background-color:red;
+
+}
+
+
+
+
+
+
+
+
+
+</style>
+
+<script>
+"use strict";
+
+
+
+//Change these variables as needed... 
+
+var showGrid = false;
+
+let x = -500, v=100;
+
+let flagMap = new Image();
+
+flagMap.src = "https://dl.dropbox.com/s/1oydw21cn15iz94/flagMapHD.png?dl=0";
+
+flagMap.crossOrigin = "anonymous";
+
+/*flagMap.width = 500;
+
+flagMap.height = 300;*/
+
+
+
+const {sin, cos, PI, sqrt, random, floor, ceil, round, abs} = Math;
+
+
+
+function atan(x1,y1,x2,y2){
+
+    let dx = x2 - x1;
+
+    let dy = y2 - y1;
+
+    if(dx==0){
+
+        if(dy>=0){
+
+            return PI/2;
+
+        }
+
+        else{
+
+            return (3/2)*PI;
+
+        }
+
+    }
+
+    else if(dx>0){
+
+        return Math.atan(dy/dx);
+
+    }
+
+    else{return PI+Math.atan(dy/dx);}
+
+}
+
+
+
+window.onload = function(){
+
+  let loadtext = document.getElementById("loadtext");
+
+  loadtext.textContent = "Loading HDRI (2/2)";
+
+  // SCENE
+
+  var scene = new THREE.Scene();
+
+  scene.background = new THREE.Color(0x111111);
+
+
+
+  /* /////////////////////////// */
+
+
+
+  // CAMERA
+
+  var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .01, 800);
+
+  //camera.position.set(0,0,20);
+
+  camera.position.set(-15, -10, 16.5);
+
+  /* ////////////////////////////////////////// */
+
+
+
+  // RENDERER
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+
+
+  // Append canvas to the body
+
+  document.body.appendChild(renderer.domElement);
+
+
+
+  /* ////////////////////////////////////////// */
+
+
+
+  // Camera Rotation Control
+
+  var controls = new THREE.OrbitControls(camera,renderer.domElement);
+
+  controls.enablePan = false;
+
+  controls.enableZoom = false;
+
+  controls.minPolarAngle = PI/2.2;
+
+  controls.target.set(1.5,0,0);
+
+  /*controls.autoRotate=true;
+
+  controls.autoRotateSpeed=-3;*/
+
+  let cnv1 = document.createElement("canvas");
+
+  let ctx1 = cnv1.getContext("2d");
+
+  cnv1.width = flagMap.width;
+
+  cnv1.height = flagMap.height;
+
+  ctx1.drawImage(flagMap,0,0);
+
+  let dt = ctx1.getImageData(0,0,flagMap.width,flagMap.height);
+
+  for(let i=0;i<dt.data.length;i+=4){
+
+      dt.data[i+3] = (255 - dt.data[i])/2;
+
+      dt.data[i] = 0;
+
+      dt.data[i+1] = 0;
+
+      dt.data[i+2] = 0;
+
+  }
+
+  ctx1.clearRect(0,0,flagMap.width,flagMap.height);
+
+  ctx1.putImageData(dt,0,0);
+
+  let shadowMap = new Image();
+
+  shadowMap.src = cnv1.toDataURL();
+
+  let grd1;
+
+  shadowMap.onload =()=>{
+
+    cnv1.width = 250;
+
+    cnv1.height = 300;
+
+    ctx1.fillStyle = "rgb(0,106,78)";
+
+    ctx1.fillRect(0,0,500,300);
+
+    ctx1.fillStyle = "rgb(244,42,65)";
+
+    ctx1.beginPath()
+
+    ctx1.arc(225, 150, 100, 0, PI*2);
+
+    ctx1.fill();
+
+    ctx1.fillStyle = "rgba(0,0,0,0.5)";
+
+    ctx1.fillRect(0,0,500,300);
+
+    grd1 = ctx1.getImageData(0,0,250,300);
+
+    for(let g=0;g<grd1.data.length/4;g++){
+
+        grd1.data[4*g+3] = 255 * (249 - g%250)/249;
+
+    }
+
+    ctx1.clearRect(0,0,250,300);
+
+    ctx1.putImageData(grd1,0,0);
+
+    grd1 = new Image();
+
+    grd1.src = cnv1.toDataURL();
+
+    cnv1.width = 500;
+
+    cnv1.height = 300;
+
+    ctx1.fillStyle = "rgb(0,106,78)";
+
+    ctx1.fillRect(0,0,500,300);
+
+    ctx1.fillStyle = "rgb(244,42,65)";
+
+    ctx1.beginPath()
+
+    ctx1.arc(225, 150, 100, 0, PI*2);
+
+    ctx1.fill();
+
+    ctx1.fillStyle = "rgba(0,0,0,0.5)";
+
+    ctx1.fillRect(0,0,500,300);
+
+    ctx1.drawImage(shadowMap,x,0,1000, 300);
+
+  }
+
+  let colorMap = new THREE.CanvasTexture(cnv1);
+
+  
+
+  let cnv2 = document.createElement("canvas");
+
+  let ctx2 = cnv2.getContext("2d");
+
+  cnv2.height = 300;
+
+  cnv2.width = 500;
+
+  ctx2.drawImage(flagMap,x,0,1000,300);
+
+  let motionMap = new THREE.CanvasTexture(cnv2);
+
+
+
+  if(showGrid){
+
+      const size = 10;
+
+      const divisions = 10;
+
+  
+
+      const gridHelper = new THREE.GridHelper(size, divisions);
+
+      scene.add(gridHelper);
+
+  }
+
+
+
+  let standGeo = new THREE.CylinderGeometry(0.5,0.5,60,20);
+
+  let standMat = new THREE.MeshStandardMaterial({
+
+      color:0xDDDDDD,
+
+      roughness:0.4,
+
+      metalness:0.6,
+
+  });
+
+  let stand = new THREE.Mesh(
+
+      standGeo, standMat
+
+  );
+
+  const hdrEquirect = new THREE.RGBELoader().load( "https://dl.dropbox.com/s/pvft9ybkveqcdgd/je_gray_02_2k.hdr?dl=0", () => { 
+
+    hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+
+    scene.environment = hdrEquirect;
+
+    //scene.add(new THREE.AmbientLight(0xFFFFFF, 0.3));
+
+    scene.background = hdrEquirect;
+
+    let flagGeo = new THREE.PlaneGeometry(20,12,15,15);
+
+    let flagMat = new THREE.MeshStandardMaterial({
+
+        color:0xFFFFFF,
+
+        map:colorMap,
+
+        displacementMap:motionMap,
+
+        displacementScale:3,
+
+        side:THREE.DoubleSide,
+
+        envMapIntensity:0.6,
+
+        emissive:0xFFFFFF,
+
+        emissiveIntensity:0.4,
+
+        emissiveMap:colorMap,
+
+    });
+
+    let flag = new THREE.Mesh(
+
+        flagGeo, flagMat,
+
+    );
+
+    flag.position.set(10,22.5,-1.5);
+
+    stand.position.set(-10,-23.5,0);
+
+    stand.rotation.z = -0.1;
+
+    stand.add(flag);
+
+    scene.add(stand);
+
+    removeLoader();
+
+    render();
+
+  });
+
+  
+
+  function removeLoader(){
+
+      let l = document.getElementById("loading");
+
+      l.parentNode.removeChild(l);
+
+  }
+
+  
+
+  // GLTF Loader to Load and manipulate 3D Models
+
+  /*var loader = new THREE.GLTFLoader();
+
+
+
+  loader.crossOrigin = true;
+
+
+
+  loader.load('', function(data) {
+
+    var object = data.scene;
+
+    object.position.set(0, 0, 0);
+
+    object.scale.set(
+
+        1,1,1
+
+    );
+
+    scene.add(object);
+
+  });*/
+
+
+
+  /* ////////////////////////////// */
+
+
+
+  // Render animation on every rendering phase
+
+  let grd2 = ctx2.createLinearGradient(0,0,250,0);
+
+  grd2.addColorStop(0, "rgb(128,128,128)");
+
+  grd2.addColorStop(1, "transparent");
+
+  ctx2.fillStyle = grd2;
+
+  let ang = 0;
+
+  function render() {
+
+    //requestAnimationFrame(render);
+
+    setTimeout(render, 100);
+
+    renderer.render(scene, camera); // Render Scene and Camera
+
+    controls.update(); // For Orbit Controller
+
+    colorMap.needsUpdate = true;
+
+    motionMap.needsUpdate = true;
+
+    x+= (v + v*random())/2;
+
+    if(x>=1000) x = 0;
+
+    ctx1.clearRect(0,0,500,300);
+
+    ctx1.fillStyle = "rgb(0,106,78)";
+
+    ctx1.fillRect(0,0,500,300);
+
+    ctx1.fillStyle = "rgb(244,42,65)";
+
+    ctx1.beginPath()
+
+    ctx1.arc(225, 150, 100, 0, PI*2);
+
+    ctx1.fill();
+
+    ctx1.drawImage(shadowMap,x,0,1000,300);
+
+    ctx1.drawImage(shadowMap,x-1000,0,1000,300);
+
+    ctx1.drawImage(grd1,0,0,250,300);
+
+    ctx2.clearRect(0,0,500,300);
+
+    ctx2.drawImage(flagMap,x,0,1000,300);
+
+    ctx2.drawImage(flagMap,x-1000,0,1000,300);
+
+    ctx2.fillRect(0,0,250,300);
+
+    ang += 0.3*random();
+
+    if(ang > 2*PI) ang -= 2*PI;
+
+    stand.rotation.z = -0.18-0.02*abs(cos(ang));
+
+  }
+
+
+
+  /*///////////////////////////////*/
+
+  /*window.onclick =()=>{
+
+      console.log([
+
+          camera.position.x,
+
+          camera.position.y,
+
+          camera.position.z,
+
+      ]);
+
+  }*/
+
+  // Update Camera Aspect Ratio and Renderer ScreenSize on Window resize
+
+  window.addEventListener('resize', function() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+  }, false);
+
+}
+
+/*////////////////////////////////*/</script>
+
+<!DOCTYPE html>
+
+<html>
+
+    <head><meta charset="utf-8">
+
+        <title>3D Animated Flag</title>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/loaders/RGBELoader.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="loading">
+
+           <div id="spin"></div><br>
+
+           <i id="loadtext">Loading Base Map (1/2)</i>
+
+           <div id="instructions">Drag to rotate the scene!</div>
+
+        </div>
+
+    </body>
+
+</html>

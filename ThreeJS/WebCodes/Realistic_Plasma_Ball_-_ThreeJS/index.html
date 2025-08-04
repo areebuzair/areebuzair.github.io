@@ -1,0 +1,570 @@
+<style>
+*{
+
+    user-select:none;
+
+    -webkit-user-select:none;
+
+    font-family: Helvetica, Arial, sans-serif;
+
+}
+
+body{
+
+    width: 100vw;
+
+    height: 100vh;
+
+    margin: 0;
+
+    overflow: hidden;
+
+}
+
+canvas{
+
+    cursor:grab;
+
+}
+
+canvas:active{
+
+    cursor:grabbing;
+
+}
+
+#loading{
+
+    position:fixed;
+
+    width: 100vw;
+
+    height: 100vh;
+
+    top:0;
+
+    left:0;
+
+    background-color:#222;
+
+    color:white;
+
+    display:flex;
+
+    text-align:center;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:20px;
+
+    flex-direction:column;
+
+}
+
+#spin{
+
+    width:30vmin;
+
+    height:30vmin;
+
+    border:5vmin solid #AAD;
+
+    border-radius:50%;
+
+    border-top-color:#FFF;
+
+    animation:spin 1s linear infinite;
+
+    margin:5px;
+
+}
+
+@keyframes spin{
+
+    to{transform:rotate(360deg);}
+
+}
+
+
+
+
+
+</style>
+
+<script>
+"use strict";
+
+//Change these variables as needed... 
+
+var showGrid = false,
+
+    A = 0.25,//Amplitude
+
+    numberOfTendrils = 50,
+
+    blackBall = false,
+
+    clearCoat = false;
+
+
+
+const {random, PI} = Math;
+
+window.onload = function(){
+
+  
+
+  // SCENE
+
+  var scene = new THREE.Scene();
+
+  scene.background = new THREE.Color(0x444444);
+
+
+
+  /* /////////////////////////// */
+
+
+
+  // CAMERA
+
+  var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .01, 800);
+
+  camera.position.set(0, 0, 5);
+
+
+
+  /* ////////////////////////////////////////// */
+
+
+
+  // RENDERER
+
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+
+
+
+  // Append canvas to the body
+
+  document.body.appendChild(renderer.domElement);
+
+
+
+  /* ////////////////////////////////////////// */
+
+
+
+  // Camera Rotation Control
+
+  var controls = new THREE.OrbitControls(camera,renderer.domElement);
+
+  controls.enableZoom = false;
+
+  controls.enablePan = false;
+
+  controls.autoRotate=true;
+
+  controls.autoRotateSpeed=-2;
+
+  controls.maxPolarAngle = (clearCoat?0.323:0.6) * PI;
+
+  
+
+  
+
+  if(showGrid){
+
+      const size = 10;
+
+      const divisions = 10;
+
+  
+
+      const gridHelper = new THREE.GridHelper(size, divisions);
+
+      scene.add(gridHelper);
+
+  }
+
+  
+
+  let resources = 0;
+
+
+
+  let wood = new THREE.TextureLoader().load("https://dl.dropbox.com/s/99jrp6l573gihab/woodenbackground.png?dl=0", () =>{
+
+      resources++;
+
+  });
+
+  const hdrEquirect = new THREE.RGBELoader().load( "https://dl.dropbox.com/s/5zsujd724szhnbt/comfy_cafe_2k.hdr?dl=0", () => { 
+
+      hdrEquirect.mapping = THREE.EquirectangularReflectionMapping;
+
+      //console.log("loaded");  
+
+      scene.background = hdrEquirect;
+
+      scene.environment = hdrEquirect;
+
+      resources++;
+
+   });
+
+      
+
+  
+
+  let tendrils = [];
+
+  for(let i=0;i<numberOfTendrils;i++){
+
+  // Create a sine-like wave 
+
+      const curve = new THREE.SplineCurve( [     
+
+           new THREE.Vector2( 0, 0 ),     
+
+           new THREE.Vector2( -A/2 + A*random(), 0.2 ),     
+
+           new THREE.Vector2( -A/2 + A*random(), 0.4 ),
+
+           new THREE.Vector2( -A/2 + A*random(), 0.6 ),     
+
+           new THREE.Vector2( -A/2 + A*random(), 0.8 ),     
+
+           new THREE.Vector2( 0, 1 ) 
+
+      ] ); 
+
+      const points = curve.getPoints( 50 ); 
+
+      const geometry = new THREE.BufferGeometry().setFromPoints( points ); 
+
+      const material = new THREE.LineBasicMaterial( { color: 0xEEEEEE } ); // Create the final object to add to the scene 
+
+      const splineObject = new THREE.Line( geometry, material );
+
+      const disc = new THREE.Mesh(
+
+          new THREE.CircleGeometry((1+random())/40, 20),
+
+          new THREE.MeshBasicMaterial({color:0xFF9988, side:THREE.DoubleSide,}),
+
+      );
+
+      disc.rotation.x = PI/2;
+
+      disc.position.y = 1;
+
+      let tendril = new THREE.Group();
+
+      tendril.add(splineObject, disc);
+
+      tendril.rotation.x = 6*random();
+
+      tendril.rotation.y = 6*random();
+
+      tendril.rotation.z = 6*random();
+
+      scene.add(tendril);
+
+      tendrils.push(tendril);
+
+  }
+
+  
+
+  let ballgeo = new THREE.IcosahedronGeometry(1.5, 15);
+
+  //let ballmat = new THREE.MeshPhongMaterial({side: THREE.BackSide, shininess:100, opacity:0.6, transparent:true,});
+
+  let ballmat = new THREE.MeshPhysicalMaterial({
+
+      metalness:0,
+
+      roughness:0,
+
+      transmission:1,
+
+      thickness:1,
+
+      //transparent:true,
+
+      //opacity:1,
+
+      //envMap:hdrEquirect,
+
+      color:0xBBBBFF,
+
+      //reflectivity:0.5,
+
+      //color:0x0000FF,
+
+  });
+
+  let ball = new THREE.Mesh(ballgeo, ballmat);
+
+  scene.add(ball)//, new THREE.PointLight(0xFFFFFF));
+
+  
+
+  
+
+  scene.add(new THREE.Mesh(
+
+      new THREE.SphereGeometry(0.13, 20, 10),
+
+      new THREE.MeshBasicMaterial({color:0xFF9988,}),
+
+  ));
+
+  
+
+  scene.add(new THREE.Mesh(
+
+      new THREE.SphereGeometry(0.16, 20, 10),
+
+      new THREE.MeshBasicMaterial({color:0xFFFFFF, side:THREE.BackSide,}),
+
+  ));
+
+  
+
+  let standGeo = new THREE.CylinderGeometry(1,1.5,1,6);
+
+  let standMat= new THREE.MeshStandardMaterial({
+
+      roughness:0.3, color:0x222233, //metalness:0.5,
+
+  });
+
+  let stand = new THREE.Mesh(standGeo, standMat);
+
+  stand.position.y = -0.5-1.118;
+
+  scene.add(stand);
+
+  
+
+  let rodGeo = new THREE.CylinderGeometry(0.08,0.08,1,32);
+
+  let rodMat= new THREE.MeshStandardMaterial({
+
+      roughness:0, color:0x111122,
+
+  });
+
+  let rod = new THREE.Mesh(rodGeo, rodMat);
+
+  rod.position.y = -(1 + 0.16)/2;
+
+  scene.add(rod);
+
+  
+
+  let tableGeo = new THREE.CircleGeometry(5,32);
+
+  let tableMat = clearCoat?
+
+    new THREE.MeshPhysicalMaterial({
+
+        roughness:1, 
+
+        metalness:0,
+
+        color:0x444455,
+
+        map:wood,
+
+        clearcoat:1,
+
+        clearcoatRoughness:0.05,
+
+    }):
+
+    new THREE.MeshStandardMaterial({
+
+        roughness:1, 
+
+        metalness:0,
+
+        color:0x444455,
+
+        map:wood,
+
+    });
+
+  let table = new THREE.Mesh(tableGeo, tableMat);
+
+  table.rotation.x = -PI/2;
+
+  table.position.y = -2.118;
+
+  scene.add(table);
+
+  
+
+  if(blackBall){
+
+      scene.add(new THREE.Mesh(
+
+          new THREE.SphereGeometry(1.25, 64, 32),
+
+          new THREE.MeshBasicMaterial({color:0x111111, side:THREE.BackSide}),
+
+      ));
+
+  }
+
+
+
+  // GLTF Loader to Load and manipulate 3D Models
+
+  /*var loader = new THREE.GLTFLoader();
+
+
+
+  loader.crossOrigin = true;
+
+
+
+  loader.load('', function(data) {
+
+    var object = data.scene;
+
+    object.position.set(0, 0, 0);
+
+    object.scale.set(
+
+        1,1,1
+
+    );
+
+    scene.add(object);
+
+  });*/
+
+
+
+  /* ////////////////////////////// */
+
+
+
+  // Render animation on every rendering phase
+
+  function render() {
+
+    requestAnimationFrame(render);
+
+    renderer.render(scene, camera); // Render Scene and Camera
+
+    controls.update(); // For Orbit Controller
+
+    if(resources==2){
+
+        resources = null;
+
+        let l = document.getElementById("loading");
+
+        l.parentNode.removeChild(l);
+
+    }
+
+    for(let t=0;t<tendrils.length;t++){
+
+        tendrils[t].rotation.y += (random())/10;
+
+        tendrils[t].rotation.x += (random())/10;
+
+        tendrils[t].rotation.z += (random())/10;
+
+    }
+
+  }
+
+
+
+  render();
+
+  
+
+  /*///////////////////////////////*/
+
+
+
+  // Update Camera Aspect Ratio and Renderer ScreenSize on Window resize
+
+  window.addEventListener('resize', function() {
+
+    camera.aspect = window.innerWidth / window.innerHeight;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+  }, false);
+
+  
+
+}
+
+/*////////////////////////////////*/</script>
+
+<!--Credits:
+
+Glass material tutorial from here:
+
+https://tympanus.net/codrops/2021/10/27/creating-the-effect-of-transparent-glass-and-plastic-in-three-js/
+
+HDRI (Comfy Cafe) from Poly Haven:
+
+https://polyhaven.com/hdris
+
+Wooden Background by Nor'wester, using Paint 3D.-->
+
+<!DOCTYPE html>
+
+<html>
+
+    <head><meta charset="utf-8">
+
+        <title>Plasma Ball</title>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+
+         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/loaders/RGBELoader.js"></script>
+
+    </head>
+
+    <body>
+
+        <div id="loading">
+
+           <div id="spin"></div><br>
+
+           Loading Resources
+
+        </div>
+
+    </body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
