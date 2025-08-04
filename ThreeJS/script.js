@@ -34,7 +34,7 @@ window.onload = () => {
                         document.querySelector(".loading-screen").style.display = "none";
                     }
                     else {
-                        document.querySelector(".loading-screen").textContent = `LOADING ${Math.floor((1 - count / data.length)*100)}%`;
+                        document.querySelector(".loading-screen").textContent = `LOADING ${Math.floor((1 - count / data.length) * 100)}%`;
                     }
                 }
                 images.push(img);
@@ -61,6 +61,12 @@ window.onload = () => {
     let Container = document.getElementById('Container');
     let cards = document.getElementsByClassName('card');
 
+    const isReduced = window.matchMedia(`(prefers-reduced-motion: reduce)`) === true || window.matchMedia(`(prefers-reduced-motion: reduce)`).matches === true;
+
+    let animDur = 1200;
+    if(isReduced){
+        animDur = 0;
+    }
     let mousedown = false, prevX = 0, container_progress = 0;
     function grab(e) {
         mousedown = true;
@@ -75,11 +81,11 @@ window.onload = () => {
         prevX = X;
         Container.animate({
             transform: `translate(${container_progress * 100}%, -50%)`,
-        }, { duration: 1200, fill: 'forwards', })
+        }, { duration: animDur, fill: 'forwards', })
         for (let card of cards) {
             card.animate({
                 backgroundPosition: `${100 + container_progress * 100}%, 50%`,
-            }, { duration: 1200, fill: 'forwards', })
+            }, { duration: animDur, fill: 'forwards', })
         }
 
     }

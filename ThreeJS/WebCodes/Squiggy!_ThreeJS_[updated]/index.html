@@ -1,15 +1,15 @@
 <style>
-*{
+  * {
 
-    user-select:none;
+    user-select: none;
 
-    -webkit-user-select:none;
+    -webkit-user-select: none;
 
     font-family: Helvetica, Arial, sans-serif;
 
-}
+  }
 
-body{
+  body {
 
     width: 100vw;
 
@@ -19,388 +19,384 @@ body{
 
     overflow: hidden;
 
-}
+  }
 
-canvas{
+  canvas {
 
-    cursor:grab;
+    cursor: grab;
 
-}
+  }
 
-canvas:active{
+  canvas:active {
 
-    cursor:grabbing;
+    cursor: grabbing;
 
-}
+  }
 
-#load{
+  #load {
 
-    position:fixed;
+    position: fixed;
 
-    cursor:wait;
+    cursor: wait;
 
-    top:0;
+    top: 0;
 
-    left:0;
+    left: 0;
 
     width: 100vw;
 
     height: 100vh;
 
-    background-color:#CCCCCC;
+    background-color: #CCCCCC;
 
-    color:#111111;
+    color: #111111;
 
-    display:flex;
+    display: flex;
 
-    text-align:center;
+    text-align: center;
 
-    align-items:center;
+    align-items: center;
 
-    justify-content:center;
+    justify-content: center;
 
-    padding:10px;
+    padding: 10px;
 
-    box-sizing:border-box;
+    box-sizing: border-box;
 
-}
+  }
 
-#wait{
+  #wait {
 
-    position:fixed;
+    position: fixed;
 
-    color:black;
+    color: black;
 
-    font-size:10vmin;
+    font-size: 10vmin;
 
-    top:10px;
+    top: 10px;
 
-    right:10px;
+    right: 10px;
 
-    text-shadow:0 0 0 white,
+    text-shadow: 0 0 0 white,
 
-                0 0 1px black,
+      0 0 1px black,
 
-                0 0 2px black;
+      0 0 2px black;
 
-    display:none;
+    display: none;
 
-}
+  }
 
-#menu{
+  #menu {
 
-    position:fixed;
+    position: fixed;
 
-    color:white;
+    color: white;
 
-    font-size:3vmin;
+    font-size: 3vmin;
 
-    top:10px;
+    top: 10px;
 
-    left:10px;
+    left: 10px;
 
-    font-weight:lighter;
+    font-weight: lighter;
 
-    display:inline-block;
+    display: inline-block;
 
-    padding:5px;
+    padding: 5px;
 
-    border:1px solid white;
+    border: 1px solid white;
 
-    background-color:rgba(0,0,0,0.4);
+    background-color: rgba(0, 0, 0, 0.4);
 
-}     
+  }
 
-label,input{
+  label,
+  input {
 
-    cursor:pointer;
+    cursor: pointer;
 
-}   
-
-
-
-
-
+  }
 </style>
 
 <script>
-"use strict";
+  "use strict";
 
-// alert("It lags on my phone a bit when I zoom in. Thought I'd let you know.");
+  // alert("It lags on my phone a bit when I zoom in. Thought I'd let you know.");
 
-var showGrid = false;
-
-
-
-var sound = new Audio("https://www.fesliyanstudios.com/play-mp3/4521");
-
-sound.volume = 0;
-
-const {sin, cos, PI, sqrt, random, floor, ceil, round, abs} = Math;
-
-var colors = [0xFF0000,0x00FF00,0x0000FF,0xFFFF00,0x00FFFF,0xFF00FF];
-
-var dt = 0, spd = 0.5, R = 0.25, rmax = 20*R/sqrt(3), L = 2*rmax, T = sqrt(2*4/0.01), s = false;
+  var showGrid = false;
 
 
 
-window.onload = function(){
+  var sound = new Audio("https://www.fesliyanstudios.com/play-mp3/4521");
+
+  sound.volume = 0;
+
+  const { sin, cos, PI, sqrt, random, floor, ceil, round, abs } = Math;
+
+  var colors = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0x00FFFF, 0xFF00FF];
+
+  var dt = 0, spd = 0.5, R = 0.25, rmax = 20 * R / sqrt(3), L = 2 * rmax, T = sqrt(2 * 4 / 0.01), s = false;
 
 
 
-  var load = document.getElementById("load");
+  window.onload = function () {
 
-  var wait = document.getElementById("wait");
 
-  var soundbox = document.getElementById("soundbox");
 
-  var shadowbox = document.getElementById("shadowbox");
+    var load = document.getElementById("load");
 
-  var glowbox = document.getElementById("glowbox");
+    var wait = document.getElementById("wait");
 
-  var speedrange = document.getElementById("speedrange");
+    var soundbox = document.getElementById("soundbox");
 
-  const touch = "ontouchstart" in document;
+    var shadowbox = document.getElementById("shadowbox");
 
+    var glowbox = document.getElementById("glowbox");
+
+    var speedrange = document.getElementById("speedrange");
+
+    const touch = "ontouchstart" in document;
+
+
+
+    // SCENE
+
+    var scene = new THREE.Scene();
+
+    scene.background = new THREE.Color(0xCCCCCC);
+
+
+
+    /* /////////////////////////// */
+
+
+
+    // CAMERA
+
+    var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .01, 800);
+
+    camera.position.set(-10 * R, 16 * R, 16 * R);
+
+
+
+    /* ///////////////////////////// */
+
+
+
+    // RENDERER
+
+    var renderer = new THREE.WebGLRenderer({ antialias: true });
+
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    renderer.shadowMap.enabled = true;
+
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+
+
+    // Append canvas to the body
+
+    document.body.appendChild(renderer.domElement);
+
+
+
+    /* ////////////////////////////////////////// */
+
+
+
+    // Camera Rotation Control
+
+    var controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+    controls.maxPolarAngle = PI / 2.6;
+
+    controls.minDistance = 1;
+
+    controls.enablePan = false;
+
+    //controls.minDistance = sqrt(2);
+
+    //controls.maxDistance = 1500;
+
+    /*controls.autoRotate=true;
   
-
-  // SCENE
-
-  var scene = new THREE.Scene();
-
-  scene.background = new THREE.Color(0xCCCCCC);
+    controls.autoRotateSpeed=-3;*/
 
 
 
-  /* /////////////////////////// */
 
 
 
-  // CAMERA
 
-  var camera = new THREE.PerspectiveCamera(80, window.innerWidth / window.innerHeight, .01, 800);
-
-  camera.position.set(-10*R, 16*R, 16*R);
-
-
-
-  /* ///////////////////////////// */
-
-
-
-  // RENDERER
-
-  var renderer = new THREE.WebGLRenderer({ antialias: true });
-
-  renderer.setSize(window.innerWidth, window.innerHeight);
-
-  renderer.shadowMap.enabled = true;
-
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
-
-
-
-  // Append canvas to the body
-
-  document.body.appendChild(renderer.domElement);
-
-
-
-  /* ////////////////////////////////////////// */
-
-
-
-  // Camera Rotation Control
-
-  var controls = new THREE.OrbitControls(camera,renderer.domElement);
-
-  controls.maxPolarAngle = PI/2.6;
-
-  controls.minDistance = 1;
-
-  controls.enablePan = false;
-
-  //controls.minDistance = sqrt(2);
-
-  //controls.maxDistance = 1500;
-
-  /*controls.autoRotate=true;
-
-  controls.autoRotateSpeed=-3;*/
-
-
-
-  
-
-  
-
-  if(showGrid){
+    if (showGrid) {
 
       const size = 10;
 
       const divisions = 10;
 
-  
+
 
       const gridHelper = new THREE.GridHelper(size, divisions);
 
       scene.add(gridHelper);
 
-  }
+    }
 
 
 
 
 
-  let dropGeo = new THREE.SphereGeometry( R, 32, 32 );
+    let dropGeo = new THREE.SphereGeometry(R, 32, 32);
 
-  let dropMaterial=new THREE.MeshPhongMaterial({color:0x9A9A9A,transparent:true,opacity:0.6,shininess:100});
+    let dropMaterial = new THREE.MeshPhongMaterial({ color: 0x9A9A9A, transparent: true, opacity: 0.6, shininess: 100 });
 
-   let drop = new THREE.Mesh(dropGeo, dropMaterial);
+    let drop = new THREE.Mesh(dropGeo, dropMaterial);
 
-   drop.position.set(0,-2,0);
+    drop.position.set(0, -2, 0);
 
-   drop.name = "drop";
+    drop.name = "drop";
 
-   drop.castShadow = true;
+    drop.castShadow = true;
 
-   drop.receiveShadow = false;
+    drop.receiveShadow = false;
 
-   scene.add(drop);
+    scene.add(drop);
 
-   
 
-   let baseGeo = new THREE.BoxGeometry(L,3,L);
 
-   let baseMaterial = new THREE.MeshPhongMaterial({color:0xEFEFEF});
+    let baseGeo = new THREE.BoxGeometry(L, 3, L);
 
-   let base = new THREE.Mesh(baseGeo, baseMaterial);
+    let baseMaterial = new THREE.MeshPhongMaterial({ color: 0xEFEFEF });
 
-   base.position.set(0,-1.5,0);
+    let base = new THREE.Mesh(baseGeo, baseMaterial);
 
-   base.castShadow = false;
+    base.position.set(0, -1.5, 0);
 
-   base.receiveShadow = true;
+    base.castShadow = false;
 
-   scene.add(base);
+    base.receiveShadow = true;
 
-   
+    scene.add(base);
 
-   let puddleGeo = new THREE.CylinderGeometry(20*R*sqrt(1-2/3),20*R*sqrt(1-2/3),1/100,64);
 
-   let puddleMaterial=new THREE.MeshPhongMaterial({color:0x9A9A9A,transparent:true,opacity:0.4,shininess:100});
 
-   let puddle = new THREE.Mesh(puddleGeo,puddleMaterial);
+    let puddleGeo = new THREE.CylinderGeometry(20 * R * sqrt(1 - 2 / 3), 20 * R * sqrt(1 - 2 / 3), 1 / 100, 64);
 
-   puddle.position.set(0,1/200,0);
+    let puddleMaterial = new THREE.MeshPhongMaterial({ color: 0x9A9A9A, transparent: true, opacity: 0.4, shininess: 100 });
 
-   puddle.name = "puddle";
+    let puddle = new THREE.Mesh(puddleGeo, puddleMaterial);
 
-   scene.add(puddle);
+    puddle.position.set(0, 1 / 200, 0);
 
-   
+    puddle.name = "puddle";
 
-   
+    scene.add(puddle);
 
-   
 
-   let glow = new THREE.AmbientLight(0xFFFFFF, 0.6);
 
-   scene.add(glow);
 
-   /*let pointLight = new THREE.PointLight(0xEFEFEF,0.6,0,2);
 
-   pointLight.position.set(-1,1,1);
 
-   scene.add(pointLight); 
 
-   let pointLight2 = new THREE.PointLight(0x8888FF,0.2,0,1);
+    let glow = new THREE.AmbientLight(0xFFFFFF, 0.6);
 
-   pointLight2.position.set(3,-1,3);
+    scene.add(glow);
 
-   scene.add(pointLight2);*/
+    /*let pointLight = new THREE.PointLight(0xEFEFEF,0.6,0,2);
+ 
+    pointLight.position.set(-1,1,1);
+ 
+    scene.add(pointLight); 
+ 
+    let pointLight2 = new THREE.PointLight(0x8888FF,0.2,0,1);
+ 
+    pointLight2.position.set(3,-1,3);
+ 
+    scene.add(pointLight2);*/
 
-   
 
-   for(let c of colors){
 
-     let pointLight = new THREE.PointLight(c,0.4,0);
+    for (let c of colors) {
 
-     pointLight.position.set(
+      let pointLight = new THREE.PointLight(c, 0.4, 0);
 
-       -2+Math.random()*4,
+      pointLight.position.set(
 
-       Math.random()*2,
+        -2 + Math.random() * 4,
 
-       -2+Math.random()*4
+        Math.random() * 2,
 
-     );
+        -2 + Math.random() * 4
 
-     pointLight.castShadow = true;
+      );
 
-     pointLight.shadow.mapSize.width = 512;
+      pointLight.castShadow = true;
 
-     pointLight.shadow.mapSize.height = 512; 
+      pointLight.shadow.mapSize.width = 512;
 
-     pointLight.shadow.camera.near = 0.5; 
+      pointLight.shadow.mapSize.height = 512;
 
-     pointLight.shadow.camera.far = 500; 
+      pointLight.shadow.camera.near = 0.5;
 
-     scene.add(pointLight);
+      pointLight.shadow.camera.far = 500;
 
-   }
+      scene.add(pointLight);
 
-   
+    }
 
+
+
+
+
+
+
+    // GLTF Loader to Load and manipulate 3D Models
+
+    /*var loader = new THREE.GLTFLoader();
   
+  
+  
+    loader.crossOrigin = true;
+  
+  
+  
+    loader.load('', function(data) {
+  
+      var object = data.scene;
+  
+      object.position.set(0, 0, 0);
+  
+      object.scale.set(
+  
+          1,1,1
+  
+      );
+  
+      scene.add(object);
+  
+    });*/
 
 
 
-  // GLTF Loader to Load and manipulate 3D Models
-
-  /*var loader = new THREE.GLTFLoader();
+    /* ////////////////////////////// */
 
 
 
-  loader.crossOrigin = true;
+    // Render animation on every rendering phase
 
+    function render() {
 
+      //drop.position.set(Math.random()/100,Math.random()/100,Math.random()/100)
 
-  loader.load('', function(data) {
+      //drop.rotation.x += 0.02;
 
-    var object = data.scene;
+      drop.position.y = 2 - 0.5 * 0.01 * T * T;
 
-    object.position.set(0, 0, 0);
+      T += dt;
 
-    object.scale.set(
-
-        1,1,1
-
-    );
-
-    scene.add(object);
-
-  });*/
-
-
-
-  /* ////////////////////////////// */
-
-
-
-  // Render animation on every rendering phase
-
-  function render() {
-
-    //drop.position.set(Math.random()/100,Math.random()/100,Math.random()/100)
-
-    //drop.rotation.x += 0.02;
-
-    drop.position.y = 2 - 0.5*0.01*T*T;
-
-    T+=dt;
-
-    if(T<0){
+      if (T < 0) {
 
         T = 0;
 
@@ -408,19 +404,19 @@ window.onload = function(){
 
         speedrange.disabled = false;
 
-    }
+      }
 
-    else if(T>sqrt(2*4/0.01)){
+      else if (T > sqrt(2 * 4 / 0.01)) {
 
-        T = sqrt(2*4/0.01);
+        T = sqrt(2 * 4 / 0.01);
 
         wait.style.display = "none";
 
         speedrange.disabled = false;
 
-    }
+      }
 
-    else if(soundbox.checked && sqrt(2*2/0.01)-spd<=T && T<sqrt(2*2/0.01)){
+      else if (soundbox.checked && sqrt(2 * 2 / 0.01) - spd <= T && T < sqrt(2 * 2 / 0.01)) {
 
         sound.currentTime = 0;
 
@@ -428,39 +424,39 @@ window.onload = function(){
 
         sound.play();
 
-    }
+      }
 
-    let h = R - drop.position.y;
+      let h = R - drop.position.y;
 
-    if(h<0) h = 0;
+      if (h < 0) h = 0;
 
-    else if(h>2*R) h = 2*R;
+      else if (h > 2 * R) h = 2 * R;
 
-    let r = 10*h*sqrt(1-h/(3*R));
+      let r = 10 * h * sqrt(1 - h / (3 * R));
 
-    //if(r>2*R) r = 2*R;
+      //if(r>2*R) r = 2*R;
 
-    puddle.scale.set(
+      puddle.scale.set(
 
-        r/rmax,
+        r / rmax,
 
         1,
 
-        r/rmax
+        r / rmax
 
-    )
+      )
 
-    requestAnimationFrame(render);
+      requestAnimationFrame(render);
 
-    renderer.render(scene, camera); // Render Scene and Camera
+      renderer.render(scene, camera); // Render Scene and Camera
 
-    controls.update(); // For Orbit Controller
+      controls.update(); // For Orbit Controller
 
-  }
+    }
 
-  load.innerHTML = "Click the Puddle/Bubble to see what happens, unless the ⌛ icon is showing at the top-right corner.<br>Sound effect from Fesliyan Studios.<br>Click to continue...";
+    load.innerHTML = "Click the Puddle/Bubble to see what happens, unless the ⌛ icon is showing at the top-right corner.<br>Sound effect from Fesliyan Studios.<br>Click to continue...";
 
-  load.addEventListener("click", function(){
+    load.addEventListener("click", function () {
 
       sound.play();
 
@@ -472,154 +468,158 @@ window.onload = function(){
 
       //sound.pause();
 
-  });
+    });
 
-  load.style.cursor = "pointer";
-
-
-
-  /*///////////////////////////////*/
+    load.style.cursor = "pointer";
 
 
 
-  // Update Camera Aspect Ratio and Renderer ScreenSize on Window resize
+    /*///////////////////////////////*/
 
-  window.addEventListener('resize', function() {
 
-    camera.aspect = window.innerWidth / window.innerHeight;
 
-    camera.updateProjectionMatrix();
+    // Update Camera Aspect Ratio and Renderer ScreenSize on Window resize
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    window.addEventListener('resize', function () {
 
-  }, false);
+      camera.aspect = window.innerWidth / window.innerHeight;
 
-  
+      camera.updateProjectionMatrix();
 
-  //window.addEventListener('click', e => raycast(e)); 
+      renderer.setSize(window.innerWidth, window.innerHeight);
 
-  //window.addEventListener('touchend', e => raycast(e, true)); 
+    }, false);
 
-  let raycaster = new THREE.Raycaster();
 
-  function raycast(e, touch = false) { 
 
-    let mouse = {}; 
+    //window.addEventListener('click', e => raycast(e)); 
 
-    if (touch) { 
+    //window.addEventListener('touchend', e => raycast(e, true)); 
 
-      mouse.x = 2 * (e.changedTouches[0].clientX / window.innerWidth) - 1; 
+    let raycaster = new THREE.Raycaster();
 
-      mouse.y = 1 - 2 * (e.changedTouches[0].clientY / window.innerHeight); 
+    function raycast(e, touch = false) {
 
-    } 
+      let mouse = {};
 
-    else { 
+      if (touch) {
 
-      mouse.x = 2 * (e.clientX / window.innerWidth) - 1; 
+        mouse.x = 2 * (e.changedTouches[0].clientX / window.innerWidth) - 1;
 
-      mouse.y = 1 - 2 * (e.clientY / window.innerHeight); 
+        mouse.y = 1 - 2 * (e.changedTouches[0].clientY / window.innerHeight);
 
-    } // update the picking ray with the camera and mouse position 
+      }
 
-    raycaster.setFromCamera(mouse, camera); // calculate objects intersecting the picking ray 
+      else {
 
-    let intersects = raycaster.intersectObjects(scene.children); 
+        mouse.x = 2 * (e.clientX / window.innerWidth) - 1;
 
-    if (intersects[0]) { 
+        mouse.y = 1 - 2 * (e.clientY / window.innerHeight);
 
-      let object = intersects[0].object; 
+      } // update the picking ray with the camera and mouse position 
 
-      if(object.name=="drop" || object.name=="puddle"){
+      raycaster.setFromCamera(mouse, camera); // calculate objects intersecting the picking ray 
+
+      let intersects = raycaster.intersectObjects(scene.children);
+
+      if (intersects[0]) {
+
+        let object = intersects[0].object;
+
+        if (object.name == "drop" || object.name == "puddle") {
 
           return true;
 
-      }
+        }
 
-      else{
+        else {
 
           return false;
 
+        }
+
       }
 
-    } 
+    }
 
-  }
 
-  
 
-  shadowbox.addEventListener("input", function(){
+    shadowbox.addEventListener("input", function () {
 
       drop.castShadow = this.checked;
 
       base.receiveShadow = this.checked;
 
-  });
+    });
 
-  glowbox.addEventListener("input", function(){
+    glowbox.addEventListener("input", function () {
 
-      this.checked?scene.add(glow):scene.remove(glow);
+      this.checked ? scene.add(glow) : scene.remove(glow);
 
-  });
+    });
 
-  speedrange.addEventListener("input", function(){
+    speedrange.addEventListener("input", function () {
 
       spd = parseFloat(this.value);
 
-  });
+    });
 
-  document.querySelector("canvas").addEventListener(touch?"touchend":"click", function(e){
+    document.querySelector("canvas").addEventListener(touch ? "touchend" : "click", function (e) {
 
-    if(raycast(e,touch) && (T===0 || T>sqrt(6/0.01))){
+      if (raycast(e, touch) && (T === 0 || T > sqrt(6 / 0.01))) {
 
-      if(navigator.vibrate) navigator.vibrate(70);
+        if (navigator.vibrate) navigator.vibrate(70);
 
-      dt = dt<0?spd:-spd;
+        dt = dt < 0 ? spd : -spd;
 
-      wait.style.display = "inline";
+        wait.style.display = "inline";
 
-      speedrange.disabled = true;
+        speedrange.disabled = true;
 
-    }
+      }
 
-  });
+    });
 
-}
+  }
 
-/*////////////////////////////////*/</script>
+  /*////////////////////////////////*/</script>
 
 <!DOCTYPE html>
 
 <html>
 
-    <head><meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Squiggy!</title>
+  <title>Squiggy!</title>
 
-         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/build/three.min.js"></script>
 
-         <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.145.0/examples/js/controls/OrbitControls.js"></script>
 
-    </head>
+</head>
 
-    <body>
+<body>
 
-        <span id="wait">⏳</span>
+  <span id="wait">⏳</span>
 
-        <span id="menu">
+  <span id="menu">
 
-            <label for="soundbox">Sound:</label><input id="soundbox" type="checkbox" checked><br>
+    <label for="soundbox">Sound:</label><input id="soundbox" type="checkbox" checked><br>
 
-            <label for="shadowbox">Shadow:</label><input id="shadowbox" type="checkbox" checked><br>
+    <label for="shadowbox">Shadow:</label><input id="shadowbox" type="checkbox" checked><br>
 
-            <label for="glowbox">Ambience:</label><input id="glowbox" type="checkbox" checked><br>
+    <label for="glowbox">Ambience:</label><input id="glowbox" type="checkbox" checked><br>
 
-            <label for="shadowbox">Speed:</label><br><input id="speedrange" type="range" value="0.5" min="0.1" max="1" step="0.1">
+    <label for="shadowbox">Speed:</label><br><input id="speedrange" type="range" value="0.5" min="0.1" max="1"
+      step="0.1">
 
-        </span>
+  </span>
 
-        <div id="load">Loading...</div>
+  <div id="load">Loading...</div>
 
-    </body>
+</body>
 
 </html>
