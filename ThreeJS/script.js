@@ -101,9 +101,8 @@ window.onload = () => {
     window.addEventListener('touchmove', drag);
     window.addEventListener('touchend', release);
 
-    let darkMode = false;
-    document.getElementById("theme").addEventListener('click', () => {
-        darkMode = !darkMode;
+    let darkMode = localStorage.getItem("theme") == "true";
+    const setTheme=()=>{
         const r = document.querySelector(':root');
         if (darkMode) {
             document.getElementById("sun").style.scale = 0;
@@ -117,6 +116,12 @@ window.onload = () => {
             r.style.setProperty('--bg', '#f3f3f3ff')
             r.style.setProperty('--text', '#323232ff')
         }
+    }
+    setTheme()
+    document.getElementById("theme").addEventListener('click', () => {
+        darkMode = !darkMode;
+        localStorage.setItem("theme", darkMode);
+        setTheme();
     })
 
 }
