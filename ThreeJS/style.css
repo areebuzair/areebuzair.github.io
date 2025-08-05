@@ -148,10 +148,6 @@ h1 {
     text-decoration: underline;
 }
 
-.card a:after {
-    content: "Visit";
-}
-
 nav {
     display: flex;
     justify-content: space-between;

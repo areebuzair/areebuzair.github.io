@@ -21,6 +21,7 @@ window.onload = () => {
                 a.href = `./WebCodes/${name.folder_name}`;
                 a.target = "_blank";
                 a.draggable = false;
+                a.textContent = "Visit";
                 let card = document.createElement('div')
                 card.className = 'card'
                 card.style.backgroundColor = `hsl(${360 * i / data.length}deg, 100%, 70%)`;
