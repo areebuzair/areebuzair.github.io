@@ -48,6 +48,7 @@ main:after {
     height: 100%;
     top: 0;
     z-index: 2;
+    transition: background-image .2s;
 }
 
 main::before {
