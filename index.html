@@ -19,27 +19,53 @@
     <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair">
     <meta name="description" content="Home for J. M Areeb Uzair's various projects">
     <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
+    <link rel="stylesheet" href="./variables.css">
     <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
-    <div class="background">
-        Website designed and developed by J. M Areeb Uzair &copy; 2023
-    </div>
-    <div class="container">
-        <h1>J. M Areeb Uzair</h1>
-        <h3 class="animated-text">Front-End Developer</h3>
-        <a href="./BlenderArtPortfolio/">Visit my Blender Art Portfolio</a>
-        <a href="./GameHUB/">Play my Games</a>
-        <a href="./ThreeJS/">My Three JS Projects</a>
-    </div>
+    <main>
+        <header>
+            <h1>J. M Areeb Uzair</h1>
+            <h3 class="animated-text">Front-End Developer</h3>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="./BlenderArtPortfolio/">Visit my Blender Art Portfolio</a></li>
+                <li><a href="./GameHUB/">Play my Games</a></li>
+                <li><a href="./ThreeJS/">My Three JS Projects</a></li>
+            </ul>
+        </nav>
+        <section id="introduction">
+            <div class="scroll-container" data-pages="3">
+                <div class="scroll-content">
+                    <img src="Assets/DoubleA logo glass square.webp" alt="Glass Logo" id="glass_logo">
+                </div>
+            </div>
+        </section>
+        <section id="experience">
+            Experience
+        </section>
+        <section id="projects">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
+            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
+            necessitatibus eaque?
+        </section>
+        <section id="skills">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
+            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
+            necessitatibus eaque?
+        </section>
+        <section id="contact">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
+            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
+            necessitatibus eaque?
+        </section>
+    </main>
 </body>
 
 <script>
-    onload = () => {
-        let bg = document.querySelector(".background");
-        bg.style.opacity = ".4";
-    }
+
     let texts = ["Front-End Developer", "Programmer", "Artist"];
     let anim = document.querySelector(".animated-text");
 

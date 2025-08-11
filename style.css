@@ -2,77 +2,84 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+html,
 body {
+    width: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: var(--bg-main);
+    font-family: 'Raleway', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
-    padding: 10px;
-    width: 100vw;
-    height: 100vh;
-    box-sizing: border-box;
-    background-color: rgb(17, 17, 17);
-    font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
 }
 
-/* h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} */
-
-.background {
-    user-select: none;
-    -webkit-user-select: none;
-    background-image: url("/Assets/DoubleA logo glass square.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    width: 100vw;
+header {
+    width: 100%;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    opacity: 0;
-    transition: opacity 2s;
-    color: white;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    font-size: 80%;
-    padding-bottom: 5px;
-    box-sizing: border-box;
-    text-shadow: 1px 1px 0px black,
-
-        -1px 1px 0px black,
-
-        1px -1px 0px black,
-
-        -1px -1px 0px black;
-}
-
-.container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: left;
+    justify-content: flex-end;
+    padding: 20px;
+    box-sizing: border-box;
+    align-items: flex-start;
+    color: var(--text-main);
+    background-image: radial-gradient(circle at top, transparent 20%, var(--bg-main) 70%), linear-gradient(135deg, var(--bg-main) 10%, var(--bg-secondary) 10% 40%, var(--bg-main) 40% 60%, var(--bg-secondary) 60% 90%, var(--bg-main) 90%);
+    background-size: contain, 10px 10px;
+    background-repeat: no-repeat, repeat;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-main);
+    z-index: var(--nav-z);
+}
+
+nav ul {
+    list-style-type: none;
+    max-width: var(--max-w);
+    margin: 0 auto;
     text-align: center;
+    display: flex;
+    gap: 2vmin;
+    justify-content: flex-end;
+}
+
+section{
+    max-width: var(--max-w);
+    margin: 0 auto;
+    color: var(--text-main)
+}
+
+main {
     width: 100%;
-    height: 100%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+section {
+    min-height: 100vh;
+    text-align: justify;
 }
 
 a {
     display: inline-block;
-    color: white;
+    color: var(--text-link);
     text-decoration: none;
     padding: 5px;
     margin: 5px;
     position: relative;
 }
 
+a:hover {
+    color: var(--text-link-hovered);
+}
+
 a:after {
     position: absolute;
     width: 100%;
     height: 1px;
-    background-color: white;
+    background-color: var(--text-link-hovered);
     content: "";
     bottom: 0;
     left: 0;
@@ -82,23 +89,43 @@ a:after {
 
 a:hover:after {
     transform: scaleX(1);
-    box-shadow: 0 0 2px white,
-        0 0 3px lightblue,
-        0 0 4px blue,
-        0 0 5px darkblue;
 }
 
 .animated-text {
     margin: 2px;
     display: block;
-    color: rgb(196, 196, 196);
     font-family: "JetBrains Mono", monospace;
     font-optical-sizing: auto;
     font-weight: 100;
     font-style: italic;
+    color: var(--text-secondary);
 }
 
 .animated-text:after {
     content: "|";
-    color: rgb(142, 142, 142);
+}
+
+.scroll-container{
+    --pages: 2;
+    height: calc(var(--pages) * 100vh);
+}
+.scroll-container[data-pages=3]{
+    --pages: 3;
+}
+.scroll-content{
+    background-image: linear-gradient(blue, white, blue);
+    width: 100%;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+}
+
+#introduction{
+    max-width: none;
+}
+#introduction .scroll-content img{
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }

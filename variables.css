@@ -1,0 +1,11 @@
+:root{
+    --bg-main: rgb(2, 6, 24);
+    --bg-secondary: rgb(29, 41, 61);
+    --bg-tertiary: rgb(69, 85, 108);
+    --text-main: rgb(248, 250, 252);
+    --text-secondary: rgb(196, 203, 209);
+    --text-link: rgb(0, 188, 255);
+    --text-link-hovered: rgb(170, 232, 255);
+    --max-w: 1200px;
+    --nav-z: 100;
+}

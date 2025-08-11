@@ -209,9 +209,10 @@ nav h2 a:hover{
     color: var(--text);
     font-family: monospace;
     display: flex;
-    justify-content: start;
+    justify-content: center;
+    text-align: center;
     align-items: center;
-    font-size: 20vmin;
+    font-size: 10vmin;
     z-index: 10;
 }
 
