@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SVG Building Maker</title>
+    <script src="builder.js" defer></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+
+<body>
+    <h1>SVG Building Maker</h1>
+    <div class="container">
+        <form id="form" id="form-container" class="item-container">
+
+            <label>Wall: <input type="color" name="wall-color" /></label>
+            <label>Windows: <input type="color" name="window-color" value="#ffff00" /></label>
+            <label>Balcony: <input type="color" name="balcony-color" value="#223344" /></label>
+            <input type="submit" value="Create Building!" />
+        </form>
+        <div id="svg-container" class="item-container"></div>
+        <div class="button-container">
+            <button type="button" id="png_download">Download PNG</button>
+            <button type="button" id="svg_download">Download SVG</button>
+            <button type="button" id="copy">Copy SVG</button>
+            <button type="button" id="copy-code">Copy Code</button>
+        </div>
+    </div>
+</body>
+
+</html>
