@@ -8,4 +8,5 @@
     --text-link-hovered: rgb(170, 232, 255);
     --max-w: 1200px;
     --nav-z: 100;
+    --bounce: cubic-bezier(.22, -0.7, .54, 1.7);
 }

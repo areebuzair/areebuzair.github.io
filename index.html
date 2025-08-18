@@ -25,77 +25,89 @@
 
 <body>
     <main>
-        <header>
-            <h1>J. M Areeb Uzair</h1>
+        <header style="--layers:3;">
+            <h1><span style='--i:0;'>J</span><span style='--i:1;'>.</span><span style='--i:2;'>&nbsp;</span><span
+                    style='--i:3;'>M</span><span style='--i:4;'>&nbsp;</span><span style='--i:5;'>A</span><span
+                    style='--i:6;'>r</span><span style='--i:7;'>e</span><span style='--i:8;'>e</span><span
+                    style='--i:9;'>b</span><span style='--i:10;'>&nbsp;</span><span style='--i:11;'>U</span><span
+                    style='--i:12;'>z</span><span style='--i:13;'>a</span><span style='--i:14;'>i</span><span
+                    style='--i:15;'>r</span></h1>
             <h3 class="animated-text">Front-End Developer</h3>
+            <img style="--layer:0;" draggable="false" src="./Assets/DoubleA logo glass square.webp" />
+            <img style="--layer:1;" draggable="false" src="./Assets/Old_English_typeface.svg.png" />
+            <img style="--layer:2;" draggable="false" src="./Assets/blender_logo_socket.png" />
         </header>
-        <nav>
-            <ul>
-                <li><a href="./BlenderArtPortfolio/">Visit my Blender Art Portfolio</a></li>
-                <li><a href="./GameHUB/">Play my Games</a></li>
-                <li><a href="./ThreeJS/">My Three JS Projects</a></li>
-            </ul>
-        </nav>
-        <section id="introduction">
-            <div class="scroll-container" data-pages="3">
-                <div class="scroll-content">
-                    <img src="Assets/DoubleA logo glass square.webp" alt="Glass Logo" id="glass_logo">
-                </div>
+        <div class="body-wrapper">
+            <nav>
+                <ul>
+                    <li><a href="#introduction">Introduction</a></li>
+                    <li><a href="#experience">Experience</a></li>
+                    <li><a href="#projects">Latest Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <aside>
+                <ul>
+                    <li><a>GitHub</a></li>
+                    <li><a>YouTube</a></li>
+                    <li><a>LinkedIn</a></li>
+                    <li><a>HuggingFace</a></li>
+                    <hr />
+                    <li><a href="./BlenderArtPortfolio/">Blender Art Portfolio</a></li>
+                    <li><a href="./GameHUB/">Games</a></li>
+                    <li><a href="./ThreeJS/">Three JS Projects</a></li>
+                </ul>
+            </aside>
+
+            <div class="content">
+                <section id="introduction" data-ease="easeInOutExpo" class="scroll-container">
+                    <div class="scroll-content">
+                        <div class="intro-smoke">
+                            <!-- <svg width="150" height="150">
+                                <circle cx="75" cy="75" r="70" fill="none"></circle>
+                            </svg> -->
+                            <div class="intro-smoke-1">My name is <span>J. M Areeb Uzair</span></div>
+                            <div class="intro-smoke-2">And I make websites.</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="experience">
+                    <h2>Experience</h2>
+                </section>
+
+                <section id="projects">
+                    <h2>Latest Projects</h2>
+                    <div class="iframe-area">
+                        <div class="iframe-container">
+                            <iframe src="https://www.thefootnote.net/"></iframe>
+                        </div>
+                    </div>
+                    <div class="resize-button-container">
+                        <button type="button" class="resize-button">3440x1440</button>
+                        <button type="button" class="resize-button">1920x1080</button>
+                        <button type="button" class="resize-button">800x1280</button>
+                        <button type="button" class="resize-button">412x915</button>
+                    </div>
+                </section>
+
+                <section id="skills">
+                    <h2>Skills</h2>
+                </section>
+
+                <section id="contact">
+                    <h2>Contact</h2>
+                </section>
+
             </div>
-        </section>
-        <section id="experience">
-            Experience
-        </section>
-        <section id="projects">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
-            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
-            necessitatibus eaque?
-        </section>
-        <section id="skills">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
-            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
-            necessitatibus eaque?
-        </section>
-        <section id="contact">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere eveniet, ullam molestiae quasi quisquam
-            voluptate optio iure itaque sint quia doloremque nemo vel ab voluptates nesciunt consectetur provident
-            necessitatibus eaque?
-        </section>
+        </div>
+        <footer>
+            &copy;2025
+        </footer>
     </main>
 </body>
 
-<script>
-
-    let texts = ["Front-End Developer", "Programmer", "Artist"];
-    let anim = document.querySelector(".animated-text");
-
-    function deleteChar() {
-        if (anim.textContent != "") {
-            text = anim.textContent;
-            anim.textContent = text.slice(0, -1);
-            window.requestAnimationFrame(deleteChar);
-        }
-        else {
-            texts.push(texts.shift());
-            setTimeout(() => {
-                addChar(texts[0]);
-            }, 100);
-        }
-    }
-    function addChar(text) {
-        if (text != "") {
-            ch = text[0];
-            text = text.slice(1);
-            anim.textContent += ch;
-            setTimeout(() => {
-                addChar(text);
-            }, 100);
-        }
-        else {
-            setTimeout(deleteChar, 1000);
-        }
-    }
-    deleteChar();
-</script>
+<script src="script.js"></script>
 
 </html>
