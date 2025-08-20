@@ -16,6 +16,9 @@ const easingFunctions = {
                 ? 1
                 : x < 0.5 ? Math.pow(2, 20 * x - 10) / 2
                     : (2 - Math.pow(2, -20 * x + 10)) / 2;
+    },
+    "step": function (x) {
+        return Math.round(x);
     }
 }
 
