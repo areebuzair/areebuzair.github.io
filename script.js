@@ -66,14 +66,14 @@ onload = () => {
     const scrollEffects = () => {
         let newActive = sections[0];
         for (let section of sections) {
-            const { top, height } = document.getElementById(section).getBoundingClientRect()
+            const { top, height, bottom } = document.getElementById(section).getBoundingClientRect()
             const H = window.innerHeight
             if (top < H / 3) {
                 newActive = section;
             }
             if (top > H || top < -height) continue
             const ease = easingFunctions[document.getElementById(section).dataset.ease || ""]
-            const fraction = ease(max(min(1.25 * (-top / (height - H)) - 0.125, 1), 0));
+            const fraction = ease(1 - max(min((bottom / (height)), 1), 0));
             document.getElementById(section).style.setProperty("--scroll-amount", fraction);
         }
         if (newActive == active) return;

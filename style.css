@@ -19,6 +19,7 @@ main {
     perspective: 20px;
     scrollbar-width: thin;
     scrollbar-color: var(--bg-tertiary) var(--bg-secondary);
+    /* scroll-snap-type: y proximity; */
 }
 
 main::-webkit-scrollbar {
@@ -56,9 +57,9 @@ header {
     display: flex;
     flex-direction: column;
     text-align: left;
-    justify-content: flex-end;
+    justify-content: center;
     box-sizing: border-box;
-    padding: 10px;
+    /* padding: 10px; */
     align-items: flex-start;
     color: var(--text-main);
     /* z-index: var(--nav-z); */
@@ -71,30 +72,15 @@ header {
 
 header h1 {
     margin: 0;
+    /* transition-timing-function: var(--bounce); */
 }
 
-header h1 span {
-    display: inline-block;
-    font-size: 10vw;
-}
+/* header h1:hover {
+    
+} */
 
-header h1:hover span {
-    animation: jump .3s ease-in-out calc(var(--i) * .02s + 0.1s);
-}
 
-@keyframes jump {
-    20% {
-        transform: translate(0, 5%);
-        color: var(--text-main);
-    }
-
-    70% {
-        transform: translate(0, -30%);
-        color: var(--text-link);
-    }
-}
-
-header img {
+.header-layer {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -104,6 +90,30 @@ header img {
     transform: translateZ(calc(-20px + 20px * var(--layer) / var(--layers))) scale(calc(2 - var(--layer)/var(--layers)));
     z-index: -1;
     user-select: none;
+    backdrop-filter: blur(calc((var(--layer) - var(--layers) + 1) * (var(--layer) - var(--layers) + 1) * 0.1vmin));
+}
+
+.title-texts>div {
+    text-align: right;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+}
+
+.title-texts p {
+    font-size: 1rem;
+}
+
+.title-texts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.24);
 }
 
 .animated-text {
@@ -114,7 +124,7 @@ header img {
     font-weight: 100;
     font-style: italic;
     color: var(--text-secondary);
-    font-size: 5vmin;
+    font-size: 4vmin;
 }
 
 .animated-text:after {
@@ -179,14 +189,17 @@ section {
     text-align: justify;
     background-color: var(--bg-main);
     padding: 10px;
+    scroll-snap-align: start;
 }
 
 section h2 {
     position: sticky;
     top: 0;
     background-color: var(--bg-main);
+    background-image: linear-gradient(to right, var(--bg-main), var(--bg-secondary) calc(var(--scroll-amount) * 100%), var(--bg-main) calc(var(--scroll-amount) * 100%));
     border-bottom: 1px solid var(--bg-secondary);
     z-index: var(--nav-z);
+    padding: 5px;
 }
 
 
@@ -359,7 +372,7 @@ aside li:has(a:hover) {
 }
 
 #introduction {
-    height: 150vh;
+    height: 100vh;
 }
 
 #introduction .scroll-content {
@@ -368,54 +381,14 @@ aside li:has(a:hover) {
     align-items: center;
     text-align: center;
     perspective: 1000px;
-}
-
-.intro-smoke {
-    width: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateY(calc((var(--scroll-amount)) * 180deg));
-    transition: transform .4s;
-    transition-timing-function: ease;
-}
-
-.intro-smoke-1,
-.intro-smoke-2 {
-    border-radius: 10px;
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    font-weight: bolder;
-    font-size: calc(1.5rem + 2vw);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
     flex-direction: column;
-    z-index: 5;
-    transition: .4s;
 }
 
-.intro-smoke-1 {
-    /* background-color: var(--bg-secondary); */
-    filter: blur(calc(var(--scroll-amount) * 3em));
-    opacity: calc(1 - var(--scroll-amount));
+.intro-heading {
+    font-size: clamp(1rem, 4vmin, 3rem);
 }
 
-/* .intro-smoke svg {
-    top: 50%;
-    left: 50%;
-    stroke-width: 10px;
-    stroke-dasharray: 440;
-    stroke-dashoffset: calc((1 - var(--scroll-amount)) * 440);
-    transform: translate(-50%, -50%) rotate(calc(var(--scroll-amount) * 360deg));
-    stroke-linecap: round;
-    stroke: red;
-    display: block;
-    position: absolute;
-} */
-
-.intro-smoke-1 span {
+.intro-heading span {
     font-style: italic;
     color: transparent;
     background-image: linear-gradient(to right, magenta, cyan);
@@ -423,30 +396,32 @@ aside li:has(a:hover) {
     text-wrap: nowrap;
     text-shadow: none;
     font-weight: bolder;
-    letter-spacing: calc(5px - var(--scroll-amount) * 5px);
+    letter-spacing: calc(var(--scroll-amount) * 5px);
     transition: letter-spacing 0.2s;
-    transition-delay: 0.5s;
+    transition-delay: 0.2s;
     transition-timing-function: var(--bounce);
     overflow: visible;
 }
 
-.intro-smoke-2 {
-    transform: rotateY(180deg);
-    filter: blur(calc((1 - var(--scroll-amount)) * 3rem));
-    opacity: calc(var(--scroll-amount));
-    text-shadow: 0 calc(var(--scroll-amount) * 6rem) 0 var(--text-main), 0 calc(var(--scroll-amount) * -1 * 6rem) 0 var(--text-main);
-    transition: text-shadow 0.2s;
-    transition-timing-function: var(--bounce);
-    transition-delay: .5s;
-    -webkit-text-stroke: 1px var(--text-secondary);
-    color: transparent;
+.intro-body {
+    background-image: radial-gradient(ellipse at 50% 0, var(--bg-tertiary), transparent 70%);
+    margin: 16px;
 }
+
 
 .iframe-area {
     max-height: 70vh;
+    height: 70vh;
     max-width: 90%;
     overflow: auto;
     margin: 10px auto;
+    background-color: var(--bg-main);
+    background-image: linear-gradient(135deg, var(--bg-main) 10%, var(--bg-secondary) 10% 40%, var(--bg-main) 40% 60%, var(--bg-secondary) 60% 90%, var(--bg-main) 90%);
+    background-size: 10px 10px;
+    background-repeat: repeat;
+    background-attachment: fixed;
+    display: grid;
+    place-items: center;
 }
 
 .iframe-container {
