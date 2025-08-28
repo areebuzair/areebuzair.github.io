@@ -66,13 +66,16 @@ header {
     position: relative;
     transform-style: preserve-3d;
     text-shadow: 0 5px 10px rgba(0, 0, 0, 0.812);
-    font-size: 3rem;
+    font-size: 4vmin;
     /* overflow: hidden; */
 }
 
 header h1 {
     margin: 0;
-    /* transition-timing-function: var(--bounce); */
+    font-weight: 200;
+    font-size: 6.47em;
+    text-align: left;
+    font-family: monospace;
 }
 
 /* header h1:hover {
@@ -90,7 +93,7 @@ header h1 {
     transform: translateZ(calc(-20px + 20px * var(--layer) / var(--layers))) scale(calc(2 - var(--layer)/var(--layers)));
     z-index: -1;
     user-select: none;
-    backdrop-filter: blur(calc((var(--layer) - var(--layers) + 1) * (var(--layer) - var(--layers) + 1) * 0.1vmin));
+    backdrop-filter: blur(calc((var(--layer) - var(--layers) + 1) * (var(--layer) - var(--layers) + 1) * 0.2vmin));
 }
 
 .title-texts>div {
@@ -99,18 +102,17 @@ header h1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    position: sticky;
-    top: 0;
 }
 
 .title-texts p {
-    font-size: 1rem;
+    font-size: 1em;
+    font-weight: 200;
 }
 
 .title-texts {
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-end;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.24);
@@ -124,7 +126,7 @@ header h1 {
     font-weight: 100;
     font-style: italic;
     color: var(--text-secondary);
-    font-size: 4vmin;
+    font-size: 1.618em;
 }
 
 .animated-text:after {
@@ -261,6 +263,7 @@ aside a {
     padding-left: 0;
     transition: padding .2s;
     transition-timing-function: var(--bounce);
+    color: var(--text-main);
 }
 
 nav a:after,
@@ -354,9 +357,9 @@ aside li:has(a:hover) {
         display: block;
     }
 
-    header {
+    /* header {
         font-size: 2rem;
-    }
+    } */
 }
 
 .scroll-container {
