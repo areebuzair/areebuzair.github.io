@@ -1,0 +1,22 @@
+[
+    {
+        "name": "The Footnote",
+        "url": "https://www.thefootnote.net/",
+        "description": "As part of Astareo, I was one of the UI developers for this project, especially for the home page. I took the client's design and made a responsive version."
+    },
+    {
+        "name": "Blender Art Portfolio",
+        "url": "https://areebuzair.github.io/BlenderArtPortfolio/",
+        "description": "A website where I showcase my Blender 3D projects. I designed and developed a responsive and interactive UI."
+    },
+    {
+        "name": "GameHUB",
+        "url": "https://areebuzair.github.io/GameHUB/",
+        "description": "A central hub for all my web-games. Features a procedural animated background."
+    },
+    {
+        "name": "ThreeJS Projects",
+        "url": "https://areebuzair.github.io/ThreeJS/",
+        "description": "Hosts all my ThreeJS projects."
+    }
+]

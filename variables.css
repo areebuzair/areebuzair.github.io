@@ -9,4 +9,6 @@
     --max-w: 1500px;
     --nav-z: 100;
     --bounce: cubic-bezier(.22, -0.7, .54, 1.7);
+    --mouse-x: 50%;
+    --mouse-y: 50%;
 }

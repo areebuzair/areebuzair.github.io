@@ -5,8 +5,7 @@
     <title>Areeb Uzair's Website</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,100&family=Raleway:wght@100..900&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Bruno+Ace+SC&family=Didact+Gothic&display=swap"
         rel="stylesheet">
     <meta property="og:title" content="Areeb Uzair's Website">
     <meta property="og:description" content="Home for J. M Areeb Uzair's various projects">
@@ -26,41 +25,55 @@
 
 <body>
     <main>
-        <header style="--layers:4;">
-            <img class="header-layer" style="--layer:0;" draggable="false" src="./Assets/Backgrounds/City Bg 1.svg" />
-            <img class="header-layer" style="--layer:1;" draggable="false" src="./Assets/Backgrounds/City Bg 2.svg" />
-            <img class="header-layer" style="--layer:2;" draggable="false" src="./Assets/Backgrounds/City Bg 3.svg" />
-            <img class="header-layer" style="--layer:3;" draggable="false" src="./Assets/Backgrounds/City Bg 4.svg" />
-            <div class="title-texts" style="--layer:4;">
+        <header style="--layers:3;">
+            <div class="header-layer image" draggable="false"
+                style="--layer:0; background-image: url('./Assets/Backgrounds/City Bg 1.svg');"></div>
+            <div class="header-layer image" draggable="false"
+                style="--layer:1; background-image: url('./Assets/Backgrounds/City Bg 2.svg');"></div>
+            <div class="header-layer image" draggable="false"
+                style="--layer:2; background-image: url('./Assets/Backgrounds/City Bg 3.svg');"></div>
+            <div class="title-texts">
                 <div>
-                    <div>
-                        <h1>
-                            J. M<br/>Areeb Uzair
-                        </h1>
-                        <!-- <h3 class="animated-text">Front-End Developer</h3> -->
-                    </div>
-                    <!-- <div>
-                        <p>
-                            I am a front-end developer, and I want to bring your ideas to life.
-                        </p>
-                    </div> -->
+                    <h1>J. M</h1>
+                    <p>
+                        Front-end Developer<br />
+                        Programmer<br />
+                        Artist<br />
+                    </p>
+                    <h1>Areeb Uzair</h1>
                 </div>
             </div>
+            <div draggable="false" class="image" style="background-image: url('./Assets/Backgrounds/City Bg 4.svg');"></div>
+            <div class="title-texts title-texts-outline">
+                <div>
+                    <h1>J. M</h1>
+                    <p>
+                        Front-end Developer<br />
+                        Programmer<br />
+                        Artist<br />
+                    </p>
+                    <h1>Areeb Uzair</h1>
+                </div>
+            </div>
+            <div class="transition-gradient"></div>
+
         </header>
         <div class="body-wrapper">
             <nav>
                 <ul>
                     <!-- <li><a href="#introduction">Introduction</a></li> -->
-                    <li><a href="#projects">Latest Projects</a></li>
+                    <!-- <li><a href="#projects">Latest Projects</a></li>
                     <li><a href="#skills">Skills</a></li>
                     <li><a href="#experience">Experience</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#contact">Contact</a></li> -->
                 </ul>
             </nav>
             <aside>
                 <ul>
-                    <li><a target="_blank" href="https://github.com/areebuzair"><i class="fa-brands fa-github"></i> GitHub</a></li>
-                    <li><a target="_blank" href="https://www.researchgate.net/profile/J-M-Areeb-Alam"><i class="fa-brands fa-researchgate"></i> ResearchGate</a></li>
+                    <li><a target="_blank" href="https://github.com/areebuzair"><i class="fa-brands fa-github"></i>
+                            GitHub</a></li>
+                    <li><a target="_blank" href="https://www.researchgate.net/profile/J-M-Areeb-Alam"><i
+                                class="fa-brands fa-researchgate"></i> ResearchGate</a></li>
                     <li><a target="_blank"><i class="fa-brands fa-linkedin"></i> LinkedIn</a></li>
                     <li><a target="_blank" href="https://huggingface.co/areebuzair">🤗 Hugging Face</a></li>
                     <hr />
@@ -84,11 +97,11 @@
                     <h2>Latest Projects</h2>
                     <div class="iframe-area">
                         <div class="iframe-container">
-                            <iframe name="project-iframe" src="https://www.thefootnote.net/"></iframe>
+                            <iframe name="project-iframe" id="project-iframe"></iframe>
                         </div>
                     </div>
                     <div class="url-container">
-                        <a href="https://www.thefootnote.net/" target="_blank">https://www.thefootnote.net/</a>
+                        <a target="_blank"></a>
                     </div>
                     <div class="resize-button-container">
                         <button type="button" class="resize-button">3440x1440</button>
@@ -96,36 +109,85 @@
                         <button type="button" class="resize-button">800x1280</button>
                         <button type="button" class="resize-button">412x915</button>
                     </div>
-                    <p>As part of Astareo, I was one of the UI developers for this project, especially for the home
-                        page. I took the
-                        client's design and made a responsive version.</p>
+                    <p class="project-description"></p>
 
                     <div class="projects-list">
-                        <div class="project-item">
-                            <a href="https://www.thefootnote.net/" target="project-iframe">
-                                The Footnote
-                            </a>
+
+                    </div>
+
+                    <div class="other-projects">
+                        <h3>Other Works</h3>
+                        <div>
+                            <img src="./Assets/Projects/psm500k.png" />
+                            <article>
+                                <h3>psm500k</h3>
+                                <p>A synthetic dataset of <b>500,000</b> pure Maths problems.</p>
+                            </article>
                         </div>
-                        <div class="project-item">
-                            <a href="https://areebuzair.github.io/BlenderArtPortfolio/" target="project-iframe">
-                                Blender Art Portfolio
-                            </a>
+                        <div>
+                            <img src="./Assets/Projects/Sketchfab Addon.png" />
+                            <article>
+                                <h3>Sketchfab Plugin</h3>
+                                <p>A fork of the official Sketchfab Blender Addon which auto-generates an Attribution
+                                    file for downloaded assets.</p>
+                            </article>
                         </div>
-                        <div class="project-item">
-                            <a href="https://areebuzair.github.io/GameHUB/" target="project-iframe">
-                                GameHUB
-                            </a>
-                        </div>
-                        <div class="project-item">
-                            <a href="https://areebuzair.github.io/ThreeJS/" target="project-iframe">
-                                ThreeJS Projects
-                            </a>
+                        <div>
+                            <img src="./Assets/Projects/MemeMaker.png" />
+                            <article>
+                                <h3>Meme Maker</h3>
+                                <p>A windows app to make memes with. Has a hotkey based workflow inspired by Blender.
+                                </p>
+                            </article>
                         </div>
                     </div>
                 </section>
 
                 <section id="skills">
                     <h2>Skills</h2>
+                    <div class="skills-container">
+                        <!-- Languages -->
+                        <div>
+                            <i class="fab fa-js-square" style="--color:#F7DF1E;"></i> <!-- JavaScript -->
+                        </div>
+                        <div>
+                            <i class="fab fa-python" style="--color:#3776AB;"></i> <!-- Python -->
+                        </div>
+                        <div>
+                            <i class="fab fa-java" style="--color:#007396;"></i> <!-- Java -->
+                        </div>
+
+                        <!-- Frontend -->
+                        <div>
+                            <i class="fab fa-html5" style="--color:#E34F26;"></i> <!-- HTML5 -->
+                        </div>
+                        <div>
+                            <i class="fab fa-css3-alt" style="--color:#1572B6;"></i> <!-- CSS3 -->
+                        </div>
+                        <div>
+                            <i class="fab fa-react" style="--color:#61DAFB;"></i> <!-- React -->
+                        </div>
+                        <div>
+                            <i class="fas fa-wind" style="--color:#06B6D4;"></i>
+                            <!-- Tailwind (approximation, FA doesn't have Tailwind logo) -->
+                        </div>
+                        <div>
+                            <i class="fas fa-cube" style="--color:#000000;"></i>
+                            <!-- Three.js (approximation) -->
+
+
+                            <!-- Tools -->
+                        </div>
+                        <div>
+                            <i class="fab fa-node-js" style="--color:#339933;"></i> <!-- Node.js -->
+                        </div>
+                        <div>
+                            <i class="fab fa-git-alt" style="--color:#F05033;"></i> <!-- Git -->
+                        </div>
+                        <div>
+                            <i class="fab fa-github" style="--color:#181717;"></i> <!-- GitHub -->
+                        </div>
+                    </div>
                 </section>
 
                 <section id="experience">
