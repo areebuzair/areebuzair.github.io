@@ -70,7 +70,7 @@ onload = () => {
 
     //Create Navbar
     const navList = document.querySelector("nav ul")
-    for(let id of sections){
+    for (let id of sections) {
         let li = document.createElement("li");
         let a = document.createElement("a")
         a.textContent = document.querySelector(`#${id} h2`).textContent;
@@ -126,6 +126,7 @@ onload = () => {
             // Handle the JSON data
             // console.log(data);
             document.getElementById("project-iframe").src = data[0].url;
+            document.querySelector(".project-name").textContent = data[0].name;
             document.querySelector(".project-description").textContent = data[0].description;
             document.querySelector(".url-container a").textContent = data[0].url;
             document.querySelector(".url-container a").href = data[0].url;
@@ -143,6 +144,8 @@ onload = () => {
                     document.querySelector(".project-description").textContent = e.target.dataset.description;
                     document.querySelector(".url-container a").textContent = e.target.href;
                     document.querySelector(".url-container a").href = e.target.href;
+                    document.querySelector(".project-name").textContent = e.target.textContent;
+
                     document.querySelector("#projects").scrollIntoView()
                 })
                 card.appendChild(card_url);
