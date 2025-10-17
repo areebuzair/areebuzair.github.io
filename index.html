@@ -20,56 +20,43 @@
     <meta name="description" content="Home for J. M Areeb Uzair's various projects">
     <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
     <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/5a3d9e2a8a.js" crossorigin="anonymous"></script>
+    <script src="animated-bg.js" defer>  </script>
+    <script src="script.js" defer>  </script>
 </head>
 
 <body>
-    <div class="background">
-        Website designed and developed by J. M Areeb Uzair &copy; 2023
-    </div>
-    <div class="container">
-        <h1>J. M Areeb Uzair</h1>
-        <h3 class="animated-text">Front-End Developer</h3>
-        <a href="./BlenderArtPortfolio/">Visit my Blender Art Portfolio</a>
-        <a href="./GameHUB/">Play my Games</a>
-        <a href="./ThreeJS/">My Three JS Projects</a>
-    </div>
+    <canvas id="cnv"></canvas>
+    <header>
+        <div class="header-content">
+            <h1><span>J. M Areeb Uzair Alam</span></h1>
+            <ul class="social-media">
+                <li style="--i:0;"><a target="_blank" href="https://github.com/areebuzair">
+                        <i class="fa-brands fa-github"></i>
+                        <span class='word'><span class='letter' style='--i:0;'>G</span><span class='letter' style='--i:1;'>I</span><span class='letter' style='--i:2;'>T</span><span class='letter' style='--i:3;'>H</span><span class='letter' style='--i:4;'>U</span><span class='letter' style='--i:5;'>B</span></span>
+                    </a></li>
+                <li style="--i:1;"><a target="_blank" href="https://www.researchgate.net/profile/J-M-Areeb-Alam">
+                        <i class="fa-brands fa-researchgate"></i>
+                        <span class='word'><span class='letter' style='--i:0;'>R</span><span class='letter' style='--i:1;'>E</span><span class='letter' style='--i:2;'>S</span><span class='letter' style='--i:3;'>E</span><span class='letter' style='--i:4;'>A</span><span class='letter' style='--i:5;'>R</span><span class='letter' style='--i:6;'>C</span><span class='letter' style='--i:7;'>H</span><span class='letter' style='--i:8;'>G</span><span class='letter' style='--i:9;'>A</span><span class='letter' style='--i:10;'>T</span><span class='letter' style='--i:11;'>E</span></span>
+                    </a></li>
+                <li style="--i:2;"><a target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                        <span class='word'><span class='letter' style='--i:0;'>L</span><span class='letter' style='--i:1;'>I</span><span class='letter' style='--i:2;'>N</span><span class='letter' style='--i:3;'>K</span><span class='letter' style='--i:4;'>E</span><span class='letter' style='--i:5;'>D</span><span class='letter' style='--i:6;'>I</span><span class='letter' style='--i:7;'>N</span></span>
+                    </a></li>
+                <li style="--i:3;"><a target="_blank" href="https://huggingface.co/areebuzair">
+                        <i style="filter: saturate(0);">🤗</i>
+                        <span class='word'><span class='letter' style='--i:0;'>H</span><span class='letter' style='--i:1;'>U</span><span class='letter' style='--i:2;'>G</span><span class='letter' style='--i:3;'>G</span><span class='letter' style='--i:4;'>I</span><span class='letter' style='--i:5;'>N</span><span class='letter' style='--i:6;'>G</span><span class='letter' style='--i:7;'> </span><span class='letter' style='--i:8;'>F</span><span class='letter' style='--i:9;'>A</span><span class='letter' style='--i:10;'>C</span><span class='letter' style='--i:11;'>E</span></span>
+                    </a></li>
+            </ul>
+        </div>
+    </header>
+    <footer>
+        Website designed and developed by J. M Areeb Uzair &copy; 2025
+    </footer>
+
+    <div id="Cursor"></div>
 </body>
 
-<script>
-    onload = () => {
-        let bg = document.querySelector(".background");
-        bg.style.opacity = ".4";
-    }
-    let texts = ["Front-End Developer", "Programmer", "Artist"];
-    let anim = document.querySelector(".animated-text");
 
-    function deleteChar() {
-        if (anim.textContent != "") {
-            text = anim.textContent;
-            anim.textContent = text.slice(0, -1);
-            window.requestAnimationFrame(deleteChar);
-        }
-        else {
-            texts.push(texts.shift());
-            setTimeout(() => {
-                addChar(texts[0]);
-            }, 100);
-        }
-    }
-    function addChar(text) {
-        if (text != "") {
-            ch = text[0];
-            text = text.slice(1);
-            anim.textContent += ch;
-            setTimeout(() => {
-                addChar(text);
-            }, 100);
-        }
-        else {
-            setTimeout(deleteChar, 1000);
-        }
-    }
-    deleteChar();
-</script>
 
 </html>
