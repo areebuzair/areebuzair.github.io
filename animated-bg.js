@@ -88,7 +88,7 @@ window.onload = function () {
 
         this.ang = ang;
 
-        this.fc = 7;
+        this.fc = 3;
 
         //XP = x;YP=y;
 
