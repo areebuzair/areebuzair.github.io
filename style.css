@@ -40,7 +40,7 @@ header {
     height: 100%;
 }
 
-header p{
+header p {
     max-width: 500px;
     text-align: justify;
     padding: 10px;
@@ -48,8 +48,9 @@ header p{
     opacity: 0;
     transform: translate(0, 5px);
 }
+
 @keyframes fade-in {
-    to{
+    to {
         opacity: 1;
         transform: translate(0, 0);
     }
@@ -173,6 +174,17 @@ a:hover .letter {
     }
 }
 
+@media only screen and (max-width: 300px) {
+    .social-media .word {
+        display: none;
+    }
+
+    .social-media {
+        /* justify-content: space-between; */
+        font-size: 150%;
+    }
+}
+
 /* a:after {
     position: absolute;
     width: 100%;
@@ -220,4 +232,54 @@ footer {
 
         -1px -1px 0px black;
     z-index: 1;
+}
+
+section {
+    width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    display: grid;
+    position: relative;
+    --width: 10vmax;
+    perspective: calc(var(--width) * 5);
+    overflow-y: visible;
+}
+
+.carousel {
+    transform-style: preserve-3d;
+    position: absolute;
+    animation: spin 10s linear infinite;
+    inset: 0 0 0 0;
+}
+
+@keyframes spin {
+    from {
+        transform: rotateY(0deg);
+    }
+
+    to {
+        transform: rotateY(360deg);
+    }
+}
+
+.card {
+    --height: calc(var(--width) * 1.414);
+    width: var(--width);
+    height: var(--height);
+    border-radius: 10px;
+    background-color: hsl(calc(var(--i) * 360deg / var(--items)), 100%, 50%);
+    position: absolute;
+    top: calc(50% - var(--height) / 2);
+    left: calc(50% - var(--width) / 2);
+    transform: rotateY(calc(var(--i) * 360deg / var(--items))) translateZ(0) scale(0);
+    transition: transform .2s;
+    transition-delay: calc(var(--i) * 0.05s);
+    /* backface-visibility: hidden; */
+    opacity: 0.5;
+/* }
+
+.active .card { */
+    transform: rotateY(calc(var(--i) * 360deg / var(--items))) translateZ(calc(var(--height) * 2)) scale(1);
 }

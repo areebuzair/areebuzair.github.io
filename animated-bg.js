@@ -1,56 +1,9 @@
 "use strict";
 
-var W, H, L, ang = 0, points, start;
+window.addEventListener("load", () => {
+    var W, H, L, ang = 0, points, start;
 
-//var XP,YP;
-
-const { sin, cos, PI, sqrt, random, floor, ceil, round, abs } = Math;
-
-
-
-function id(n) {
-
-    return document.getElementById(n);
-
-}
-
-
-
-function atan(x1, y1, x2, y2) {
-
-    let dx = x2 - x1;
-
-    let dy = y2 - y1;
-
-    if (dx == 0) {
-
-        if (dy >= 0) {
-
-            return PI / 2;
-
-        }
-
-        else {
-
-            return (3 / 2) * PI;
-
-        }
-
-    }
-
-    else if (dx > 0) {
-
-        return Math.atan(dy / dx);
-
-    }
-
-    else { return PI + Math.atan(dy / dx); }
-
-}
-
-
-
-window.onload = function () {
+    const { sqrt } = Math;
 
     var cnv = document.getElementById("cnv");
 
@@ -178,28 +131,24 @@ window.onload = function () {
 
 
 
-    window.ontouchmove = function (e) {
+    window.addEventListener("touchmove", (e) => {
 
         points.push(new Point(e.touches[0].clientX, e.touches[0].clientY));
 
-    }
+    })
 
-    window.ontouchstart = function (e) {
+    window.addEventListener("touchstart", (e) => {
 
         points.push(new Point(e.touches[0].clientX, e.touches[0].clientY));
 
-    }
+    })
 
-    window.onmousemove = function (e) {
+    window.addEventListener("mousemove", (e) => {
         if (points.length == 0)
             points.push(new Point(e.clientX, e.clientY));
         else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > 100)
             points.push(new Point(e.clientX, e.clientY));
 
-    }
+    })
 
-
-
-
-
-}
+})
