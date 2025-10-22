@@ -3,6 +3,11 @@
     box-sizing: border-box;
 }
 
+:root{
+    --mouse-x: -500px;
+    --mouse-y: -500px;
+}
+
 #cnv {
     position: fixed;
     top: 0;
@@ -237,39 +242,56 @@ footer {
 section {
     width: 100%;
     min-height: 100vh;
+    position: relative;
+}
+
+.carousel-container{
     justify-content: center;
     text-align: center;
     align-items: center;
-    display: grid;
-    position: relative;
+    display: flex;
     --width: 10vmax;
     perspective: calc(var(--width) * 5);
-    overflow-y: visible;
+    overflow: visible;
+}
+
+.carousel-container p {
+    max-width: calc(var(--width) * 4.25);
+    text-align: justify;
+    text-align-last: center;
+    padding: 10px;
+    box-sizing: border-box;
+    transform: translateY(-50%);
 }
 
 .carousel {
     transform-style: preserve-3d;
     position: absolute;
     animation: spin 10s linear infinite;
-    inset: 0 0 0 0;
+    /* inset: 0 0 0 0; */
 }
+
+/* .carousel p{
+    animation: spin 10s linear infinite reverse;
+} */
 
 @keyframes spin {
     from {
-        transform: rotateY(0deg);
+        transform: rotateX(-20deg) rotateY(0deg);
     }
 
     to {
-        transform: rotateY(360deg);
+        transform: rotateX(-20deg) rotateY(360deg);
     }
 }
 
 .card {
-    --height: calc(var(--width) * 1.414);
+    --height: calc(var(--width) / 1.414);
     width: var(--width);
     height: var(--height);
-    border-radius: 10px;
-    background-color: hsl(calc(var(--i) * 360deg / var(--items)), 100%, 50%);
+    border-radius: calc(var(--width) / 10);
+    /* background-color: hsl(calc(var(--i) * 360deg / var(--items)), 100%, 50%); */
+    background-color: hsl(240, 100%, 66%);
     position: absolute;
     top: calc(50% - var(--height) / 2);
     left: calc(50% - var(--width) / 2);
@@ -278,8 +300,50 @@ section {
     transition-delay: calc(var(--i) * 0.05s);
     /* backface-visibility: hidden; */
     opacity: 0.5;
-/* }
+    clip-path: polygon(0 14%, 10% 0, 100% 0, 100% 30%, 90% 44%, 90% 65%, 100% 76%, 100% 100%, 0 100%);
+
+    /* }
 
 .active .card { */
-    transform: rotateY(calc(var(--i) * 360deg / var(--items))) translateZ(calc(var(--height) * 2)) scale(1);
+    transform: rotateY(calc(var(--i) * 360deg / var(--items))) translateZ(calc(var(--height) * -3)) scale(1);
+}
+
+
+
+#cursor{
+    position: fixed;
+    z-index: 5;
+    width: 10px;
+    aspect-ratio: 1;
+    top: var(--mouse-y);
+    left: var(--mouse-x);
+    /* background-color: rgba(255, 0, 0, 0.4); */
+    border-radius: 50%;
+    pointer-events: none;
+    backdrop-filter: invert(1);
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity .3s, width .1s, transform .1s;
+    overflow: hidden;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#cursor *{
+    display: none;
+}
+
+body:hover #cursor{
+    opacity: 1;
+}
+
+
+body:hover:has(a:hover) #cursor{
+    width: 50px;
+    transform: translate(10px, 10px);
+}
+body:hover:has(a:hover) #cursor *{
+    display: inline-block;
 }
