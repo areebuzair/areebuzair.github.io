@@ -3,9 +3,24 @@
     box-sizing: border-box;
 }
 
-:root{
+:root {
     --mouse-x: -500px;
     --mouse-y: -500px;
+
+    scrollbar-width: thin;
+    scrollbar-color: red black;
+}
+
+:root::-webkit-scrollbar {
+    width: 2vmin;
+}
+
+:root::-webkit-scrollbar-thumb {
+    background-color: red;
+}
+
+:root::-webkit-scrollbar-track {
+    background-color: black;
 }
 
 #cnv {
@@ -16,6 +31,8 @@
     background-color: black;
     width: 100vw;
     height: 100vh;
+    pointer-events: none;
+    user-select: none;
 }
 
 body {
@@ -27,6 +44,7 @@ body {
     font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     overflow-x: hidden;
+    /* overflow-y: hidden; */
 }
 
 /* h1 {
@@ -42,7 +60,7 @@ header {
     align-items: center;
     text-align: center;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
 }
 
 header p {
@@ -81,12 +99,69 @@ h1 {
     }
 }
 
-h1 span {
+h1 .sparkly-word {
     padding: 10px 5px;
     display: inline-block;
     transform: translate(-100%, 0);
-    animation: pop-out 1s;
+    animation: pop-out 1s, background-pan 2s linear infinite;
     animation-fill-mode: forwards;
+    position: relative;
+    color: white;
+    background-clip: text;
+    background-image: linear-gradient(to left, violet, lightblue, cyan, violet);
+    background-size: 200%;
+    transition: color 0.5s;
+}
+
+h1 .sparkly-word:hover {
+    color: transparent;
+}
+
+@keyframes background-pan {
+    from {
+        background-position: 0 0;
+    }
+
+    to {
+        background-position: -200% 0;
+    }
+}
+
+.sparkly-word .sparkles {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background-color: violet;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    animation: sparkle 1s ease forwards, spin 2s linear infinite;
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+    overflow: visible;
+}
+
+.sparkly-word:hover .sparkles {
+    opacity: 0.6;
+}
+
+@keyframes sparkle {
+
+    from,
+    to {
+        scale: 0;
+    }
+
+    50% {
+        scale: 1;
+    }
+}
+
+@keyframes spin {
+    to {
+        rotate: 180deg;
+    }
 }
 
 .social-media {
@@ -239,13 +314,9 @@ footer {
     z-index: 1;
 }
 
-section {
-    width: 100%;
-    min-height: 100vh;
-    position: relative;
-}
 
-.carousel-container{
+
+.carousel-container {
     justify-content: center;
     text-align: center;
     align-items: center;
@@ -267,7 +338,7 @@ section {
 .carousel {
     transform-style: preserve-3d;
     position: absolute;
-    animation: spin 10s linear infinite;
+    animation: spin-3d 10s linear infinite;
     /* inset: 0 0 0 0; */
 }
 
@@ -275,7 +346,7 @@ section {
     animation: spin 10s linear infinite reverse;
 } */
 
-@keyframes spin {
+@keyframes spin-3d {
     from {
         transform: rotateX(-20deg) rotateY(0deg);
     }
@@ -310,7 +381,7 @@ section {
 
 
 
-#cursor{
+#cursor {
     position: fixed;
     z-index: 5;
     width: 10px;
@@ -331,19 +402,46 @@ section {
     align-items: center;
     text-align: center;
 }
-#cursor *{
+
+#cursor * {
     display: none;
 }
 
-body:hover #cursor{
+body:hover #cursor {
     opacity: 1;
 }
 
 
-body:hover:has(a:hover) #cursor{
+body:hover:has(a:hover) #cursor {
     width: 50px;
     transform: translate(10px, 10px);
 }
-body:hover:has(a:hover) #cursor *{
+
+body:hover:has(a:hover) #cursor * {
     display: inline-block;
+}
+
+
+section {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    /* display: grid;
+    grid-template-columns: repeat(2, 1fr); */
+    font-size: 2rem;
+    padding: 10px;
+}
+
+.img-container img {
+    width: 100%;
+    position: sticky;
+    top: 0;
+}
+
+p > .first-letter {
+    font-size: 3em;
+    float: left;
+    height: fit-content;
 }
