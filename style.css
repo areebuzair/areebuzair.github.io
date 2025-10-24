@@ -422,17 +422,17 @@ body:hover:has(a:hover) #cursor * {
 }
 
 
-section {
+/* section {
     width: 100%;
     min-height: 100vh;
     position: relative;
     max-width: 600px;
     margin: 0 auto;
     /* display: grid;
-    grid-template-columns: repeat(2, 1fr); */
+    grid-template-columns: repeat(2, 1fr); 
     font-size: 2rem;
     padding: 10px;
-}
+} */
 
 .img-container img {
     width: 100%;
@@ -444,4 +444,31 @@ p > .first-letter {
     font-size: 3em;
     float: left;
     height: fit-content;
+}
+
+#affiliate-websites{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#affiliate-websites .banner{
+    width: 100%;
+    min-height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: sticky;
+    top: 0;
+}
+#affiliate-websites .blender{
+    background-image: url("Assets/The  Parasite.webp");
+}
+
+#affiliate-websites .gamehub{
+    background-image: url("Assets/Games Collage.webp");
+}
+
+#affiliate-websites .threejs{
+    background-image: url("Assets/ThreeJS Demo.webp");
 }
