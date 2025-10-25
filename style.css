@@ -1,6 +1,7 @@
 * {
     -webkit-tap-highlight-color: transparent;
     box-sizing: border-box;
+    scroll-behavior: smooth;
 }
 
 
@@ -209,7 +210,6 @@ h1 .sparkly-word:hover {
 a {
     white-space: nowrap;
     display: inline-block;
-    padding: 0;
     /* max-height: fit-content; */
     overflow: hidden;
     color: white;
@@ -454,21 +454,21 @@ p>.first-letter {
     padding: 0;
 }
 
-#affiliate-websites .banner {
+.banner {
     width: 100%;
     min-height: 100vh;
+    top: 10px;
+    position: sticky;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     /* background-attachment: fixed; */
-    position: sticky;
-    border-radius: 10vmin;
+    border-radius: 10vmin 10vmin;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     box-sizing: border-box;
-    top: 10px;
     white-space: normal;
     transition: transform .2s, opacity .2s;
 }
@@ -503,12 +503,47 @@ p>.first-letter {
     display: grid;
     text-align: left;
     grid-template-columns: repeat(2, 1fr);
-    font-size: 2em;
-    padding: 10px;
+    /* font-size: 2em; */
 }
 
 .two-cols h2,
 .two-cols p {
     padding: 0;
     margin: 0;
+}
+
+.two-cols p {
+    max-width: 300px;
+    margin-bottom: 1em;
+}
+
+#selected-projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+#selected-projects h2{
+    grid-column: span 2;
+}
+
+.project-card{
+    width: 100%;
+    aspect-ratio: 2.390;
+    position: relative;
+    background-color: grey;
+    padding: 10px;
+}
+
+.project-button{
+    background-color: #005fb3;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+section {
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
