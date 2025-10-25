@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 
+
 :root {
     --mouse-x: -500px;
     --mouse-y: -500px;
@@ -462,7 +463,6 @@ p>.first-letter {
     /* background-attachment: fixed; */
     position: sticky;
     border-radius: 10vmin;
-    padding: 10vmin;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -486,14 +486,29 @@ p>.first-letter {
 }
 
 .banner>div {
-    background-color: rgba(0, 0, 0, 0.4);
+    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4) 10% 90%, transparent);
     text-align: center;
-    backdrop-filter: blur(5px);
-    max-width: 100%;
+    padding: 10vmin;
+    /* backdrop-filter: blur(5px); */
+    width: 100%;
 }
 
 @media screen and (min-width: 500px) {
     .banner>div {
         min-width: 500px;
     }
+}
+
+.two-cols {
+    display: grid;
+    text-align: left;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 2em;
+    padding: 10px;
+}
+
+.two-cols h2,
+.two-cols p {
+    padding: 0;
+    margin: 0;
 }

@@ -27,16 +27,17 @@ window.addEventListener("load", () => {
 
     const banners = document.querySelectorAll(".banner");
     const banner_container = document.querySelector("#affiliate-websites")
-    window.addEventListener("scroll", ()=>{
-        let {bottom, height} = banner_container.getBoundingClientRect();
-        const H = window.innerHeight;
-        const factor = bottom / height * banners.length;
-        banner_container.dataset.factor = factor;
-        for(let b=0;b<banners.length; b++){
-            let banner = banners[b];
-            let f = Math.max(Math.min(factor - (banners.length - b - 1), 1), 0)
-            banner.style.transform = `scale(${f})`;
-            banner.style.opacity = `${f}`;
+    window.addEventListener("scroll", () => {
+        let { bottom, height, top } = banner_container.getBoundingClientRect();
+        if (top <= window.innerHeight && bottom >= 0) {
+            const factor = bottom / height * banners.length;
+            banner_container.dataset.factor = factor;
+            for (let b = 0; b < banners.length; b++) {
+                let banner = banners[b];
+                let f = Math.max(Math.min(factor - (banners.length - b - 1), 1), 0)
+                banner.style.transform = `scale(${f})`;
+                banner.style.opacity = `${f}`;
+            }
         }
     })
 })
