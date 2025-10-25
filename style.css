@@ -415,6 +415,7 @@ body:hover #cursor {
 body:hover:has(a:hover) #cursor {
     width: 50px;
     transform: translate(10px, 10px);
+    background-color: white;
 }
 
 body:hover:has(a:hover) #cursor * {
@@ -440,35 +441,59 @@ body:hover:has(a:hover) #cursor * {
     top: 0;
 }
 
-p > .first-letter {
+p>.first-letter {
     font-size: 3em;
     float: left;
     height: fit-content;
 }
 
-#affiliate-websites{
+#affiliate-websites {
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
-#affiliate-websites .banner{
+#affiliate-websites .banner {
     width: 100%;
     min-height: 100vh;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    /* background-attachment: fixed; */
     position: sticky;
-    top: 0;
+    border-radius: 10vmin;
+    padding: 10vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+    top: 10px;
+    white-space: normal;
+    transition: transform .2s, opacity .2s;
 }
-#affiliate-websites .blender{
+
+#affiliate-websites .blender {
     background-image: url("Assets/The  Parasite.webp");
 }
 
-#affiliate-websites .gamehub{
+#affiliate-websites .gamehub {
     background-image: url("Assets/Games Collage.webp");
 }
 
-#affiliate-websites .threejs{
+#affiliate-websites .threejs {
     background-image: url("Assets/ThreeJS Demo.webp");
+}
+
+.banner>div {
+    background-color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+    backdrop-filter: blur(5px);
+    max-width: 100%;
+}
+
+@media screen and (min-width: 500px) {
+    .banner>div {
+        min-width: 500px;
+    }
 }
