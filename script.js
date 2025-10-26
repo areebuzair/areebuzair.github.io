@@ -40,4 +40,20 @@ window.addEventListener("load", () => {
             }
         }
     })
+
+    let observer = new IntersectionObserver((entries, observer)=>{
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                entry.target.classList.add("Observed!")
+                observer.unobserve(entry.target);
+            }
+        }, {threshold: 1});
+    });
+
+    let sections = document.querySelectorAll("section");
+    for(let section of sections){
+        observer.observe(section)
+    }
+
+
 })
