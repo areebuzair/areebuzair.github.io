@@ -44,15 +44,15 @@ window.addEventListener("load", () => {
     let observer = new IntersectionObserver((entries, observer)=>{
         entries.forEach(entry => {
             if(entry.isIntersecting){
-                entry.target.classList.add("observed")
+                entry.target.classList.add("animated")
                 observer.unobserve(entry.target);
             }
         });
     }, {threshold: 0.5});
 
-    let sections = document.querySelectorAll("section");
-    for(let section of sections){
-        observer.observe(section)
+    let animated_elements = document.querySelectorAll(".animate");
+    for(let elem of animated_elements){
+        observer.observe(elem)
     }
 
 

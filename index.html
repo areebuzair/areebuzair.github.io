@@ -28,8 +28,16 @@
 
 <body>
     <canvas id="cnv"></canvas>
+    <nav>
+        <a href="./">J. M Areeb Uzair</a>
+        <span>
+            <a href="">Download CV</a>
+            <span>&bull;</span>
+            <a href="">YouTube</a>
+        </span>
+    </nav>
     <header>
-        <div class="header-content">
+        <div class="header-content animate">
             <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                 y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50"
                 xml:space="preserve">
@@ -94,13 +102,15 @@
     </header>
     <section class="two-cols">
         <h2>About Me</h2>
-        <div>
-            <p>I am a software developer based in Bangladesh. I have been writing code since my days in High School.</p>
-            <p>I primarily use Python and Javascript, with a focus on Front-end web development with React, Next,
-                Tailwind and Vanilla Web stack.</p>
-            <p>I am also working with NodeJS and Spring Boot for Back-end development.</p>
-            <p>Aside from software development, I also work on 3D renders and animations as a hobby.</p>
-            <p>I am currently employed at <a href="https://astareo.com/" target="_blank">Astareo</a>, a freelancing firm
+        <div class="animate">
+            <p style="--i:0;">I am a software developer based in Bangladesh. I have been writing code since my days in
+                High School.</p>
+            <p style="--i:1;">I primarily use Python and Javascript, with a focus on Front-end web development with
+                React, Next, Tailwind and Vanilla Web stack.</p>
+            <p style="--i:2;">I am also working with NodeJS and Spring Boot for Back-end development.</p>
+            <p style="--i:3;">Aside from software development, I also work on 3D renders and animations as a hobby.</p>
+            <p style="--i:4;">I am currently employed at <a href="https://astareo.com/" target="_blank">Astareo</a>, a
+                freelancing firm
                 that develops software as you need.</p>
         </div>
     </section>
@@ -141,19 +151,19 @@
         <h2>Other Works</h2>
         <div id="affiliate-websites">
             <a target="_blank" href="./BlenderArtPortfolio/" class="banner blender">
-                <div>
+                <div class="animate">
                     <p>My 3D Artworks, animations and Blender addons all in one place.</p>
                     <h2>Blender Art Portfolio</h2>
                 </div>
             </a>
             <a target="_blank" href="./GameHUB/" class="banner gamehub">
-                <div>
+                <div class="animate">
                     <p>Games I made with HTML, CSS and JavaScript!</p>
                     <h2>Norwester's GameHUB</h2>
                 </div>
             </a>
             <a target="_blank" href="./ThreeJS/" class="banner threejs">
-                <div>
+                <div class="animate">
                     <p>My Experiments with threejs.</p>
                     <h2>ThreeJS Projects</h2>
                 </div>
@@ -176,12 +186,11 @@
             quo esse dolor consequatur.</p>
     </section> -->
     <section class="two-cols">
-        <div>
-            <h2>Contact Me</h2>
-            <p>Hire me through Astareo!</p>
-            <p>Or, shoot me a mail.</p>
-        </div>
-        <div>
+        <h2>Contact Me</h2>
+        <div class="animate">
+            <p style="--i:0;">Hire me through Astareo!</p>
+            <p style="--i:1;">Or, shoot me a mail.</p>
+
             <form>
                 <label for="form-name">Name</label>
                 <input type="text" required name="name" id="form-name" placeholder="Your Name" />

@@ -545,13 +545,22 @@ button[type="submit"]{
     }
 }
 
-section p{
-    opacity: 0;
-    transform: translate(0, 10px);
-    transition: opacity 1s, transform 1s;
+nav{
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+    box-sizing: border-box;
 }
-.observed p{
-    opacity: 1;
-    transform: translate(0, 0);
 
+nav a{
+    color: white;
+    text-decoration: none;
+}
+
+nav>span{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
