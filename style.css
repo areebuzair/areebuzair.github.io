@@ -69,44 +69,19 @@ header p {
     max-width: 500px;
     text-align: justify;
     padding: 10px;
-    animation: fade-in 0.5s 1.5s forwards;
-    opacity: 0;
-    transform: translate(0, 5px);
 }
 
-@keyframes fade-in {
-    to {
-        opacity: 1;
-        transform: translate(0, 0);
-    }
-}
-
-h1 {
+header h1 {
     overflow: hidden;
     border-left: 2px solid red;
-    transform: scaleY(0) translate(50%, 0);
-    animation: pop-open 1s;
-    animation-fill-mode: forwards;
     text-align: left;
     margin-left: 10px;
 }
 
-@keyframes pop-open {
-    50% {
-        transform: scaleY(1) translate(50%, 0);
-    }
-
-    100% {
-        transform: scaleY(1) translate(0%, 0);
-    }
-}
 
 h1 .sparkly-word {
     padding: 10px 5px;
     display: inline-block;
-    transform: translate(-100%, 0);
-    animation: pop-out 1s, background-pan 2s linear infinite;
-    animation-fill-mode: forwards;
     position: relative;
     color: white;
     background-clip: text;
@@ -119,15 +94,7 @@ h1 .sparkly-word:hover {
     color: transparent;
 }
 
-@keyframes background-pan {
-    from {
-        background-position: 0 0;
-    }
 
-    to {
-        background-position: -200% 0;
-    }
-}
 
 .sparkly-word .sparkles {
     position: absolute;
@@ -148,23 +115,8 @@ h1 .sparkly-word:hover {
     opacity: 0.6;
 }
 
-@keyframes sparkle {
 
-    from,
-    to {
-        scale: 0;
-    }
 
-    50% {
-        scale: 1;
-    }
-}
-
-@keyframes spin {
-    to {
-        rotate: 180deg;
-    }
-}
 
 .social-media {
     list-style-type: none;
@@ -175,26 +127,8 @@ h1 .sparkly-word:hover {
 
 .social-media li {
     white-space: nowrap;
-    /* transform: scale(0); */
-    /* animation: scale-in .2s calc(1s + var(--i) * 0.1s);
-    animation-fill-mode: forwards; */
 }
 
-/* @keyframes scale-in {
-    to{
-        transform: scale(1);
-    }
-} */
-
-/* .social-media span{
-    width: 0;
-    overflow-x: hidden;
-    display: inline-block;
-    transition: width .5s;
-}
-.social-media a:hover span{
-    width: 100%;
-} */
 .social-media li {
     overflow: hidden;
 }
@@ -202,9 +136,6 @@ h1 .sparkly-word:hover {
 .social-media a {
     display: inline-block;
     font-style: normal;
-    transform: translate(0, 120%);
-    animation: pop-up 0.2s calc(1s + var(--i) * 0.1s);
-    animation-fill-mode: forwards;
 }
 
 header a {
@@ -227,7 +158,6 @@ a .letter {
     max-height: fit-content;
     transition: transform .2s;
     transition-delay: calc(var(--i) * 0.02s + 0.02s);
-    animation: spin-in 0.5s;
     transform-origin: 0 100%;
 }
 
@@ -239,21 +169,7 @@ a:hover .letter {
     font-style: normal;
 }
 
-@keyframes pop-up {
-    to {
-        transform: translate(0, 0%);
-    }
-}
 
-@keyframes pop-out {
-    50% {
-        transform: translate(-100%, 0);
-    }
-
-    100% {
-        transform: translate(0, 0);
-    }
-}
 
 @media only screen and (max-width: 300px) {
     .social-media .word {
@@ -347,15 +263,7 @@ footer {
     animation: spin 10s linear infinite reverse;
 } */
 
-@keyframes spin-3d {
-    from {
-        transform: rotateX(-20deg) rotateY(0deg);
-    }
 
-    to {
-        transform: rotateX(-20deg) rotateY(360deg);
-    }
-}
 
 .card {
     --height: calc(var(--width) / 1.414);
@@ -464,6 +372,7 @@ p>.first-letter {
     min-height: 100vh;
     /* top: 10px; */
     position: sticky;
+    top: 0;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -589,7 +498,9 @@ div:hover a:after {
 
 section {
     padding: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);box-sizing: border-box;
+    max-width: 2000px;
+    margin: 0 auto;
 }
 
 form {
@@ -632,4 +543,15 @@ button[type="submit"]{
     .two-cols form {
         max-width: 100%;
     }
+}
+
+section p{
+    opacity: 0;
+    transform: translate(0, 10px);
+    transition: opacity 1s, transform 1s;
+}
+.observed p{
+    opacity: 1;
+    transform: translate(0, 0);
+
 }
