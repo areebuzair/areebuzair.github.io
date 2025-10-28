@@ -151,6 +151,16 @@ header a {
     /* background-color: red; */
 }
 
+a .word {
+    display: inline-flex;
+    align-items: flex-end;
+    overflow-y: hidden;
+    max-height: fit-content;
+    padding: 0;
+    margin: 0;
+    padding: 0;
+}
+
 a .letter {
     text-shadow: 0 2em 0 rgb(255, 255, 255);
     margin: 0;
@@ -159,6 +169,8 @@ a .letter {
     transition: transform .2s;
     transition-delay: calc(var(--i) * 0.02s + 0.02s);
     transform-origin: 0 100%;
+    margin: 0;
+    padding: 0;
 }
 
 a:hover .letter {
@@ -321,7 +333,8 @@ body:hover #cursor {
 }
 
 
-body:hover:has(a:hover) #cursor, body:hover:has(button[type="submit"]:hover) #cursor {
+body:hover:has(a:hover) #cursor,
+body:hover:has(button[type="submit"]:hover) #cursor {
     width: 50px;
     transform: translate(10px, 10px);
     background-color: white;
@@ -434,14 +447,16 @@ p>.first-letter {
 }
 
 p a {
-    --color: rgb(151, 205, 252);
-    color: var(--color);
+    /* --color: rgb(151, 205, 252);
+    color: var(--color); */
+    color: white;
     text-decoration: none;
     /* font-style: italic; */
     position: relative;
+    overflow: hidden;
 }
 
-p a:after {
+/* p a:after {
     content: "";
     position: absolute;
     width: 100%;
@@ -452,7 +467,7 @@ p a:after {
     scale: 0 1;
     transition: scale 0.2s;
     transform-origin: left center;
-}
+} */
 
 div:hover a:after {
     scale: 1 1;
@@ -498,7 +513,8 @@ div:hover a:after {
 
 section {
     padding: 10px;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);box-sizing: border-box;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
     max-width: 2000px;
     margin: 0 auto;
 }
@@ -527,7 +543,7 @@ textarea {
     height: 10em;
 }
 
-button[type="submit"]{
+button[type="submit"] {
     cursor: pointer;
 }
 
@@ -545,21 +561,21 @@ button[type="submit"]{
     }
 }
 
-nav{
-    height: 30px;
+nav {
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 5px;
+    padding: 20px;
     box-sizing: border-box;
 }
 
-nav a{
+nav a {
     color: white;
     text-decoration: none;
 }
 
-nav>span{
+nav>span {
     display: flex;
     justify-content: space-between;
     gap: 10px;
