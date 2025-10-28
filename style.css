@@ -300,54 +300,71 @@ footer {
     transform: rotateY(calc(var(--i) * 360deg / var(--items))) translateZ(calc(var(--height) * -3)) scale(1);
 }
 
-
-
 #cursor {
-    position: fixed;
-    z-index: 20;
-    width: 10px;
-    aspect-ratio: 1;
-    top: var(--mouse-y);
-    left: var(--mouse-x);
-    /* background-color: rgba(255, 0, 0, 0.4); */
-    border-radius: 50%;
-    pointer-events: none;
-    backdrop-filter: invert(1);
-    transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity .3s, width .1s, transform .1s;
-    overflow: hidden;
-    color: black;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-}
-
-#cursor * {
     display: none;
 }
 
-body:hover #cursor {
-    opacity: 1;
+@media (any-pointer: fine) {
+
+    #cursor {
+        position: fixed;
+        z-index: 20;
+        width: 10px;
+        aspect-ratio: 1;
+        top: var(--mouse-y);
+        left: var(--mouse-x);
+        /* background-color: rgba(255, 0, 0, 0.4); */
+        border-radius: 50%;
+        pointer-events: none;
+        backdrop-filter: invert(1);
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity .3s, width .1s, transform .1s;
+        overflow: hidden;
+        color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #cursor * {
+        display: none;
+    }
+
+    body:hover #cursor {
+        opacity: 1;
+    }
+
+
+    body:hover:has(a:hover) #cursor,
+    body:hover:has(button[type="submit"]:hover) #cursor {
+        width: 50px;
+        transform: translate(10px, 10px);
+        background-color: white;
+    }
+
+    body:hover:has(.cursor-link:hover) #cursor .fa-arrow-up-right-from-square {
+        display: inline-block;
+    }
+
+    body:hover:has(button[type="submit"]:hover) #cursor .fa-paper-plane {
+        display: inline-block;
+    }
+
+    body:hover:has(.cursor-home:hover) #cursor .fa-house {
+        display: inline-block;
+    }
+
+    body:hover:has(.cursor-cv:hover) #cursor .fa-file {
+        display: inline-block;
+    }
+
+    body:hover:has(.cursor-youtube:hover) #cursor .fa-youtube {
+        display: inline-block;
+    }
+
 }
-
-
-body:hover:has(a:hover) #cursor,
-body:hover:has(button[type="submit"]:hover) #cursor {
-    width: 50px;
-    transform: translate(10px, 10px);
-    background-color: white;
-}
-
-body:hover:has(a:hover) #cursor .fa-arrow-up-right-from-square {
-    display: inline-block;
-}
-
-body:hover:has(button[type="submit"]:hover) #cursor .fa-paper-plane {
-    display: inline-block;
-}
-
 
 
 /* section {
@@ -574,10 +591,12 @@ nav {
     z-index: 10;
     transition: opacity 0.25s;
 }
-nav.hide-nav{
+
+nav.hide-nav {
     opacity: 0;
 }
-nav.hide-nav:hover{
+
+nav.hide-nav:hover {
     opacity: 1;
 }
 
@@ -590,4 +609,19 @@ nav>span {
     display: flex;
     justify-content: space-between;
     gap: 10px;
+}
+
+section a {
+    position: relative;
+}
+
+section a:after{
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 1px;
+    bottom: 0;
+    left: 0;
+    background-color: white;
+    content: "";
 }

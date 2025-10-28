@@ -144,6 +144,7 @@ window.addEventListener("load", () => {
     })
 
     window.addEventListener("mousemove", (e) => {
+
         if (points.length == 0)
             points.push(new Point(e.clientX, e.clientY));
         else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > 100)
