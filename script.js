@@ -27,7 +27,20 @@ window.addEventListener("load", () => {
 
     const banners = document.querySelectorAll(".banner");
     const banner_container = document.querySelector("#affiliate-websites")
+
+    let lastScrollPosition = window.pageYOffset;
+    const nav = document.querySelector("nav");
     window.addEventListener("scroll", () => {
+
+        if (window.pageYOffset - lastScrollPosition > 0) {
+            nav.classList.add("hide-nav")
+        }
+        else {
+            nav.classList.remove("hide-nav")
+        }
+        lastScrollPosition = window.pageYOffset;
+
+
         let { bottom, height, top } = banner_container.getBoundingClientRect();
         if (top <= window.innerHeight && bottom >= 0) {
             const factor = bottom / height * banners.length;
@@ -35,23 +48,23 @@ window.addEventListener("load", () => {
             for (let b = 0; b < banners.length; b++) {
                 let banner = banners[b];
                 let f = Math.max(Math.min(factor - (banners.length - b - 1), 1), 0)
-                banner.style.transform = `scale(${0.6 + 0.4*f})`;
+                banner.style.transform = `scale(${0.6 + 0.4 * f})`;
                 banner.style.opacity = `${f}`;
             }
         }
     })
 
-    let observer = new IntersectionObserver((entries, observer)=>{
+    let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
-            if(entry.isIntersecting){
+            if (entry.isIntersecting) {
                 entry.target.classList.add("animated")
                 observer.unobserve(entry.target);
             }
         });
-    }, {threshold: 0.5});
+    }, { threshold: 0.5 });
 
     let animated_elements = document.querySelectorAll(".animate");
-    for(let elem of animated_elements){
+    for (let elem of animated_elements) {
         observer.observe(elem)
     }
 
