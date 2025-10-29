@@ -35,9 +35,9 @@ window.addEventListener("load", () => {
 
     function Point(x, y) {
 
-        this.x = x;
+        this.x = Math.round(x/100) * 100;
 
-        this.y = y;
+        this.y = Math.round(y/100) * 100;;
 
         this.ang = ang;
 
@@ -67,9 +67,9 @@ window.addEventListener("load", () => {
 
             ctx.lineTo(this.x, this.y);
 
-            this.x += this.dx;
+            // this.x += this.dx;
 
-            this.y += this.dy;
+            // this.y += this.dy;
 
         }
 
@@ -147,7 +147,7 @@ window.addEventListener("load", () => {
 
         if (points.length == 0)
             points.push(new Point(e.clientX, e.clientY));
-        else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > 100)
+        else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > 50)
             points.push(new Point(e.clientX, e.clientY));
 
     })
