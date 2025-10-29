@@ -2,6 +2,7 @@
 
 window.addEventListener("load", () => {
     var W, H, L, ang = 0, points, start;
+    const tileSize = 100;
 
     const { sqrt } = Math;
 
@@ -35,9 +36,9 @@ window.addEventListener("load", () => {
 
     function Point(x, y) {
 
-        this.x = Math.round(x/100) * 100;
+        this.x = Math.round(x/tileSize) * tileSize;
 
-        this.y = Math.round(y/100) * 100;;
+        this.y = Math.round(y/tileSize) * tileSize;;
 
         this.ang = ang;
 
@@ -147,7 +148,7 @@ window.addEventListener("load", () => {
 
         if (points.length == 0)
             points.push(new Point(e.clientX, e.clientY));
-        else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > 50)
+        else if (points[points.length - 1].distanceFrom(e.clientX, e.clientY) > tileSize/2)
             points.push(new Point(e.clientX, e.clientY));
 
     })
