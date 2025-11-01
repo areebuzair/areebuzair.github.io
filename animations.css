@@ -102,6 +102,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: smooth;
+    }
+
     header h1 {
         transform: scaleY(0) translate(50%, 0);
     }
@@ -135,16 +139,22 @@
         animation: pop-up 0.2s calc(1s + var(--i) * 0.1s) forwards;
     }
 
-    section p {
+    section p,
+    input,
+    textarea,
+    button[type="submit"] {
         --i: 0;
         opacity: 0;
         transform: translate(0, 10px);
-        transition: 0.4s;
+        transition: opacity 0.3s, transform 0.4s;
         transition-delay: calc(var(--i) * 0.2s);
     }
 
-    section .animated p {
-        opacity: 2;
+    section .animated p,
+    .animated input,
+    .animated textarea,
+    .animated button[type="submit"] {
+        opacity: 1;
         transform: translate(0, 0);
     }
 
@@ -153,27 +163,17 @@
         animation: left-right 2s ease infinite;
     }
 
-    /* .animate.project-card {
+    .project-card img {
         opacity: 0;
-        transition: .5s;
+        transform: translate(0%, 17%);
+        transition: transform .75s, opacity .5s;
     }
 
-    .animate.project-card:nth-child(odd) {
-        transform: translate(10%, 10%);
-    }
 
-    .animate.project-card:nth-child(even) {
-        transform: translate(-10%, 10%);
-    }
-
-    .animated.project-card:nth-child(odd),
-    .animated.project-card:nth-child(even) {
+    .animated.project-card img {
         transform: translate(0%, 0%);
-    }
-
-    .animated.project-card {
         opacity: 1;
-    } */
+    }
 
     /* section a:before {
         position: absolute;
@@ -187,7 +187,7 @@
         animation: left-right 2s ease 1s infinite;
     } */
 
-    .project-card:after {
+    /* .project-card:after {
         content: "";
         width: 100%;
         height: 100%;
@@ -197,15 +197,21 @@
         background-image: url("Assets/paint-mask.png");
         background-size: auto 100%;
         background-position: 0% 0;
+        pointer-events: none;
     }
 
 
     .animated.project-card:after {
-        animation: mask-pan 1s steps(62) forwards;
+        animation: mask-pan .75s steps(62) forwards;
     }
 
     .animated.project-card:nth-child(odd):after {
         animation-delay: .2s;
+    } */
+
+    .banner {
+        transition: transform .2s, opacity .2s;
+        position: sticky;
     }
 
 }
