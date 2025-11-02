@@ -33,10 +33,10 @@ window.addEventListener("load", () => {
     window.addEventListener("scroll", () => {
 
         if (window.pageYOffset - lastScrollPosition > 0) {
-            nav.classList.add("hide-nav")
+            nav.classList.remove("show-nav")
         }
         else {
-            nav.classList.remove("hide-nav")
+            nav.classList.add("show-nav")
         }
         lastScrollPosition = window.pageYOffset;
 
