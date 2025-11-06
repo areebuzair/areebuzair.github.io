@@ -241,6 +241,7 @@ footer {
 
         -1px -1px 0px black;
     z-index: 1;
+    background-attachment: fixed;
 }
 
 
@@ -520,6 +521,7 @@ div:hover a:after {
     padding: 10px;
     padding-left: 0;
     position: relative;
+    overflow: hidden;
 }
 
 .project-card h3 {
@@ -555,15 +557,32 @@ form {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    max-width: 450px;
-    transform: translate(-50px, 0);
+    max-width: 500px;
+    width: 100%;
+}
+
+.form-container {
+    margin: 0 auto;
+    grid-column: span 2;
 }
 
 input,
 textarea,
 button[type="submit"] {
+    --stripe: rgb(29, 41, 61);
     padding: 10px;
     display: block;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    background-image: linear-gradient(135deg,
+            var(--stripe) 5%,
+            transparent 5% 45%,
+            var(--stripe) 45% 55%,
+            transparent 55% 95%,
+            var(--stripe) 95%);
+    background-size: 10px 10px;
+    background-repeat: repeat;
     /* height: 3em; */
 }
 
@@ -589,8 +608,9 @@ button[type="submit"] {
         max-width: 100%;
     }
 
-    .two-cols form {
+    .form-container {
         max-width: 100%;
+        grid-column: span 1;
     }
 }
 
@@ -610,7 +630,10 @@ nav {
     opacity: 0;
 }
 
-
+nav:has(a:focus) {
+    opacity: 1;
+    animation: none;
+}
 
 nav.show-nav {
     opacity: 1;

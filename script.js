@@ -57,13 +57,22 @@ window.addEventListener("load", () => {
     let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("animated")
+                if(entry.target.classList.contains("animate")){
+                    entry.target.classList.add("animated")
+                }
+                if(entry.target.classList.contains("scroll-snap")){
+                    entry.target.scrollIntoView({behavior: "smooth"});
+                }
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
 
     let animated_elements = document.querySelectorAll(".animate");
+    for (let elem of animated_elements) {
+        observer.observe(elem)
+    }
+    animated_elements = document.querySelectorAll(".scroll-snap");
     for (let elem of animated_elements) {
         observer.observe(elem)
     }
