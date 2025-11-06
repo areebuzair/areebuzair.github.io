@@ -687,3 +687,13 @@ section a:after {
     background-color: white;
     content: "";
 }
+
+.pre-footer{
+    width: 100%;
+    min-height: 20vh;
+    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    place-content: center;
+    max-width: none;
+}
