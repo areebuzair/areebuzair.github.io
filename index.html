@@ -3,6 +3,7 @@
 
 <head>
     <title>J. M Areeb Uzair's Website</title>
+    <link rel="stylesheet" href="./loader.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -27,6 +28,9 @@
 </head>
 
 <body>
+    <div class="loading-screen">
+        LOADING!
+    </div>
     <nav class="show-nav">
         <a class="cursor-home" href="./">J. M Areeb Uzair</a>
         <span>
@@ -215,6 +219,14 @@
         <i class="fa-solid fa-file"></i>
         <i class="fa-brands fa-youtube"></i>
     </div>
+
+
+    <script>
+        window.addEventListener("load", ()=>{
+            document.body.style.overflowY = "auto";
+            document.querySelector(".loading-screen").style.display = "none";
+        });
+    </script>
 </body>
 
 
