@@ -139,23 +139,46 @@
         animation: pop-up 0.2s calc(1s + var(--i) * 0.1s) forwards;
     }
 
-    section p,
-    input,
-    textarea,
-    button[type="submit"] {
+    section p {
         --i: 0;
         opacity: 0;
-        transform: translate(0, 10px);
+        transform: translate(0, 20px) rotate(4deg);
+        transform-origin: 0 0;
         transition: opacity 0.3s, transform 0.4s;
         transition-delay: calc(var(--i) * 0.2s);
     }
 
     section .animated p,
+    .animated label {
+        opacity: 1;
+        transform: translate(0, 0) rotate(0);
+    }
+
+    label {
+        transform: translate(0, 10px);
+        opacity: 0;
+        transition: transform .3s, opacity .3s;
+        transition-delay: 0.5s;
+    }
+
+    .animated label {
+        transform: translate(0, 0);
+        opacity: 1;
+    }
+
+    input,
+    textarea,
+    button[type="submit"] {
+        clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%);
+        transition: clip-path .3s;
+        transition-delay: 0.5s;
+        transform-origin: 0 0;
+    }
+
     .animated input,
     .animated textarea,
     .animated button[type="submit"] {
-        opacity: 1;
-        transform: translate(0, 0);
+        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
     }
 
     section a:after {

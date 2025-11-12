@@ -43,15 +43,16 @@ body {
     height: 100vh;
     box-sizing: border-box;
     /* background-color: #131313; */
-    font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: "Poppins", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: white;
     overflow-x: hidden;
     /* overflow-y: hidden; */
 }
 
-/* h1 {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} */
+h2,
+h3 {
+    font-family: "Stack Sans Notch", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 
 
@@ -532,7 +533,8 @@ div:hover a:after {
 .project-button {
     border-radius: 10px;
     display: inline-block;
-    font-family: monospace;
+    font-family: "DM Mono", monospace;
+    font-size: 80%;
 }
 
 .project-card img {
@@ -688,7 +690,7 @@ section a:after {
     content: "";
 }
 
-.pre-footer{
+.pre-footer {
     width: 100%;
     min-height: 20vh;
     background-color: red;
@@ -696,4 +698,8 @@ section a:after {
     grid-template-columns: repeat(4, 1fr);
     place-content: center;
     max-width: none;
+}
+
+.scroll-snap{
+    min-height: 100vh;
 }
