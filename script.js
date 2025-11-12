@@ -72,10 +72,10 @@ window.addEventListener("load", () => {
     for (let elem of animated_elements) {
         observer.observe(elem)
     }
-    // animated_elements = document.querySelectorAll(".scroll-snap");
-    // for (let elem of animated_elements) {
-    //     observer.observe(elem)
-    // }
+    animated_elements = document.querySelectorAll(".scroll-snap");
+    for (let elem of animated_elements) {
+        observer.observe(elem)
+    }
 
 
 })
