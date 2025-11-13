@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,100&family=Raleway:wght@100..900&display=swap"
-        rel="stylesheet"> -->
+        rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -28,13 +28,16 @@
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="./animations.css">
     <script src="https://kit.fontawesome.com/5a3d9e2a8a.js" crossorigin="anonymous"></script>
-    <script src="animated-bg.js" defer>  </script>
-    <script src="script.js" defer>  </script>
 </head>
 
 <body>
     <div class="loading-screen">
-        LOADING!
+        <div class="loading-screen-1">
+            LOADING
+        </div>
+        <div class="loading-screen-2">
+            <span>ASSALAMU<br />A'LAIKUM</span>
+        </div>
     </div>
     <nav class="show-nav">
         <a class="cursor-home" href="./">J. M Areeb Uzair</a>
@@ -45,7 +48,7 @@
         </span>
     </nav>
     <canvas id="cnv"></canvas>
-    <header class="scroll-snap">
+    <header>
         <div class="header-content animate">
             <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
                 y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50"
@@ -110,7 +113,7 @@
             <p>I am a full-stack developer based in Bangladesh, specializing in front-end web development.</p>
         </div>
     </header>
-    <section class="two-cols scroll-snap">
+    <section class="two-cols">
         <h2>About Me</h2>
         <div class="animate">
             <p style="--i:0;">I am a software developer based in Bangladesh. I have been writing code since my days in
@@ -128,7 +131,7 @@
                 that develops software as you need.</p>
         </div>
     </section>
-    <section id="selected-projects" class="scroll-snap">
+    <section id="selected-projects">
         <h2>Selected Projects</h2>
         <div class="project-card animate">
             <span class="project-button">Blender Addon - Fork</span>
@@ -185,7 +188,7 @@
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, odit? Soluta hic dolore suscipit maxime a
             quo esse dolor consequatur.</p>
     </section> -->
-    <section class="two-cols scroll-snap">
+    <section class="two-cols">
         <h2>Contact Me</h2>
         <div class="animate">
             <p style="--i:0;">Hire me through <a class="cursor-link" href="https://astareo.com/" target="_blank"><span
@@ -224,14 +227,8 @@
         <i class="fa-solid fa-file"></i>
         <i class="fa-brands fa-youtube"></i>
     </div>
-
-
-    <script>
-        window.addEventListener("load", ()=>{
-            document.body.style.overflowY = "auto";
-            document.querySelector(".loading-screen").style.display = "none";
-        });
-    </script>
+    <script src="animated-bg.js" defer>  </script>
+    <script src="script.js" defer>  </script>
 </body>
 
 

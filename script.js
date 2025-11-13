@@ -28,17 +28,17 @@ window.addEventListener("load", () => {
     const banners = document.querySelectorAll(".banner");
     const banner_container = document.querySelector("#affiliate-websites")
 
-    let lastScrollPosition = window.pageYOffset;
-    const nav = document.querySelector("nav");
+    // let lastScrollPosition = window.pageYOffset;
+    // const nav = document.querySelector("nav");
     window.addEventListener("scroll", () => {
 
-        if (window.pageYOffset - lastScrollPosition > 0) {
-            nav.classList.remove("show-nav")
-        }
-        else {
-            nav.classList.add("show-nav")
-        }
-        lastScrollPosition = window.pageYOffset;
+        // if (window.pageYOffset - lastScrollPosition > 0) {
+        //     nav.classList.remove("show-nav")
+        // }
+        // else {
+        //     nav.classList.add("show-nav")
+        // }
+        // lastScrollPosition = window.pageYOffset;
 
 
         let { bottom, height, top } = banner_container.getBoundingClientRect();
@@ -57,25 +57,34 @@ window.addEventListener("load", () => {
     let observer = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                if(entry.target.classList.contains("animate")){
+                if (entry.target.classList.contains("animate")) {
                     entry.target.classList.add("animated")
                 }
-                if(entry.target.classList.contains("scroll-snap")){
-                    entry.target.scrollIntoView({behavior: "smooth"});
+                if (entry.target.classList.contains("scroll-snap")) {
+                    entry.target.scrollIntoView({ behavior: "smooth" });
                 }
                 observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.5 });
 
-    let animated_elements = document.querySelectorAll(".animate");
-    for (let elem of animated_elements) {
-        observer.observe(elem)
-    }
-    animated_elements = document.querySelectorAll(".scroll-snap");
-    for (let elem of animated_elements) {
-        observer.observe(elem)
-    }
+    setTimeout(() => {
+        document.querySelector(".loading-screen").classList.add("loaded");
+    }, 500);
+
+    setTimeout(() => {
+        document.body.style.overflowY = "auto";
+        document.querySelector(".loading-screen").style.display = "none";
+        let animated_elements = document.querySelectorAll(".animate");
+        for (let elem of animated_elements) {
+            observer.observe(elem)
+        }
+        animated_elements = document.querySelectorAll(".scroll-snap");
+        for (let elem of animated_elements) {
+            observer.observe(elem)
+
+        }
+    }, 3000);
 
 
 })
