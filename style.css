@@ -526,8 +526,8 @@ div:hover a:after {
 }
 
 .project-card h3 {
-    margin-top: .5rem;
-    margin-bottom: .5rem;
+    margin: 0;
+    margin-bottom: 0.5em;
 }
 
 .project-button {
@@ -541,6 +541,12 @@ div:hover a:after {
     aspect-ratio: 2390/1000;
     width: 100%;
     object-fit: cover;
+}
+
+.project-demo-vid {
+    background-image: url("./Assets/Loader.svg");
+    background-position: center;
+    background-size: cover;
 }
 
 section {
@@ -700,6 +706,6 @@ section a:after {
     max-width: none;
 }
 
-.scroll-snap{
+.scroll-snap {
     min-height: 100vh;
 }

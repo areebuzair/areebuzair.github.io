@@ -68,6 +68,21 @@ window.addEventListener("load", () => {
         });
     }, { threshold: 0.5 });
 
+    let projectDemoCards = document.querySelectorAll(".project-demo-vid");
+
+    for (let card of projectDemoCards) {
+        card.addEventListener("mouseover", (e) => {
+            let src = e.target.getAttribute("src");
+            src = src.replace(".png", ".gif");
+            e.target.setAttribute("src", src);
+        });
+        card.addEventListener("mouseleave", (e) => {
+            let src = e.target.getAttribute("src");
+            src = src.replace(".gif", ".png")
+            e.target.setAttribute("src", src);
+        });
+    }
+
     setTimeout(() => {
         document.querySelector(".loading-screen").classList.add("loaded");
     }, 500);
@@ -84,7 +99,7 @@ window.addEventListener("load", () => {
             observer.observe(elem)
 
         }
-    }, 3000);
+    }, 1000);
 
 
 })
