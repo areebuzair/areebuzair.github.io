@@ -31,6 +31,7 @@
 </head>
 
 <body>
+
     <div class="loading-screen">
         <div class="loading-screen-1">
             LOADING
@@ -39,6 +40,8 @@
             <span>ASSALAMU<br />A'LAIKUM</span>
         </div>
     </div>
+
+    <canvas id="cnv"></canvas>
     <nav class="show-nav">
         <a class="cursor-home" href="./">J. M Areeb Uzair</a>
         <span>
@@ -47,133 +50,124 @@
             <a class="cursor-youtube" href="">YouTube</a>
         </span>
     </nav>
-    <canvas id="cnv"></canvas>
-    <header>
-        <div class="header-content animate">
-            <!-- <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
-                y="0px" width="50px" height="50px" viewBox="0 0 50 50" enable-background="new 0 0 50 50"
-                xml:space="preserve">
-                <defs>
-                    <path id="criclePath" d=" M 25 25 m -20, 0 a 20,20 0 0,1 40,0 a 20,20 0 0,1 -40,0 " />
-                </defs>
+    <main>
+        <header>
+            <div class="header-content animate">
+                <h1><span class="sparkly-word">
+                        J. M Areeb Uzair Alam
+                        <span class="sparkles"></span>
+                        <span class="sparkles"></span>
+                        <span class="sparkles"></span>
+                    </span></h1>
+                <ul class="social-media">
+                    <li style="--i:0;"><a class="cursor-link" target="_blank" href="https://github.com/areebuzair">
+                            <i class="fa-brands fa-github"></i>
+                            <span class='word'><span class='letter' style='--i:0;'>G</span><span class='letter'
+                                    style='--i:1;'>I</span><span class='letter' style='--i:2;'>T</span><span
+                                    class='letter' style='--i:3;'>H</span><span class='letter'
+                                    style='--i:4;'>U</span><span class='letter' style='--i:5;'>B</span></span>
+                        </a></li>
+                    <li style="--i:1;"><a class="cursor-link" target="_blank"
+                            href="https://www.researchgate.net/profile/J-M-Areeb-Alam">
+                            <i class="fa-brands fa-researchgate"></i>
+                            <span class='word'><span class='letter' style='--i:0;'>R</span><span class='letter'
+                                    style='--i:1;'>E</span><span class='letter' style='--i:2;'>S</span><span
+                                    class='letter' style='--i:3;'>E</span><span class='letter'
+                                    style='--i:4;'>A</span><span class='letter' style='--i:5;'>R</span><span
+                                    class='letter' style='--i:6;'>C</span><span class='letter'
+                                    style='--i:7;'>H</span><span class='letter' style='--i:8;'>G</span><span
+                                    class='letter' style='--i:9;'>A</span><span class='letter'
+                                    style='--i:10;'>T</span><span class='letter' style='--i:11;'>E</span></span>
+                        </a></li>
+                    <li style="--i:2;"><a class="cursor-link" target="_blank"
+                            href="https://www.linkedin.com/in/j-m-areeb-uzair-alam-017075389/">
+                            <i class="fa-brands fa-linkedin"></i>
+                            <span class='word'><span class='letter' style='--i:0;'>L</span><span class='letter'
+                                    style='--i:1;'>I</span><span class='letter' style='--i:2;'>N</span><span
+                                    class='letter' style='--i:3;'>K</span><span class='letter'
+                                    style='--i:4;'>E</span><span class='letter' style='--i:5;'>D</span><span
+                                    class='letter' style='--i:6;'>I</span><span class='letter'
+                                    style='--i:7;'>N</span></span>
+                        </a></li>
+                    <li style="--i:3;"><a class="cursor-link" target="_blank" href="https://huggingface.co/areebuzair">
+                            <i style="filter: saturate(0);">🤗</i>
+                            <span class='word'><span class='letter' style='--i:0;'>H</span><span class='letter'
+                                    style='--i:1;'>U</span><span class='letter' style='--i:2;'>G</span><span
+                                    class='letter' style='--i:3;'>G</span><span class='letter'
+                                    style='--i:4;'>I</span><span class='letter' style='--i:5;'>N</span><span
+                                    class='letter' style='--i:6;'>G</span><span class='letter' style='--i:7;'>
+                                </span><span class='letter' style='--i:8;'>F</span><span class='letter'
+                                    style='--i:9;'>A</span><span class='letter' style='--i:10;'>C</span><span
+                                    class='letter' style='--i:11;'>E</span></span>
+                        </a></li>
+                </ul>
+                <p>I am a full-stack developer based in Bangladesh, specializing in front-end web development.</p>
+            </div>
+        </header>
+        <section class="two-cols">
+            <h2>About Me</h2>
+            <div class="animate">
+                <p style="--i:0;">I am a software developer based in Bangladesh. I have been writing code since my days
+                    in
+                    High School.</p>
+                <p style="--i:1;">I primarily use Python and Javascript, with a focus on Front-end web development with
+                    React, Next, Tailwind and Vanilla Web stack.</p>
+                <p style="--i:2;">I am also working with NodeJS and Spring Boot for Back-end development.</p>
+                <p style="--i:3;">Aside from software development, I also work on 3D renders and animations as a hobby.
+                </p>
+                <p style="--i:4;">I am currently employed at <a class="cursor-link" href="https://astareo.com/"
+                        target="_blank"><span class='word'><span class='letter' style='--i:0;'>A</span><span
+                                class='letter' style='--i:1;'>S</span><span class='letter' style='--i:2;'>T</span><span
+                                class='letter' style='--i:3;'>A</span><span class='letter' style='--i:4;'>R</span><span
+                                class='letter' style='--i:5;'>E</span><span class='letter'
+                                style='--i:6;'>O</span></span></a>, a
+                    freelancing firm
+                    that develops software as you need.</p>
+            </div>
+        </section>
+        <section id="selected-projects">
+            <h2>Selected Projects</h2>
+            <div class="project-card animate">
+                <span class="project-button">Blender Addon - Fork</span>
+                <h3>Sketchfab Addon - Auto Attribution</h3>
+                <img src="Assets/Projects/Sketchfab Addon.png" alt="Sketchfab addon fork" class="project-demo-vid">
+            </div>
+            <div class="project-card animate">
+                <span class="project-button">Windows App</span>
+                <h3>MemeMaker</h3>
+                <img src="Assets/Projects/MemeMaker.png" alt="MemeMaker" class="project-demo-vid">
+            </div>
+            <div class="project-card animate">
+                <span class="project-button">Dataset</span>
+                <h3>psm500k</h3>
+                <img src="Assets/Projects/psm500k.png" alt="psm500k Dataset">
+            </div>
 
-                <circle cx="150" cy="150" r="150" fill="#000"/>
-                <g>
-                    <use xlink:href="#criclePath" fill="none" />
-                    <text fill="#fff" font-size="8px">
-                        <textPath xlink:href="#criclePath">Scroll Down!</textPath>
-                    </text>
-                </g>
-            </svg> -->
-            <h1><span class="sparkly-word">
-                    J. M Areeb Uzair Alam
-                    <span class="sparkles"></span>
-                    <span class="sparkles"></span>
-                    <span class="sparkles"></span>
-                </span></h1>
-            <ul class="social-media">
-                <li style="--i:0;"><a class="cursor-link" target="_blank" href="https://github.com/areebuzair">
-                        <i class="fa-brands fa-github"></i>
-                        <span class='word'><span class='letter' style='--i:0;'>G</span><span class='letter'
-                                style='--i:1;'>I</span><span class='letter' style='--i:2;'>T</span><span class='letter'
-                                style='--i:3;'>H</span><span class='letter' style='--i:4;'>U</span><span class='letter'
-                                style='--i:5;'>B</span></span>
-                    </a></li>
-                <li style="--i:1;"><a class="cursor-link" target="_blank"
-                        href="https://www.researchgate.net/profile/J-M-Areeb-Alam">
-                        <i class="fa-brands fa-researchgate"></i>
-                        <span class='word'><span class='letter' style='--i:0;'>R</span><span class='letter'
-                                style='--i:1;'>E</span><span class='letter' style='--i:2;'>S</span><span class='letter'
-                                style='--i:3;'>E</span><span class='letter' style='--i:4;'>A</span><span class='letter'
-                                style='--i:5;'>R</span><span class='letter' style='--i:6;'>C</span><span class='letter'
-                                style='--i:7;'>H</span><span class='letter' style='--i:8;'>G</span><span class='letter'
-                                style='--i:9;'>A</span><span class='letter' style='--i:10;'>T</span><span class='letter'
-                                style='--i:11;'>E</span></span>
-                    </a></li>
-                <li style="--i:2;"><a class="cursor-link" target="_blank"
-                        href="https://www.linkedin.com/in/j-m-areeb-uzair-alam-017075389/">
-                        <i class="fa-brands fa-linkedin"></i>
-                        <span class='word'><span class='letter' style='--i:0;'>L</span><span class='letter'
-                                style='--i:1;'>I</span><span class='letter' style='--i:2;'>N</span><span class='letter'
-                                style='--i:3;'>K</span><span class='letter' style='--i:4;'>E</span><span class='letter'
-                                style='--i:5;'>D</span><span class='letter' style='--i:6;'>I</span><span class='letter'
-                                style='--i:7;'>N</span></span>
-                    </a></li>
-                <li style="--i:3;"><a class="cursor-link" target="_blank" href="https://huggingface.co/areebuzair">
-                        <i style="filter: saturate(0);">🤗</i>
-                        <span class='word'><span class='letter' style='--i:0;'>H</span><span class='letter'
-                                style='--i:1;'>U</span><span class='letter' style='--i:2;'>G</span><span class='letter'
-                                style='--i:3;'>G</span><span class='letter' style='--i:4;'>I</span><span class='letter'
-                                style='--i:5;'>N</span><span class='letter' style='--i:6;'>G</span><span class='letter'
-                                style='--i:7;'> </span><span class='letter' style='--i:8;'>F</span><span class='letter'
-                                style='--i:9;'>A</span><span class='letter' style='--i:10;'>C</span><span class='letter'
-                                style='--i:11;'>E</span></span>
-                    </a></li>
-            </ul>
-            <p>I am a full-stack developer based in Bangladesh, specializing in front-end web development.</p>
-        </div>
-    </header>
-    <section class="two-cols">
-        <h2>About Me</h2>
-        <div class="animate">
-            <p style="--i:0;">I am a software developer based in Bangladesh. I have been writing code since my days in
-                High School.</p>
-            <p style="--i:1;">I primarily use Python and Javascript, with a focus on Front-end web development with
-                React, Next, Tailwind and Vanilla Web stack.</p>
-            <p style="--i:2;">I am also working with NodeJS and Spring Boot for Back-end development.</p>
-            <p style="--i:3;">Aside from software development, I also work on 3D renders and animations as a hobby.</p>
-            <p style="--i:4;">I am currently employed at <a class="cursor-link" href="https://astareo.com/"
-                    target="_blank"><span class='word'><span class='letter' style='--i:0;'>A</span><span class='letter'
-                            style='--i:1;'>S</span><span class='letter' style='--i:2;'>T</span><span class='letter'
-                            style='--i:3;'>A</span><span class='letter' style='--i:4;'>R</span><span class='letter'
-                            style='--i:5;'>E</span><span class='letter' style='--i:6;'>O</span></span></a>, a
-                freelancing firm
-                that develops software as you need.</p>
-        </div>
-    </section>
-    <section id="selected-projects">
-        <h2>Selected Projects</h2>
-        <div class="project-card animate">
-            <span class="project-button">Blender Addon - Fork</span>
-            <h3>Sketchfab Addon - Auto Attribution</h3>
-            <img src="Assets/Projects/Sketchfab Addon.png" alt="Sketchfab addon fork" class="project-demo-vid">
-        </div>
-        <div class="project-card animate">
-            <span class="project-button">Windows App</span>
-            <h3>MemeMaker</h3>
-            <img src="Assets/Projects/MemeMaker.png" alt="MemeMaker" class="project-demo-vid">
-        </div>
-        <div class="project-card animate">
-            <span class="project-button">Dataset</span>
-            <h3>psm500k</h3>
-            <img src="Assets/Projects/psm500k.png" alt="psm500k Dataset" class="project-demo-vid">
-        </div>
-
-    </section>
-    <section>
-        <h2>Other Works</h2>
-        <div id="affiliate-websites">
-            <a target="_blank" href="./BlenderArtPortfolio/" class="banner blender cursor-link scroll-snap">
-                <div class="animate">
-                    <p>My 3D Artworks, animations and Blender addons all in one place.</p>
-                    <h2>Blender Art Portfolio</h2>
-                </div>
-            </a>
-            <a target="_blank" href="./GameHUB/" class="banner gamehub cursor-link scroll-snap">
-                <div class="animate">
-                    <p>Games I made with HTML, CSS and JavaScript.</p>
-                    <h2>Norwester's GameHUB</h2>
-                </div>
-            </a>
-            <a target="_blank" href="./ThreeJS/" class="banner threejs cursor-link scroll-snap">
-                <div class="animate">
-                    <p>My Experiments with threejs.</p>
-                    <h2>ThreeJS Projects</h2>
-                </div>
-            </a>
-        </div>
-    </section>
-    <!-- <section class="carousel-container">
+        </section>
+        <section>
+            <h2>Other Works</h2>
+            <div id="affiliate-websites">
+                <a target="_blank" href="./BlenderArtPortfolio/" class="banner blender cursor-link scroll-snap">
+                    <div class="animate">
+                        <p>My 3D Artworks, animations and Blender addons all in one place.</p>
+                        <h2>Blender Art Portfolio</h2>
+                    </div>
+                </a>
+                <a target="_blank" href="./GameHUB/" class="banner gamehub cursor-link scroll-snap">
+                    <div class="animate">
+                        <p>Games I made with HTML, CSS and JavaScript.</p>
+                        <h2>Norwester's GameHUB</h2>
+                    </div>
+                </a>
+                <a target="_blank" href="./ThreeJS/" class="banner threejs cursor-link scroll-snap">
+                    <div class="animate">
+                        <p>My Experiments with threejs.</p>
+                        <h2>ThreeJS Projects</h2>
+                    </div>
+                </a>
+            </div>
+        </section>
+        <!-- <section class="carousel-container">
         <div class="carousel" style="--items:9;">
             <div class="card" style="--i:0;"></div>
             <div class="card" style="--i:1;"></div>
@@ -188,37 +182,39 @@
         <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laborum, odit? Soluta hic dolore suscipit maxime a
             quo esse dolor consequatur.</p>
     </section> -->
-    <section class="two-cols">
-        <h2>Contact Me</h2>
-        <div class="animate">
-            <p style="--i:0;">Hire me through <a class="cursor-link" href="https://astareo.com/" target="_blank"><span
-                        class='word'><span class='letter' style='--i:0;'>A</span><span class='letter'
-                            style='--i:1;'>S</span><span class='letter' style='--i:2;'>T</span><span class='letter'
-                            style='--i:3;'>A</span><span class='letter' style='--i:4;'>R</span><span class='letter'
-                            style='--i:5;'>E</span><span class='letter' style='--i:6;'>O</span></span></a>!</p>
-            <p style="--i:1;">Or, shoot me a mail. </p>
-            <form>
-                <label style="--i:2;" for="form-name"><i class="fa-solid fa-user"></i>Name</label>
-                <input style="--i:3;" type="text" required name="name" id="form-name" placeholder="Your Name" />
-                <label style="--i:4;" for="form-email"><i class="fa-solid fa-envelope"></i>Email</label>
-                <input style="--i:5;" type="email" required name="email" id="form-email"
-                    placeholder="email@service.com" />
-                <label style="--i:6;" for="form-message"><i class="fa-solid fa-pen-nib"></i>Message</label>
-                <textarea style="--i:7;" name="message" required id="form-message"
-                    placeholder="Your Message..." /></textarea>
-                <button style="--i:8;" type="submit">Send</button>
-            </form>
-        </div>
-    </section>
-    <section class="pre-footer">
-        <div>Hello</div>
-        <div>Hello</div>
-        <div>Hello</div>
-        <div>Hello</div>
-    </section>
-    <footer>
-        Website designed and developed by J. M Areeb Uzair &copy; 2025
-    </footer>
+        <section class="two-cols">
+            <h2>Contact Me</h2>
+            <div class="animate">
+                <p style="--i:0;">Hire me through <a class="cursor-link" href="https://astareo.com/"
+                        target="_blank"><span class='word'><span class='letter' style='--i:0;'>A</span><span
+                                class='letter' style='--i:1;'>S</span><span class='letter' style='--i:2;'>T</span><span
+                                class='letter' style='--i:3;'>A</span><span class='letter' style='--i:4;'>R</span><span
+                                class='letter' style='--i:5;'>E</span><span class='letter'
+                                style='--i:6;'>O</span></span></a>!</p>
+                <p style="--i:1;">Or, shoot me a mail. </p>
+                <form>
+                    <label style="--i:2;" for="form-name"><i class="fa-solid fa-user"></i>Name</label>
+                    <input style="--i:3;" type="text" required name="name" id="form-name" placeholder="Your Name" />
+                    <label style="--i:4;" for="form-email"><i class="fa-solid fa-envelope"></i>Email</label>
+                    <input style="--i:5;" type="email" required name="email" id="form-email"
+                        placeholder="email@service.com" />
+                    <label style="--i:6;" for="form-message"><i class="fa-solid fa-pen-nib"></i>Message</label>
+                    <textarea style="--i:7;" name="message" required id="form-message"
+                        placeholder="Your Message..." /></textarea>
+                    <button style="--i:8;" type="submit">Send</button>
+                </form>
+            </div>
+        </section>
+        <section class="pre-footer">
+            <div>Hello</div>
+            <div>Hello</div>
+            <div>Hello</div>
+            <div>Hello</div>
+        </section>
+        <footer>
+            Website designed and developed by J. M Areeb Uzair &copy; 2025
+        </footer>
+    </main>
 
     <div id="cursor">
         <i class="fa-solid fa-arrow-up-right-from-square"></i>
@@ -227,6 +223,7 @@
         <i class="fa-solid fa-file"></i>
         <i class="fa-brands fa-youtube"></i>
     </div>
+
     <script src="animated-bg.js" defer>  </script>
     <script src="script.js" defer>  </script>
 </body>

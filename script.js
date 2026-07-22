@@ -28,17 +28,17 @@ window.addEventListener("load", () => {
     const banners = document.querySelectorAll(".banner");
     const banner_container = document.querySelector("#affiliate-websites")
 
-    // let lastScrollPosition = window.pageYOffset;
-    // const nav = document.querySelector("nav");
+    let lastScrollPosition = window.pageYOffset;
+    const nav = document.querySelector("nav");
     window.addEventListener("scroll", () => {
 
         // if (window.pageYOffset - lastScrollPosition > 0) {
-        //     nav.classList.remove("show-nav")
+        //     nav.classList.remove("show-nav");
         // }
         // else {
-        //     nav.classList.add("show-nav")
+        //     nav.classList.add("show-nav");
         // }
-        // lastScrollPosition = window.pageYOffset;
+        lastScrollPosition = window.pageYOffset;
 
 
         let { bottom, height, top } = banner_container.getBoundingClientRect();
@@ -84,12 +84,9 @@ window.addEventListener("load", () => {
     }
 
     setTimeout(() => {
-        document.querySelector(".loading-screen").classList.add("loaded");
-    }, 500);
-
-    setTimeout(() => {
         document.body.style.overflowY = "auto";
         document.querySelector(".loading-screen").style.display = "none";
+        
         let animated_elements = document.querySelectorAll(".animate");
         for (let elem of animated_elements) {
             observer.observe(elem)
@@ -99,7 +96,7 @@ window.addEventListener("load", () => {
             observer.observe(elem)
 
         }
-    }, 1000);
+    }, 500);
 
 
 })

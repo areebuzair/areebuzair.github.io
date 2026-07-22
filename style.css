@@ -57,12 +57,25 @@ h3 {
 
 
 header {
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
+    text-align: center; */
     width: 100%;
+}
+
+header>div {
+    border: 5px double white;
+    border-radius: 10px;
+    padding: 2rem;
+    margin: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* align-items: center; */
+    text-align: center;
+    /* width: 100%; */
     min-height: 100%;
 }
 
@@ -381,11 +394,11 @@ footer {
     padding: 10px;
 } */
 
-.img-container img {
+/* .img-container img {
     width: 100%;
     position: sticky;
     top: 0;
-}
+} */
 
 p>.first-letter {
     font-size: 3em;
@@ -543,12 +556,6 @@ div:hover a:after {
     object-fit: cover;
 }
 
-.project-demo-vid {
-    background-image: url("./Assets/Loader.svg");
-    background-position: center;
-    background-size: cover;
-}
-
 section {
     padding: 10px;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
@@ -630,22 +637,16 @@ nav {
     justify-content: space-between;
     padding: 20px;
     box-sizing: border-box;
-    position: fixed;
+    position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
     background: linear-gradient(to bottom, black 45%, transparent);
     backdrop-filter: blur(3px);
     opacity: 0;
 }
 
-nav:has(a:focus) {
+.show-nav{
     opacity: 1;
-    animation: none;
-}
-
-nav.show-nav {
-    opacity: 1;
-    animation: fade-out 1s 3s forwards;
 }
 
 nav:hover {
@@ -664,11 +665,7 @@ nav:hover:after {
     background-attachment: fixed;
 }
 
-@keyframes fade-out {
-    to {
-        opacity: 0;
-    }
-}
+
 
 nav a {
     color: white;
