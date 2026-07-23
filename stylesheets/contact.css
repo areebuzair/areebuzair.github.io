@@ -1,0 +1,77 @@
+main {
+    max-width: 800px;
+    display: grid;
+    padding: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 auto;
+}
+
+@media screen and (max-width: 650px) {
+    main {
+        grid-template-columns: auto;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    width: 100%;
+    max-width: 400px;
+    background-color: rgb(23, 23, 23);
+}
+
+#response {
+    display: none;
+}
+
+h1 {
+    margin: 0;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 1rem;
+}
+
+input,
+textarea {
+    display: block;
+    width: 100%;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    border: none;
+}
+
+textarea {
+    resize: vertical;
+    height: 5rem;
+}
+
+button {
+    font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+button:active {
+    background-color: rgb(190, 190, 190);
+}
+
+button:disabled {
+    background-color: rgba(255, 255, 255, 0.556);
+}

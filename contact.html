@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Contact - J. M Areeb Uzair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,100&family=Raleway:wght@100..900&display=swap"
+        rel="stylesheet">
+    <meta property="og:title" content="Contact - J. M Areeb Uzair">
+    <meta property="og:description" content="Contact page for J. M Areeb Uzair">
+    <meta property="og:image" content="https://areebuzair.github.io/Assets/ogpimage.jpg">
+    <meta property="og:url" content="https://areebuzair.github.io/contact.html">
+    <meta property="og:type" content="website">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta author="J. M Areeb Uzair">
+    <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair, Contact">
+    <meta name="description" content="Contact page for J. M Areeb Uzair">
+    <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/contact.css">
+</head>
+
+<body>
+    <main>
+        <div>
+            <h1>Contact</h1>
+            <p>
+                Mail me at:<br/><a href="mailto:jmareebuzair@proton.me">jmareebuzair@proton.me</a>
+            </p>
+            <p>Find me on:<br/><a href="https://www.linkedin.com/in/j-m-areeb-uzair-alam-017075389">LinkedIn</a></p>
+        </div>
+        <div class="container">
+            <form method="POST" id="form">
+                <div class="input-control">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" required>
+                </div>
+                <div class="input-control">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" required>
+                </div>
+                <div class="input-control">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" required></textarea>
+                </div>
+                <div id="response"></div>
+                <div class="input-control">
+                    <button type="submit">Send!</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+
+    <script>
+        const form = document.getElementById('form');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const responseElem = document.getElementById('response');
+
+        const setResponse = (text, bad = false) => {
+            responseElem.textContent = text;
+            responseElem.style.color = bad ? "red" : "green";
+            responseElem.style.display = "block";
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData(form);
+            formData.append("access_key", "42d11400-1a8b-4947-87dc-5460a8b4c601");
+
+            const originalText = submitBtn.textContent;
+
+            submitBtn.textContent = "Sending...";
+            submitBtn.disabled = true;
+
+            try {
+                const response = await fetch("https://api.web3forms.com/submit", {
+                    method: "POST",
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    setResponse("Success! Your message has been sent.");
+                    form.reset();
+                } else {
+                    setResponse("Error: " + data.message, true);
+                }
+
+            } catch (error) {
+                setResponse("Something went wrong. Please try again.", true);
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>
