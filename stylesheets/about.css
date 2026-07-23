@@ -1,0 +1,8 @@
+summary{
+    cursor: pointer;
+}
+
+main{
+    max-width: 80ch;
+    margin: 0 auto;
+}

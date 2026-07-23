@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>About - J. M Areeb Uzair</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,100&family=Raleway:wght@100..900&display=swap"
+        rel="stylesheet">
+    <meta property="og:title" content="About - J. M Areeb Uzair">
+    <meta property="og:description" content="About page for J. M Areeb Uzair">
+    <meta property="og:image" content="https://areebuzair.github.io/Assets/ogpimage.jpg">
+    <meta property="og:url" content="https://areebuzair.github.io/about.html">
+    <meta property="og:type" content="website">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta author="J. M Areeb Uzair">
+    <meta keywords="J. M Areeb Uzair Alam, Areeb Uzair, About">
+    <meta name="description" content="About page for J. M Areeb Uzair">
+    <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link rel="stylesheet" href="./stylesheets/about.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/marked@18.0.7/lib/marked.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js"></script>
+</head>
+
+<body>
+    <main>
+
+    </main>
+
+
+    <script>
+        async function getData() {
+            const url = "https://areebuzair.github.io/areebuzair/README.md";
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`Response status: ${response.status}`);
+                }
+
+                const result = await response.text();
+                document.querySelector("main").innerHTML = DOMPurify.sanitize(marked.parse(result))
+
+            } catch (error) {
+                console.error(error.message);
+            }
+        }
+        getData()
+    </script>
+</body>
+
+</html>
