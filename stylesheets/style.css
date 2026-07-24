@@ -5,27 +5,48 @@
 
 body {
     margin: 0;
-    padding: 10px;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     box-sizing: border-box;
-    background-color: rgb(17, 17, 17);
     font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: white;
+    background-color: rgb(220, 220, 220);
+    /* background-image: url("/Assets/HDR_L_0.png");
+    background-size: 3cm; */
+    overflow-x: hidden;
+}
+
+main {
+    padding-block: 5rem;
+    padding-inline: 1rem;
 }
 
 /* h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 } */
 
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(7px);
+    padding: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    z-index: 20;
+}
 
+nav a {
+    --color: black;
+}
 
 a {
+    --color: blue;
     display: inline-block;
-    color: white;
+    color: var(--color);
     text-decoration: none;
-    padding: 5px;
-    margin: 5px;
     position: relative;
 }
 
@@ -33,7 +54,7 @@ a:after {
     position: absolute;
     width: 100%;
     height: 1px;
-    background-color: white;
+    background-color: var(--color);
     content: "";
     bottom: 0;
     left: 0;
@@ -43,9 +64,4 @@ a:after {
 
 a:hover:after {
     transform: scaleX(1);
-    box-shadow: 0 0 2px white,
-        0 0 3px lightblue,
-        0 0 4px blue,
-        0 0 5px darkblue;
 }
-
