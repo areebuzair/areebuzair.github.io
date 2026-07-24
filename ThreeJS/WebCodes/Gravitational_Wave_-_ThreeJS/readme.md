@@ -1,3 +1,0 @@
-# Preview
-
-![preview](preview.png)
