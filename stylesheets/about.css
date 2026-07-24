@@ -10,3 +10,7 @@ main{
 img{
     max-width: 100%;
 }
+
+summary:hover{
+    background-color: rgb(205, 205, 205);
+}

@@ -28,13 +28,17 @@
 
 <body>
     <nav>
-        <a href="/">Home</a>
-        <!-- <a href="/about.html">About</a> -->
-        <a href="/contact.html">Contact</a>
+        <div>
+            <a href="/">Home</a>
+            <span>
+                <a href="/about.html">About</a>
+                <a href="/contact.html">Contact</a>
+            </span>
+        </div>
     </nav>
 
     <main>
-
+        <article></article>
     </main>
 
 
@@ -48,7 +52,7 @@
                 }
 
                 const result = await response.text();
-                document.querySelector("main").innerHTML = DOMPurify.sanitize(marked.parse(result))
+                document.querySelector("article").innerHTML = DOMPurify.sanitize(marked.parse(result))
 
             } catch (error) {
                 console.error(error.message);

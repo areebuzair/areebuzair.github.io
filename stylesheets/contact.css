@@ -1,5 +1,5 @@
 main {
-    max-width: 800px;
+    max-width: 80ch;
     min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
