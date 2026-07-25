@@ -87,3 +87,18 @@ a:after {
 a:hover:after {
     transform: scaleX(1);
 }
+
+nav .active-link {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+nav .active-link:after {
+    content: none;
+}
+
+@media screen and (max-width: 250px) {
+    nav .active-link {
+        display: none;
+    }
+}
