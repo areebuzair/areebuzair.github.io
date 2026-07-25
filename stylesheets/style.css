@@ -3,13 +3,22 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+    --text-color: rgb(39, 39, 39);
+    --radius: 0.25em;
+    --main-bg: rgb(220, 220, 220);
+    --card-bg: rgb(240, 240, 240);
+    --card-padding: 1rem;
+    --max-w: 80ch;
+}
+
 body {
     margin: 0;
     width: 100%;
     min-height: 100vh;
     box-sizing: border-box;
     font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--main-bg);
     /* background-image: url("/Assets/HDR_L_0.png");
     background-size: 3cm; */
     overflow-x: hidden;
@@ -29,7 +38,7 @@ nav {
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgb(220, 220, 220);
+    background-color: var(--main-bg);
     backdrop-filter: blur(7px);
     z-index: 20;
     border-bottom: 1px solid rgb(39, 39, 39);
@@ -45,14 +54,14 @@ nav>div {
     margin: 0 auto; */
 }
 
-nav>div>span{
+nav>div>span {
     display: flex;
     justify-content: space-between;
     gap: 1rem;
 }
 
 nav a {
-    --color: black;
+    --color: var(--text-color);
 }
 
 a {

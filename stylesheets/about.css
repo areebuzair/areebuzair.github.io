@@ -3,15 +3,15 @@ summary {
 }
 
 main {
-    max-width: 80ch;
+    max-width: var(--max-w);
     margin: 0 auto;
 }
 
 article {
-    padding: 1rem;
-    background-color: rgb(240, 240, 240);
-    border-radius: 0.25rem;
-    border: 1px solid rgb(39, 39, 39);
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--text-color);
 }
 
 #readme {
@@ -30,10 +30,10 @@ article {
     background-color: red;
     font-weight: bold;
     text-align: center;
-    padding: 1rem;
+    padding: var(--card-padding);
     color: white;
-    border: 1px solid black;
-    border-radius: 0.25rem;
+    border: 1px solid var(--text-color);
+    border-radius: var(--radius);
 }
 
 #more-info a:after{
@@ -49,10 +49,10 @@ article {
 }
 
 img {
-    border-radius: 0.25rem;
+    border-radius: var(--radius);
     max-width: 100%;
 }
 
 summary:hover {
-    background-color: rgb(205, 205, 205);
+    background-color: var(--main-bg);
 }

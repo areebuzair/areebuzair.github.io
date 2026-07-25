@@ -1,5 +1,5 @@
 main {
-    max-width: 80ch;
+    max-width: var(--max-w);
     min-height: 100vh;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -22,12 +22,12 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-    padding: 1rem;
+    padding: var(--card-padding);
     width: 100%;
     max-width: 400px;
-    background-color: rgb(240, 240, 240);
-    border-radius: 0.25rem;
-    border: 1px solid rgb(39, 39, 39);
+    background-color: var(--card-bg);
+    border-radius: var(--radius);
+    border: 1px solid var(--text-color);
 }
 
 #response {
@@ -54,9 +54,9 @@ input,
 textarea {
     display: block;
     width: 100%;
-    border-radius: 0.25rem;
+    border-radius: var(--radius);
     padding: 0.5rem;
-    border: 1px solid rgb(39, 39, 39);
+    border: 1px solid var(--text-color);
 }
 
 textarea {
@@ -67,9 +67,10 @@ textarea {
 button {
     font-family: "Raleway", 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     padding: 0.5rem 1rem;
-    border: 1px solid rgb(39, 39, 39);
-    border-radius: 0.25rem;
+    border: 1px solid var(--text-color);
+    border-radius: var(--radius);
     cursor: pointer;
+    color: var(--text-color);
 }
 
 button:hover {
