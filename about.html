@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="./stylesheets/about.css">
 
+    <script src="https://kit.fontawesome.com/5cbfca4949.js" crossorigin="anonymous"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/marked@18.0.7/lib/marked.umd.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/dompurify@3.4.12/dist/purify.min.js"></script>
 </head>
@@ -38,11 +40,44 @@
     </nav>
 
     <main>
-        <article></article>
+        <article id="readme">
+            Loading
+        </article>
+        <article id="more-info">
+            <h1>Additional links:</h1>
+            <div>
+                <a target="_blank" href="">
+                    <i class="fa-solid fa-file"></i>
+                    <span>Download CV</span>
+                </a>
+                <a target="_blank" href="https://github.com/areebuzair">
+                    <i class="fa-brands fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                <a target="_blank" href="https://www.linkedin.com/in/j-m-areeb-uzair-alam-017075389/">
+                    <i class="fa-brands fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a target="_blank" href="https://www.youtube.com/@jmareebuzair">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                <a target="_blank" href="https://huggingface.co/areebuzair"">
+                    <i class=" fa-brands fa-hugging-face"></i>
+                    <span>HuggingFace</span>
+                </a>
+                <a target=" _blank" href=" https://www.researchgate.net/profile/J-M-Areeb-Alam">
+                    <i class="fa-brands fa-researchgate"></i>
+                    <span>ResearchGate</span>
+                </a>
+            </div>
+        </article>
     </main>
 
 
     <script>
+
+        const articleBody = document.getElementById("readme")
         async function getData() {
             const url = "https://areebuzair.github.io/areebuzair/README.md";
             try {
@@ -52,10 +87,10 @@
                 }
 
                 const result = await response.text();
-                document.querySelector("article").innerHTML = DOMPurify.sanitize(marked.parse(result))
+                articleBody.innerHTML = DOMPurify.sanitize(marked.parse(result))
 
             } catch (error) {
-                console.error(error.message);
+                articleBody.innerHTML = error.message;
             }
         }
         getData()

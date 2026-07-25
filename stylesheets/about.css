@@ -1,16 +1,58 @@
-summary{
+summary {
     cursor: pointer;
 }
 
-main{
+main {
     max-width: 80ch;
     margin: 0 auto;
 }
 
-img{
+article {
+    padding: 1rem;
+    background-color: rgb(240, 240, 240);
+    border-radius: 0.25rem;
+    border: 1px solid rgb(39, 39, 39);
+}
+
+#readme {
+    margin-bottom: 1rem;
+    /* display: none; */
+}
+
+#more-info>div{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
+    gap: 1rem;
+}
+
+#more-info a{
+    display: inline-block;
+    background-color: red;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+    color: white;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+}
+
+#more-info a:after{
+    content: none;
+}
+
+#more-info a:hover{
+    transform: scale(1.05);
+}
+
+#more-info a:active{
+    transform: scale(1);
+}
+
+img {
+    border-radius: 0.25rem;
     max-width: 100%;
 }
 
-summary:hover{
+summary:hover {
     background-color: rgb(205, 205, 205);
 }
