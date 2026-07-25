@@ -57,6 +57,8 @@ textarea {
     border-radius: var(--radius);
     padding: 0.5rem;
     border: 1px solid var(--text-color);
+    color: var(--text-color);
+    background-color: var(--main-bg);
 }
 
 textarea {
@@ -71,16 +73,20 @@ button {
     border-radius: var(--radius);
     cursor: pointer;
     color: var(--text-color);
+    background-color: var(--main-bg);
 }
 
 button:hover {
     background-color: rgb(226, 226, 226);
+    color: black;
 }
 
 button:active {
+    color: black;
     background-color: rgb(190, 190, 190);
 }
 
 button:disabled {
+    color: black;
     background-color: rgba(255, 255, 255, 0.556);
 }
