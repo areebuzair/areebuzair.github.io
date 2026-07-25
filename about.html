@@ -21,6 +21,7 @@
     <link rel="icon" href="./Assets/DoubleAFavicon.png" type="image/jpg">
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="./stylesheets/about.css">
+    <script src="dark-mode.js"></script>
 
     <script src="https://kit.fontawesome.com/5cbfca4949.js" crossorigin="anonymous"></script>
 
@@ -76,24 +77,27 @@
 
 
     <script>
+        window.addEventListener("load", () => {
 
-        const articleBody = document.getElementById("readme")
-        async function getData() {
-            const url = "https://areebuzair.github.io/areebuzair/README.md";
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`Response status: ${response.status}`);
+            const articleBody = document.getElementById("readme")
+            async function getData() {
+                const url = "https://areebuzair.github.io/areebuzair/README.md";
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) {
+                        throw new Error(`Response status: ${response.status}`);
+                    }
+
+                    const result = await response.text();
+                    articleBody.innerHTML = DOMPurify.sanitize(marked.parse(result))
+
+                } catch (error) {
+                    articleBody.innerHTML = error.message;
                 }
-
-                const result = await response.text();
-                articleBody.innerHTML = DOMPurify.sanitize(marked.parse(result))
-
-            } catch (error) {
-                articleBody.innerHTML = error.message;
             }
-        }
-        getData()
+            getData();
+        })
+
     </script>
 </body>
 

@@ -12,7 +12,7 @@
     --max-w: 80ch;
 }
 
-body.dark{
+body.dark {
     --text-color: rgb(217, 217, 217);
     --main-bg: rgb(27, 27, 27);
     --card-bg: rgb(36, 36, 36);
@@ -67,16 +67,20 @@ nav>div>span {
     gap: 1rem;
 }
 
-nav a {
-    --color: var(--text-color);
-}
-
 a {
     --color: blue;
     display: inline-block;
     color: var(--color);
     text-decoration: none;
     position: relative;
+}
+
+.dark a {
+    --color: #289aff;
+}
+
+nav a, .dark nav a {
+    --color: var(--text-color);
 }
 
 a:after {
@@ -108,4 +112,31 @@ nav .active-link:after {
     nav .active-link {
         display: none;
     }
+}
+
+#theme {
+    display: grid;
+    padding: 0;
+    place-items: center;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    background-color: var(--card-bg);
+    border-radius: 100%;
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 20;
+    border: 1px solid var(--text-color);
+}
+
+#sun,
+#moon {
+    transition: scale .3s;
+    transition-timing-function: cubic-bezier(.22, -0.59, .54, 1.59);
+    grid-column: 1;
+    grid-row: 1;
+    width: 1.5rem;
 }
