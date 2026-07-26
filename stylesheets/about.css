@@ -19,13 +19,19 @@ article {
     /* display: none; */
 }
 
-#more-info>div{
+#more-info>div {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(20ch, 1fr));
     gap: 1rem;
 }
 
-#more-info a{
+@media screen and (max-width: 30ch) {
+    #more-info>div {
+        grid-template-columns: auto;
+    }
+}
+
+#more-info a {
     display: inline-block;
     background-color: red;
     font-weight: bold;
@@ -34,17 +40,18 @@ article {
     color: white;
     border: 1px solid var(--text-color);
     border-radius: var(--radius);
+    max-width: 100%;
 }
 
-#more-info a:after{
+#more-info a:after {
     content: none;
 }
 
-#more-info a:hover{
+#more-info a:hover {
     transform: scale(1.05);
 }
 
-#more-info a:active{
+#more-info a:active {
     transform: scale(1);
 }
 
