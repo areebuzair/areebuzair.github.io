@@ -132,8 +132,7 @@ nav .active-link:after {
     border: 1px solid var(--text-color);
 }
 
-#sun,
-#moon {
+.theme-icon {
     transition: scale .3s;
     transition-timing-function: cubic-bezier(.22, -0.59, .54, 1.59);
     grid-column: 1;

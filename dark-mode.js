@@ -1,26 +1,40 @@
 window.addEventListener("DOMContentLoaded", () => {
+    const themeButton = document.createElement("button");
+    themeButton.setAttribute("type", "button")
+    themeButton.setAttribute("id", "theme")
+    themeButton.setAttribute("title", "Set display theme")
 
-    document.body.innerHTML += `<button type="button" id="theme" title="Set theme">
-            <img src="./Assets/moon.svg" id="moon" alt="moon">
-            <img src="./Assets/sun.svg" id="sun" alt="sun">
-        </button>`
+    const sunImage = document.createElement('img')
+    sunImage.src = "./Assets/sun.svg"
+    sunImage.className = "theme-icon"
+    sunImage.alt = "sun"
+
+    const moonImage = document.createElement('img')
+    moonImage.src = "./Assets/moon.svg"
+    moonImage.className = "theme-icon"
+    moonImage.alt = "moon"
+
+    themeButton.appendChild(sunImage)
+    themeButton.appendChild(moonImage)
+
+    document.body.appendChild(themeButton)
 
     let darkMode = !(localStorage.getItem("theme") == "false");
     const setTheme = () => {
-        const r = document.querySelector(':root');
         if (darkMode) {
-            document.getElementById("sun").style.scale = 0;
-            document.getElementById("moon").style.scale = 1;
+            sunImage.style.scale = 0;
+            moonImage.style.scale = 1;
             document.body.classList.add("dark");
         }
         else {
-            document.getElementById("sun").style.scale = 1;
-            document.getElementById("moon").style.scale = 0;
+            sunImage.style.scale = 1;
+            moonImage.style.scale = 0;
             document.body.classList.remove("dark");
         }
     }
     setTheme()
-    document.getElementById("theme").addEventListener('click', () => {
+
+    themeButton.addEventListener('click', () => {
         darkMode = !darkMode;
         localStorage.setItem("theme", darkMode);
         setTheme();
